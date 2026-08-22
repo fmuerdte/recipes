@@ -110,7 +110,22 @@
     font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:.08em;
     text-transform:uppercase; color:var(--ink-soft);
     border:1px solid var(--rule); border-radius:3px; padding:2px 7px;
+    background:var(--card); cursor:pointer; line-height:1.4;
   }
+  .tag:hover{ border-color:var(--mustard); color:var(--ink); }
+  .tag[aria-pressed="true"]{ background:var(--sage); border-color:var(--sage); color:#fff; }
+
+  .active-tag{
+    display:inline-flex; align-items:center; gap:6px;
+    font-family:'IBM Plex Mono',monospace; font-size:11.5px; color:var(--ink);
+    background:var(--card); border:1px solid var(--sage); border-radius:999px; padding:4px 6px 4px 12px;
+  }
+  .active-tag button{
+    border:none; background:none; cursor:pointer; color:var(--ink-soft);
+    font-size:14px; line-height:1; padding:2px 4px;
+  }
+  .active-tag button:hover{ color:var(--mustard); }
+  .active-tag[hidden]{ display:none; }
   dl.card-meta{ margin:2px 0 0; display:flex; gap:16px; flex-wrap:wrap; }
   dl.card-meta div{ display:flex; gap:5px; align-items:baseline; }
   dl.card-meta dt{
@@ -148,6 +163,7 @@
       <label for="q">Find a recipe</label>
       <input id="q" type="search" placeholder="chicken, eggplant, cookies&hellip;" autocomplete="off">
       <span id="count" role="status" aria-live="polite">57 recipes</span>
+      <span id="activeTag" class="active-tag" hidden>Tag: <strong></strong><button type="button" id="clearTag" aria-label="Clear tag filter">&times;</button></span>
     </div>
   </header>
 
@@ -159,7 +175,7 @@
           <a class="card-link" href="award-winning-chili.html">
             <span class="card-title">Award Winning Chili</span>
           </a>
-          <p class="card-tags"><span class="tag">Chili</span><span class="tag">Big Batch</span></p>
+          <p class="card-tags"><button type="button" class="tag" data-tag="chili">Chili</button><button type="button" class="tag" data-tag="big-batch">Big Batch</button></p>
           <dl class="card-meta">
             <div><dt>Prep</dt><dd>1 hr prep</dd></div>
             <div><dt>Cook</dt><dd>4 hr simmer</dd></div>
@@ -170,7 +186,7 @@
           <a class="card-link" href="butter-chicken.html">
             <span class="card-title">Butter Chicken</span>
           </a>
-          <p class="card-tags"><span class="tag">Indian</span><span class="tag">Curry</span></p>
+          <p class="card-tags"><button type="button" class="tag" data-tag="indian">Indian</button><button type="button" class="tag" data-tag="curry">Curry</button></p>
           <dl class="card-meta">
             <div><dt>Prep</dt><dd>1 hr marinate</dd></div>
             <div><dt>Cook</dt><dd>1 hr 20 min cook</dd></div>
@@ -181,7 +197,7 @@
           <a class="card-link" href="dak-jin-chicken.html">
             <span class="card-title">Dak Jin Chicken</span>
           </a>
-          <p class="card-tags"><span class="tag">Family Recipe</span><span class="tag">Braise</span></p>
+          <p class="card-tags"><button type="button" class="tag" data-tag="family-recipe">Family Recipe</button><button type="button" class="tag" data-tag="braise">Braise</button></p>
           <dl class="card-meta">
             <div><dt>Prep</dt><dd>2 hr marinate</dd></div>
             <div><dt>Cook</dt><dd>2–3 hr braise</dd></div>
@@ -192,7 +208,7 @@
           <a class="card-link" href="frikadeller-danish-pork-burgers.html">
             <span class="card-title">Frikadeller (Danish Pork Burgers)</span>
           </a>
-          <p class="card-tags"><span class="tag">Danish</span><span class="tag">Skillet</span></p>
+          <p class="card-tags"><button type="button" class="tag" data-tag="danish">Danish</button><button type="button" class="tag" data-tag="skillet">Skillet</button></p>
           <dl class="card-meta">
             <div><dt>Prep</dt><dd>10 min prep</dd></div>
             <div><dt>Cook</dt><dd>20 min cook</dd></div>
@@ -203,7 +219,7 @@
           <a class="card-link" href="grilled-cheese-sandwich.html">
             <span class="card-title">Grilled Cheese Sandwich</span>
           </a>
-          <p class="card-tags"><span class="tag">Lunch</span><span class="tag">10 Minutes</span></p>
+          <p class="card-tags"><button type="button" class="tag" data-tag="lunch">Lunch</button><button type="button" class="tag" data-tag="10-minutes">10 Minutes</button></p>
           <dl class="card-meta">
             <div><dt>Prep</dt><dd>2 min prep</dd></div>
             <div><dt>Cook</dt><dd>8 min cook</dd></div>
@@ -214,7 +230,7 @@
           <a class="card-link" href="pan-seared-rib-eye.html">
             <span class="card-title">Pan Seared Rib Eye</span>
           </a>
-          <p class="card-tags"><span class="tag">Steak</span><span class="tag">Cast Iron</span></p>
+          <p class="card-tags"><button type="button" class="tag" data-tag="steak">Steak</button><button type="button" class="tag" data-tag="cast-iron">Cast Iron</button></p>
           <dl class="card-meta">
             <div><dt>Prep</dt><dd>30 min to temper</dd></div>
             <div><dt>Cook</dt><dd>5 min cook</dd></div>
@@ -225,7 +241,7 @@
           <a class="card-link" href="pecan-crusted-honey-mustard-salmon.html">
             <span class="card-title">Pecan-Crusted Honey Mustard Salmon</span>
           </a>
-          <p class="card-tags"><span class="tag">Weeknight</span><span class="tag">Fish</span></p>
+          <p class="card-tags"><button type="button" class="tag" data-tag="weeknight">Weeknight</button><button type="button" class="tag" data-tag="fish">Fish</button></p>
           <dl class="card-meta">
             <div><dt>Prep</dt><dd>10 min prep</dd></div>
             <div><dt>Cook</dt><dd>15 min bake</dd></div>
@@ -236,7 +252,7 @@
           <a class="card-link" href="pernil-al-horno.html">
             <span class="card-title">Pernil al Horno</span>
           </a>
-          <p class="card-tags"><span class="tag">Puerto Rican</span><span class="tag">Roast</span></p>
+          <p class="card-tags"><button type="button" class="tag" data-tag="puerto-rican">Puerto Rican</button><button type="button" class="tag" data-tag="roast">Roast</button></p>
           <dl class="card-meta">
             <div><dt>Prep</dt><dd>24 hr marinate</dd></div>
             <div><dt>Cook</dt><dd>5 hr roast</dd></div>
@@ -247,7 +263,7 @@
           <a class="card-link" href="portuguese-poached-fish-in-seasoned-broth.html">
             <span class="card-title">Portuguese Poached Fish in Seasoned Broth</span>
           </a>
-          <p class="card-tags"><span class="tag">Portuguese</span><span class="tag">Fish Stew</span></p>
+          <p class="card-tags"><button type="button" class="tag" data-tag="portuguese">Portuguese</button><button type="button" class="tag" data-tag="fish-stew">Fish Stew</button></p>
           <dl class="card-meta">
             <div><dt>Prep</dt><dd>25 min prep</dd></div>
             <div><dt>Cook</dt><dd>30 min cook</dd></div>
@@ -258,7 +274,7 @@
           <a class="card-link" href="quiche-conchis-recipe.html">
             <span class="card-title">Quiche (Conchi&#x27;s Recipe)</span>
           </a>
-          <p class="card-tags"><span class="tag">Brunch</span><span class="tag">Tart</span></p>
+          <p class="card-tags"><button type="button" class="tag" data-tag="brunch">Brunch</button><button type="button" class="tag" data-tag="tart">Tart</button></p>
           <dl class="card-meta">
             <div><dt>Prep</dt><dd>20 min prep</dd></div>
             <div><dt>Cook</dt><dd>40 min bake</dd></div>
@@ -269,7 +285,7 @@
           <a class="card-link" href="sancocho.html">
             <span class="card-title">Sancocho</span>
           </a>
-          <p class="card-tags"><span class="tag">Puerto Rican</span><span class="tag">Stew</span></p>
+          <p class="card-tags"><button type="button" class="tag" data-tag="puerto-rican">Puerto Rican</button><button type="button" class="tag" data-tag="stew">Stew</button></p>
           <dl class="card-meta">
             <div><dt>Prep</dt><dd>45 min prep</dd></div>
             <div><dt>Cook</dt><dd>1 hr cook</dd></div>
@@ -280,7 +296,7 @@
           <a class="card-link" href="sriracha-roast-chicken-with-vegetables.html">
             <span class="card-title">Sriracha Roast Chicken with Vegetables</span>
           </a>
-          <p class="card-tags"><span class="tag">Roast</span><span class="tag">One Pan</span></p>
+          <p class="card-tags"><button type="button" class="tag" data-tag="roast">Roast</button><button type="button" class="tag" data-tag="one-pan">One Pan</button></p>
           <dl class="card-meta">
             <div><dt>Prep</dt><dd>20 min prep</dd></div>
             <div><dt>Cook</dt><dd>70 min roast</dd></div>
@@ -291,7 +307,7 @@
           <a class="card-link" href="tortilla-espanola.html">
             <span class="card-title">Tortilla Española</span>
           </a>
-          <p class="card-tags"><span class="tag">Spanish</span><span class="tag">Skillet</span></p>
+          <p class="card-tags"><button type="button" class="tag" data-tag="spanish">Spanish</button><button type="button" class="tag" data-tag="skillet">Skillet</button></p>
           <dl class="card-meta">
             <div><dt>Prep</dt><dd>30 min prep</dd></div>
             <div><dt>Cook</dt><dd>25 min cook</dd></div>
@@ -308,7 +324,7 @@
           <a class="card-link" href="fettuccine-al-ragu.html">
             <span class="card-title">Fettuccine al Ragù</span>
           </a>
-          <p class="card-tags"><span class="tag">Pasta</span><span class="tag">Slow</span></p>
+          <p class="card-tags"><button type="button" class="tag" data-tag="pasta">Pasta</button><button type="button" class="tag" data-tag="slow">Slow</button></p>
           <dl class="card-meta">
             <div><dt>Prep</dt><dd>20 min prep</dd></div>
             <div><dt>Cook</dt><dd>2 hr 30 min simmer</dd></div>
@@ -319,7 +335,7 @@
           <a class="card-link" href="linguine-with-slow-cooked-zucchini-basil-and-cream.html">
             <span class="card-title">Linguine with Slow-Cooked Zucchini, Basil and Cream</span>
           </a>
-          <p class="card-tags"><span class="tag">Pasta</span><span class="tag">Summer</span></p>
+          <p class="card-tags"><button type="button" class="tag" data-tag="pasta">Pasta</button><button type="button" class="tag" data-tag="summer">Summer</button></p>
           <dl class="card-meta">
             <div><dt>Prep</dt><dd>15 min prep</dd></div>
             <div><dt>Cook</dt><dd>45 min cook</dd></div>
@@ -330,7 +346,7 @@
           <a class="card-link" href="red-lentil-ragu-with-a-kick.html">
             <span class="card-title">Red Lentil Ragu with a Kick</span>
           </a>
-          <p class="card-tags"><span class="tag">Vegan</span><span class="tag">Pasta Sauce</span></p>
+          <p class="card-tags"><button type="button" class="tag" data-tag="vegan">Vegan</button><button type="button" class="tag" data-tag="pasta-sauce">Pasta Sauce</button></p>
           <dl class="card-meta">
             <div><dt>Prep</dt><dd>15 min prep</dd></div>
             <div><dt>Cook</dt><dd>35 min cook</dd></div>
@@ -341,7 +357,7 @@
           <a class="card-link" href="spaghetti-and-meatballs.html">
             <span class="card-title">Spaghetti and Meatballs</span>
           </a>
-          <p class="card-tags"><span class="tag">Pasta</span><span class="tag">Classic</span></p>
+          <p class="card-tags"><button type="button" class="tag" data-tag="pasta">Pasta</button><button type="button" class="tag" data-tag="classic">Classic</button></p>
           <dl class="card-meta">
             <div><dt>Prep</dt><dd>30 min prep</dd></div>
             <div><dt>Cook</dt><dd>50 min simmer</dd></div>
@@ -358,7 +374,7 @@
           <a class="card-link" href="couscous-and-feta-stuffed-peppers.html">
             <span class="card-title">Couscous and Feta-Stuffed Peppers</span>
           </a>
-          <p class="card-tags"><span class="tag">Vegetarian</span><span class="tag">Stuffed</span></p>
+          <p class="card-tags"><button type="button" class="tag" data-tag="vegetarian">Vegetarian</button><button type="button" class="tag" data-tag="stuffed">Stuffed</button></p>
           <dl class="card-meta">
             <div><dt>Prep</dt><dd>30 min prep</dd></div>
             <div><dt>Cook</dt><dd>15 min bake</dd></div>
@@ -369,7 +385,7 @@
           <a class="card-link" href="creamy-stewed-indian-black-lentils.html">
             <span class="card-title">Creamy Stewed Indian Black Lentils</span>
           </a>
-          <p class="card-tags"><span class="tag">Indian</span><span class="tag">Slow Cooker</span></p>
+          <p class="card-tags"><button type="button" class="tag" data-tag="indian">Indian</button><button type="button" class="tag" data-tag="slow-cooker">Slow Cooker</button></p>
           <dl class="card-meta">
             <div><dt>Prep</dt><dd>8 hr soak</dd></div>
             <div><dt>Cook</dt><dd>10–12 hr slow cook</dd></div>
@@ -380,7 +396,7 @@
           <a class="card-link" href="curried-lentils-with-sweet-potatoes-and-swiss-chard.html">
             <span class="card-title">Curried Lentils with Sweet Potatoes and Swiss Chard</span>
           </a>
-          <p class="card-tags"><span class="tag">Vegetarian</span><span class="tag">One Pot</span></p>
+          <p class="card-tags"><button type="button" class="tag" data-tag="vegetarian">Vegetarian</button><button type="button" class="tag" data-tag="one-pot">One Pot</button></p>
           <dl class="card-meta">
             <div><dt>Prep</dt><dd>20 min prep</dd></div>
             <div><dt>Cook</dt><dd>45 min cook</dd></div>
@@ -391,7 +407,7 @@
           <a class="card-link" href="fresh-pea-soup.html">
             <span class="card-title">Fresh Pea Soup</span>
           </a>
-          <p class="card-tags"><span class="tag">Soup</span><span class="tag">Quick</span></p>
+          <p class="card-tags"><button type="button" class="tag" data-tag="soup">Soup</button><button type="button" class="tag" data-tag="quick">Quick</button></p>
           <dl class="card-meta">
             <div><dt>Prep</dt><dd>10 min prep</dd></div>
             <div><dt>Cook</dt><dd>15 min cook</dd></div>
@@ -402,7 +418,7 @@
           <a class="card-link" href="indian-eggplant-bhurtha.html">
             <span class="card-title">Indian Eggplant Bhurtha</span>
           </a>
-          <p class="card-tags"><span class="tag">Indian</span><span class="tag">Vegetarian</span></p>
+          <p class="card-tags"><button type="button" class="tag" data-tag="indian">Indian</button><button type="button" class="tag" data-tag="vegetarian">Vegetarian</button></p>
           <dl class="card-meta">
             <div><dt>Prep</dt><dd>15 min prep</dd></div>
             <div><dt>Cook</dt><dd>45 min cook</dd></div>
@@ -413,7 +429,7 @@
           <a class="card-link" href="lesco-hungarian-pepper-stew.html">
             <span class="card-title">Lesco (Hungarian Pepper Stew)</span>
           </a>
-          <p class="card-tags"><span class="tag">Hungarian</span><span class="tag">Braise</span></p>
+          <p class="card-tags"><button type="button" class="tag" data-tag="hungarian">Hungarian</button><button type="button" class="tag" data-tag="braise">Braise</button></p>
           <dl class="card-meta">
             <div><dt>Prep</dt><dd>15 min prep</dd></div>
             <div><dt>Cook</dt><dd>45 min braise</dd></div>
@@ -424,7 +440,7 @@
           <a class="card-link" href="ratatouille.html">
             <span class="card-title">Ratatouille</span>
           </a>
-          <p class="card-tags"><span class="tag">Vegetarian</span><span class="tag">Baked</span></p>
+          <p class="card-tags"><button type="button" class="tag" data-tag="vegetarian">Vegetarian</button><button type="button" class="tag" data-tag="baked">Baked</button></p>
           <dl class="card-meta">
             <div><dt>Prep</dt><dd>25 min prep</dd></div>
             <div><dt>Cook</dt><dd>55 min cook</dd></div>
@@ -441,7 +457,7 @@
           <a class="card-link" href="crunchy-cucumber-salad-with-crushed-peanuts.html">
             <span class="card-title">Crunchy Cucumber Salad with Crushed Peanuts</span>
           </a>
-          <p class="card-tags"><span class="tag">Indian</span><span class="tag">Salad</span></p>
+          <p class="card-tags"><button type="button" class="tag" data-tag="indian">Indian</button><button type="button" class="tag" data-tag="salad">Salad</button></p>
           <dl class="card-meta">
             <div><dt>Prep</dt><dd>15 min prep</dd></div>
             <div><dt>Cook</dt><dd>2 min tadka</dd></div>
@@ -452,7 +468,7 @@
           <a class="card-link" href="emilys-cornbread.html">
             <span class="card-title">Emily&#x27;s Cornbread</span>
           </a>
-          <p class="card-tags"><span class="tag">Southern</span><span class="tag">Skillet</span></p>
+          <p class="card-tags"><button type="button" class="tag" data-tag="southern">Southern</button><button type="button" class="tag" data-tag="skillet">Skillet</button></p>
           <dl class="card-meta">
             <div><dt>Prep</dt><dd>10 min prep</dd></div>
             <div><dt>Cook</dt><dd>25 min bake</dd></div>
@@ -463,7 +479,7 @@
           <a class="card-link" href="fire-roasted-guacamole.html">
             <span class="card-title">Fire-Roasted Guacamole</span>
           </a>
-          <p class="card-tags"><span class="tag">Mexican</span><span class="tag">Dip</span></p>
+          <p class="card-tags"><button type="button" class="tag" data-tag="mexican">Mexican</button><button type="button" class="tag" data-tag="dip">Dip</button></p>
           <dl class="card-meta">
             <div><dt>Prep</dt><dd>20 min prep</dd></div>
             <div><dt>Cook</dt><dd>15 min char</dd></div>
@@ -474,7 +490,7 @@
           <a class="card-link" href="marinated-roasted-peppers-with-capers-and-mozzarella.html">
             <span class="card-title">Marinated Roasted Peppers with Capers and Mozzarella</span>
           </a>
-          <p class="card-tags"><span class="tag">Antipasto</span><span class="tag">Make Ahead</span></p>
+          <p class="card-tags"><button type="button" class="tag" data-tag="antipasto">Antipasto</button><button type="button" class="tag" data-tag="make-ahead">Make Ahead</button></p>
           <dl class="card-meta">
             <div><dt>Prep</dt><dd>20 min prep</dd></div>
             <div><dt>Cook</dt><dd>1 hr roast + 1 hr marinate</dd></div>
@@ -485,7 +501,7 @@
           <a class="card-link" href="ninis-spoonbread.html">
             <span class="card-title">Nini&#x27;s Spoonbread</span>
           </a>
-          <p class="card-tags"><span class="tag">Southern</span><span class="tag">Side</span></p>
+          <p class="card-tags"><button type="button" class="tag" data-tag="southern">Southern</button><button type="button" class="tag" data-tag="side">Side</button></p>
           <dl class="card-meta">
             <div><dt>Prep</dt><dd>30 min prep</dd></div>
             <div><dt>Cook</dt><dd>35 min bake</dd></div>
@@ -496,7 +512,7 @@
           <a class="card-link" href="okra-raita.html">
             <span class="card-title">Okra Raita</span>
           </a>
-          <p class="card-tags"><span class="tag">Indian</span><span class="tag">Side</span></p>
+          <p class="card-tags"><button type="button" class="tag" data-tag="indian">Indian</button><button type="button" class="tag" data-tag="side">Side</button></p>
           <dl class="card-meta">
             <div><dt>Prep</dt><dd>40 min prep</dd></div>
             <div><dt>Cook</dt><dd>20 min fry</dd></div>
@@ -507,7 +523,7 @@
           <a class="card-link" href="oven-roasted-potatoes.html">
             <span class="card-title">Oven Roasted Potatoes</span>
           </a>
-          <p class="card-tags"><span class="tag">Side</span><span class="tag">Roasted</span></p>
+          <p class="card-tags"><button type="button" class="tag" data-tag="side">Side</button><button type="button" class="tag" data-tag="roasted">Roasted</button></p>
           <dl class="card-meta">
             <div><dt>Prep</dt><dd>10 min prep</dd></div>
             <div><dt>Cook</dt><dd>20 min cook</dd></div>
@@ -518,7 +534,7 @@
           <a class="card-link" href="rice-and-peas.html">
             <span class="card-title">Rice and Peas</span>
           </a>
-          <p class="card-tags"><span class="tag">Indian</span><span class="tag">Side</span></p>
+          <p class="card-tags"><button type="button" class="tag" data-tag="indian">Indian</button><button type="button" class="tag" data-tag="side">Side</button></p>
           <dl class="card-meta">
             <div><dt>Prep</dt><dd>5 min prep</dd></div>
             <div><dt>Cook</dt><dd>25 min cook</dd></div>
@@ -529,7 +545,7 @@
           <a class="card-link" href="soy-marinated-eggs.html">
             <span class="card-title">Soy-Marinated Eggs</span>
           </a>
-          <p class="card-tags"><span class="tag">Snack</span><span class="tag">Make Ahead</span></p>
+          <p class="card-tags"><button type="button" class="tag" data-tag="snack">Snack</button><button type="button" class="tag" data-tag="make-ahead">Make Ahead</button></p>
           <dl class="card-meta">
             <div><dt>Prep</dt><dd>15 min prep</dd></div>
             <div><dt>Cook</dt><dd>1 hr marinate</dd></div>
@@ -540,7 +556,7 @@
           <a class="card-link" href="toasted-couscous.html">
             <span class="card-title">Toasted Couscous</span>
           </a>
-          <p class="card-tags"><span class="tag">Side</span><span class="tag">Pantry</span></p>
+          <p class="card-tags"><button type="button" class="tag" data-tag="side">Side</button><button type="button" class="tag" data-tag="pantry">Pantry</button></p>
           <dl class="card-meta">
             <div><dt>Prep</dt><dd>2 min prep</dd></div>
             <div><dt>Cook</dt><dd>17 min</dd></div>
@@ -557,7 +573,7 @@
           <a class="card-link" href="cranberry-pear-sauce.html">
             <span class="card-title">Cranberry-Pear Sauce</span>
           </a>
-          <p class="card-tags"><span class="tag">Thanksgiving</span><span class="tag">Sauce</span></p>
+          <p class="card-tags"><button type="button" class="tag" data-tag="thanksgiving">Thanksgiving</button><button type="button" class="tag" data-tag="sauce">Sauce</button></p>
           <dl class="card-meta">
             <div><dt>Prep</dt><dd>15 min prep</dd></div>
             <div><dt>Cook</dt><dd>30 min cook</dd></div>
@@ -568,7 +584,7 @@
           <a class="card-link" href="overnight-macerated-peach-jam.html">
             <span class="card-title">Overnight-Macerated Peach Jam</span>
           </a>
-          <p class="card-tags"><span class="tag">Preserves</span><span class="tag">Stone Fruit</span></p>
+          <p class="card-tags"><button type="button" class="tag" data-tag="preserves">Preserves</button><button type="button" class="tag" data-tag="stone-fruit">Stone Fruit</button></p>
           <dl class="card-meta">
             <div><dt>Prep</dt><dd>25 min + overnight</dd></div>
             <div><dt>Cook</dt><dd>2 × 15 min</dd></div>
@@ -579,7 +595,7 @@
           <a class="card-link" href="slow-roasted-tomato-sauce.html">
             <span class="card-title">Slow-Roasted Tomato Sauce</span>
           </a>
-          <p class="card-tags"><span class="tag">Sauce</span><span class="tag">Big Batch</span></p>
+          <p class="card-tags"><button type="button" class="tag" data-tag="sauce">Sauce</button><button type="button" class="tag" data-tag="big-batch">Big Batch</button></p>
           <dl class="card-meta">
             <div><dt>Prep</dt><dd>20 min prep</dd></div>
             <div><dt>Cook</dt><dd>6 hr oven</dd></div>
@@ -590,7 +606,7 @@
           <a class="card-link" href="yogurt-dressing.html">
             <span class="card-title">Yogurt Dressing</span>
           </a>
-          <p class="card-tags"><span class="tag">Sauce</span><span class="tag">5 Minutes</span></p>
+          <p class="card-tags"><button type="button" class="tag" data-tag="sauce">Sauce</button><button type="button" class="tag" data-tag="5-minutes">5 Minutes</button></p>
           <dl class="card-meta">
             <div><dt>Prep</dt><dd>5 min prep</dd></div>
             <div><dt>Cook</dt><dd>no cooking</dd></div>
@@ -607,7 +623,7 @@
           <a class="card-link" href="challah-french-toast.html">
             <span class="card-title">Challah French Toast with Orange, Nutmeg &amp;amp; Brandy</span>
           </a>
-          <p class="card-tags"><span class="tag">Breakfast</span><span class="tag">French Toast</span></p>
+          <p class="card-tags"><button type="button" class="tag" data-tag="breakfast">Breakfast</button><button type="button" class="tag" data-tag="french-toast">French Toast</button></p>
           <dl class="card-meta">
             <div><dt>Prep</dt><dd>15 min (+ drying the bread)</dd></div>
             <div><dt>Cook</dt><dd>20 min</dd></div>
@@ -618,7 +634,7 @@
           <a class="card-link" href="chocolate-swirl-buns.html">
             <span class="card-title">Chocolate Swirl Buns</span>
           </a>
-          <p class="card-tags"><span class="tag">Baking</span><span class="tag">Breakfast</span></p>
+          <p class="card-tags"><button type="button" class="tag" data-tag="baking">Baking</button><button type="button" class="tag" data-tag="breakfast">Breakfast</button></p>
           <dl class="card-meta">
             <div><dt>Prep</dt><dd>1 hr 45 min rise</dd></div>
             <div><dt>Cook</dt><dd>20 min bake</dd></div>
@@ -629,7 +645,7 @@
           <a class="card-link" href="crepes.html">
             <span class="card-title">Crepes</span>
           </a>
-          <p class="card-tags"><span class="tag">Breakfast</span><span class="tag">Skillet</span></p>
+          <p class="card-tags"><button type="button" class="tag" data-tag="breakfast">Breakfast</button><button type="button" class="tag" data-tag="skillet">Skillet</button></p>
           <dl class="card-meta">
             <div><dt>Prep</dt><dd>10 min prep + 30 min rest</dd></div>
             <div><dt>Cook</dt><dd>15 min cook</dd></div>
@@ -640,7 +656,7 @@
           <a class="card-link" href="flax-greek-yogurt-pancakes.html">
             <span class="card-title">Flaxseed Greek Yogurt Pancakes</span>
           </a>
-          <p class="card-tags"><span class="tag">Breakfast</span><span class="tag">Pancakes</span></p>
+          <p class="card-tags"><button type="button" class="tag" data-tag="breakfast">Breakfast</button><button type="button" class="tag" data-tag="pancakes">Pancakes</button></p>
           <dl class="card-meta">
             <div><dt>Prep</dt><dd>10 min prep</dd></div>
             <div><dt>Cook</dt><dd>10 min cook</dd></div>
@@ -651,7 +667,7 @@
           <a class="card-link" href="fluffy-pancakes.html">
             <span class="card-title">Fluffy Pancakes</span>
           </a>
-          <p class="card-tags"><span class="tag">Breakfast</span><span class="tag">Griddle</span></p>
+          <p class="card-tags"><button type="button" class="tag" data-tag="breakfast">Breakfast</button><button type="button" class="tag" data-tag="griddle">Griddle</button></p>
           <dl class="card-meta">
             <div><dt>Prep</dt><dd>10 min prep</dd></div>
             <div><dt>Cook</dt><dd>15 min cook</dd></div>
@@ -662,7 +678,7 @@
           <a class="card-link" href="katies-scones.html">
             <span class="card-title">Katie&#x27;s Scones</span>
           </a>
-          <p class="card-tags"><span class="tag">Baking</span><span class="tag">Scones</span></p>
+          <p class="card-tags"><button type="button" class="tag" data-tag="baking">Baking</button><button type="button" class="tag" data-tag="scones">Scones</button></p>
           <dl class="card-meta">
             <div><dt>Prep</dt><dd>20 min prep</dd></div>
             <div><dt>Cook</dt><dd>18–25 min bake</dd></div>
@@ -673,7 +689,7 @@
           <a class="card-link" href="semolina-pudding.html">
             <span class="card-title">Semolina Pudding</span>
           </a>
-          <p class="card-tags"><span class="tag">Breakfast</span><span class="tag">10 Minutes</span></p>
+          <p class="card-tags"><button type="button" class="tag" data-tag="breakfast">Breakfast</button><button type="button" class="tag" data-tag="10-minutes">10 Minutes</button></p>
           <dl class="card-meta">
             <div><dt>Prep</dt><dd>2 min prep</dd></div>
             <div><dt>Cook</dt><dd>8 min cook</dd></div>
@@ -684,7 +700,7 @@
           <a class="card-link" href="waffles.html">
             <span class="card-title">Waffles</span>
           </a>
-          <p class="card-tags"><span class="tag">Breakfast</span><span class="tag">Waffle Iron</span></p>
+          <p class="card-tags"><button type="button" class="tag" data-tag="breakfast">Breakfast</button><button type="button" class="tag" data-tag="waffle-iron">Waffle Iron</button></p>
           <dl class="card-meta">
             <div><dt>Prep</dt><dd>10 min prep</dd></div>
             <div><dt>Cook</dt><dd>4 min per waffle</dd></div>
@@ -701,7 +717,7 @@
           <a class="card-link" href="apple-and-pear-crumble.html">
             <span class="card-title">Apple and Pear Crumble</span>
           </a>
-          <p class="card-tags"><span class="tag">Dessert</span><span class="tag">Baked</span></p>
+          <p class="card-tags"><button type="button" class="tag" data-tag="dessert">Dessert</button><button type="button" class="tag" data-tag="baked">Baked</button></p>
           <dl class="card-meta">
             <div><dt>Prep</dt><dd>20 min prep</dd></div>
             <div><dt>Cook</dt><dd>55 min bake</dd></div>
@@ -712,7 +728,7 @@
           <a class="card-link" href="basque-cheesecake.html">
             <span class="card-title">Basque Cheesecake</span>
           </a>
-          <p class="card-tags"><span class="tag">Baking</span><span class="tag">Cheesecake</span></p>
+          <p class="card-tags"><button type="button" class="tag" data-tag="baking">Baking</button><button type="button" class="tag" data-tag="cheesecake">Cheesecake</button></p>
           <dl class="card-meta">
             <div><dt>Prep</dt><dd>20 min prep</dd></div>
             <div><dt>Cook</dt><dd>60 min bake</dd></div>
@@ -723,7 +739,7 @@
           <a class="card-link" href="chocolate-chip-tahini-cookies.html">
             <span class="card-title">Chocolate Chip Tahini Cookies</span>
           </a>
-          <p class="card-tags"><span class="tag">Baking</span><span class="tag">Cookies</span></p>
+          <p class="card-tags"><button type="button" class="tag" data-tag="baking">Baking</button><button type="button" class="tag" data-tag="cookies">Cookies</button></p>
           <dl class="card-meta">
             <div><dt>Prep</dt><dd>15 min prep + 12 hr chill</dd></div>
             <div><dt>Cook</dt><dd>15 min bake</dd></div>
@@ -734,7 +750,7 @@
           <a class="card-link" href="chocolate-chip-pecan-and-coconut-cookies.html">
             <span class="card-title">Chocolate Chip, Pecan and Coconut Cookies</span>
           </a>
-          <p class="card-tags"><span class="tag">Baking</span><span class="tag">Cookies</span></p>
+          <p class="card-tags"><button type="button" class="tag" data-tag="baking">Baking</button><button type="button" class="tag" data-tag="cookies">Cookies</button></p>
           <dl class="card-meta">
             <div><dt>Prep</dt><dd>25 min prep</dd></div>
             <div><dt>Cook</dt><dd>10–14 min bake</dd></div>
@@ -745,7 +761,7 @@
           <a class="card-link" href="country-blueberry-pie.html">
             <span class="card-title">Country Blueberry Pie</span>
           </a>
-          <p class="card-tags"><span class="tag">Baking</span><span class="tag">Pie</span></p>
+          <p class="card-tags"><button type="button" class="tag" data-tag="baking">Baking</button><button type="button" class="tag" data-tag="pie">Pie</button></p>
           <dl class="card-meta">
             <div><dt>Prep</dt><dd>40 min prep</dd></div>
             <div><dt>Cook</dt><dd>45 min bake</dd></div>
@@ -756,7 +772,7 @@
           <a class="card-link" href="easy-vegan-chocolate-cake.html">
             <span class="card-title">Easy Vegan Chocolate Cake</span>
           </a>
-          <p class="card-tags"><span class="tag">Baking</span><span class="tag">Vegan</span></p>
+          <p class="card-tags"><button type="button" class="tag" data-tag="baking">Baking</button><button type="button" class="tag" data-tag="vegan">Vegan</button></p>
           <dl class="card-meta">
             <div><dt>Prep</dt><dd>10 min prep</dd></div>
             <div><dt>Cook</dt><dd>30 min bake</dd></div>
@@ -767,7 +783,7 @@
           <a class="card-link" href="german-sour-cherry-cake.html">
             <span class="card-title">German Sour Cherry Cake</span>
           </a>
-          <p class="card-tags"><span class="tag">Baking</span><span class="tag">Cake</span></p>
+          <p class="card-tags"><button type="button" class="tag" data-tag="baking">Baking</button><button type="button" class="tag" data-tag="cake">Cake</button></p>
           <dl class="card-meta">
             <div><dt>Prep</dt><dd>20 min prep</dd></div>
             <div><dt>Cook</dt><dd>45 min bake</dd></div>
@@ -778,7 +794,7 @@
           <a class="card-link" href="indian-rice-pudding.html">
             <span class="card-title">Indian Rice Pudding</span>
           </a>
-          <p class="card-tags"><span class="tag">Dessert</span><span class="tag">Stovetop</span></p>
+          <p class="card-tags"><button type="button" class="tag" data-tag="dessert">Dessert</button><button type="button" class="tag" data-tag="stovetop">Stovetop</button></p>
           <dl class="card-meta">
             <div><dt>Prep</dt><dd>5 min prep</dd></div>
             <div><dt>Cook</dt><dd>15 min cook</dd></div>
@@ -789,7 +805,7 @@
           <a class="card-link" href="ninis-beignets.html">
             <span class="card-title">Nini&#x27;s Beignets</span>
           </a>
-          <p class="card-tags"><span class="tag">Dessert</span><span class="tag">Fried</span></p>
+          <p class="card-tags"><button type="button" class="tag" data-tag="dessert">Dessert</button><button type="button" class="tag" data-tag="fried">Fried</button></p>
           <dl class="card-meta">
             <div><dt>Prep</dt><dd>1 hr rise</dd></div>
             <div><dt>Cook</dt><dd>15 min fry</dd></div>
@@ -800,7 +816,7 @@
           <a class="card-link" href="oat-chocolate-chip-cookies.html">
             <span class="card-title">Oat Chocolate Chip Cookies</span>
           </a>
-          <p class="card-tags"><span class="tag">Baking</span><span class="tag">Cookies</span></p>
+          <p class="card-tags"><button type="button" class="tag" data-tag="baking">Baking</button><button type="button" class="tag" data-tag="cookies">Cookies</button></p>
           <dl class="card-meta">
             <div><dt>Prep</dt><dd>15 min prep</dd></div>
             <div><dt>Cook</dt><dd>13 min bake</dd></div>
@@ -811,7 +827,7 @@
           <a class="card-link" href="perfect-chocolate-chip-cookies.html">
             <span class="card-title">Perfect Chocolate Chip Cookies</span>
           </a>
-          <p class="card-tags"><span class="tag">Baking</span><span class="tag">Cookies</span></p>
+          <p class="card-tags"><button type="button" class="tag" data-tag="baking">Baking</button><button type="button" class="tag" data-tag="cookies">Cookies</button></p>
           <dl class="card-meta">
             <div><dt>Prep</dt><dd>25 min prep</dd></div>
             <div><dt>Cook</dt><dd>14 min bake</dd></div>
@@ -834,12 +850,41 @@
   var count = document.getElementById('count');
   var cards = Array.prototype.slice.call(document.querySelectorAll('.card'));
   var groups = Array.prototype.slice.call(document.querySelectorAll('.group'));
+  var tagButtons = Array.prototype.slice.call(document.querySelectorAll('.tag'));
+  var activeTagEl = document.getElementById('activeTag');
+  var activeTagLabel = activeTagEl.querySelector('strong');
+  var clearTagBtn = document.getElementById('clearTag');
+  var activeTag = null;
+
+  function labelFor(tag){
+    var btn = tagButtons.filter(function(b){ return b.dataset.tag === tag; })[0];
+    return btn ? btn.textContent : tag;
+  }
+
+  function setActiveTag(tag, skipHash){
+    activeTag = tag;
+    tagButtons.forEach(function(btn){
+      btn.setAttribute('aria-pressed', btn.dataset.tag === tag ? 'true' : 'false');
+    });
+    activeTagEl.hidden = !tag;
+    if (tag) activeTagLabel.textContent = labelFor(tag);
+    if (!skipHash){
+      var base = location.pathname + location.search;
+      if (tag) history.replaceState(null, '', base + '#tag=' + tag);
+      else history.replaceState(null, '', base);
+    }
+    apply();
+  }
 
   function apply(){
     var term = q.value.trim().toLowerCase();
     var shown = 0;
     cards.forEach(function(card){
-      var hit = !term || card.dataset.search.indexOf(term) !== -1;
+      var textHit = !term || card.dataset.search.indexOf(term) !== -1;
+      var tagHit = !activeTag || Array.prototype.some.call(card.querySelectorAll('.tag'), function(t){
+        return t.dataset.tag === activeTag;
+      });
+      var hit = textHit && tagHit;
       card.hidden = !hit;
       if (hit) shown++;
     });
@@ -850,8 +895,22 @@
     count.textContent = shown === 1 ? '1 recipe' : shown + ' recipes';
   }
 
+  tagButtons.forEach(function(btn){
+    btn.addEventListener('click', function(){
+      setActiveTag(activeTag === btn.dataset.tag ? null : btn.dataset.tag);
+    });
+  });
+  clearTagBtn.addEventListener('click', function(){ setActiveTag(null); });
   q.addEventListener('input', apply);
-  apply();
+
+  var hashMatch = location.hash.match(/^#tag=(.+)$/);
+  if (hashMatch) setActiveTag(decodeURIComponent(hashMatch[1]), true);
+  else apply();
+
+  window.addEventListener('hashchange', function(){
+    var m = location.hash.match(/^#tag=(.+)$/);
+    setActiveTag(m ? decodeURIComponent(m[1]) : null, true);
+  });
 })();
 </script>
 </body>

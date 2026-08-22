@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Butter Chicken</title>
+<title>Indian Rice Pudding</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
 <style>
@@ -120,15 +120,15 @@
 </head>
 <body>
 <div class="sheet">
-  <div class="tab">INDIAN · CURRY</div>
+  <div class="tab">DESSERT · STOVETOP</div>
   <header>
-    <h1>Butter Chicken</h1>
+    <h1>Indian Rice Pudding</h1>
     <div class="meta">
-      <span>⏱ 1 hr marinate</span>
-      <span>🔥 1 hr 20 min cook</span>
+      <span>⏱ 5 min prep</span>
+      <span>🔥 15 min cook</span>
       <span>🍽 <span id="servings-label"></span> servings</span>
     </div>
-    <div class="source">Adapted from a family recipe, after Darrow Montgomery</div>
+    <div class="source">From the family recipe document</div>
   </header>
 
   <div class="body-grid">
@@ -157,134 +157,69 @@
   "baseServings": 4,
   "ingredients": [
     {
-      "id": "yogurt",
-      "name": "whole-milk Greek yogurt",
-      "baseAmount": 245,
+      "id": "rice",
+      "name": "cooked long grain or basmati rice",
+      "baseAmount": 160,
       "unit": "g",
       "category": "weight"
     },
     {
-      "id": "marinadeginger",
-      "name": "ginger, peeled and grated, for the marinade",
-      "baseAmount": 1,
-      "unit": "tbsp",
-      "category": "small"
-    },
-    {
-      "id": "marinadegarlic",
-      "name": "garlic, peeled and minced, for the marinade",
-      "baseAmount": 2,
-      "unit": "tbsp",
-      "category": "small"
-    },
-    {
-      "id": "masala",
-      "name": "Indian tandoori masala (Shan brand recommended)",
-      "baseAmount": 2,
-      "unit": "tbsp",
-      "category": "small"
-    },
-    {
-      "id": "marinadepuree",
-      "name": "canned tomato purée, for the marinade",
-      "baseAmount": 120,
+      "id": "milk",
+      "name": "whole milk",
+      "baseAmount": 240,
       "unit": "ml",
       "category": "volume"
     },
     {
-      "id": "lemon",
-      "name": "fresh lemon juice",
-      "baseAmount": 2,
-      "unit": "tbsp",
-      "category": "small"
+      "id": "coconutmilk",
+      "name": "coconut milk (just use the whole can)",
+      "baseAmount": 400,
+      "unit": "ml",
+      "category": "volume"
     },
     {
-      "id": "ghee",
-      "name": "ghee or butter, melted",
-      "baseAmount": 2,
-      "unit": "tbsp",
-      "category": "small"
+      "id": "sugar",
+      "name": "sugar",
+      "baseAmount": 30,
+      "unit": "g",
+      "category": "weight"
     },
     {
-      "id": "chicken",
-      "name": "skinless bone-in chicken thighs, slashed so the marinade penetrates",
-      "baseAmount": 8,
-      "unit": "",
-      "category": "count"
-    },
-    {
-      "id": "salt",
-      "name": "salt, to taste",
-      "baseAmount": 1,
+      "id": "cardamom",
+      "name": "ground cardamom",
+      "baseAmount": 0.375,
       "unit": "tsp",
       "category": "small"
     },
     {
-      "id": "butter",
-      "name": "butter, for the sauce",
-      "baseAmount": 4,
-      "unit": "tbsp",
+      "id": "salt",
+      "name": "salt",
+      "baseAmount": 0.125,
+      "unit": "tsp",
       "category": "small"
     },
     {
-      "id": "sauceginger",
-      "name": "ginger, peeled and grated, for the sauce",
-      "baseAmount": 1,
-      "unit": "tbsp",
-      "category": "small"
+      "id": "raisins",
+      "name": "golden raisins",
+      "baseAmount": 45,
+      "unit": "g",
+      "category": "weight"
     },
     {
-      "id": "saucegarlic",
-      "name": "garlic, peeled and minced, for the sauce",
-      "baseAmount": 1,
-      "unit": "tbsp",
-      "category": "small"
-    },
-    {
-      "id": "dicedtomatoes",
-      "name": "diced tomatoes",
-      "baseAmount": 120,
-      "unit": "ml",
-      "category": "volume"
-    },
-    {
-      "id": "saucepuree",
-      "name": "tomato purée, for the sauce",
-      "baseAmount": 120,
-      "unit": "ml",
-      "category": "volume"
-    },
-    {
-      "id": "chile",
-      "name": "serrano chile or jalapeño, finely minced",
-      "baseAmount": 1,
-      "unit": "",
-      "category": "count"
-    },
-    {
-      "id": "broth",
-      "name": "vegetable broth",
-      "baseAmount": 120,
-      "unit": "ml",
-      "category": "volume"
-    },
-    {
-      "id": "fenugreek",
-      "name": "dried fenugreek leaves",
-      "baseAmount": 2,
-      "unit": "tbsp",
-      "category": "small"
+      "id": "pistachios",
+      "name": "unsalted pistachios, chopped",
+      "baseAmount": 60,
+      "unit": "g",
+      "category": "weight"
     }
   ],
   "steps": [
-    "In a large bowl, mix the {{yogurt}}, {{marinadeginger}}, {{marinadegarlic}}, {{masala}}, {{marinadepuree}}, {{salt}}, {{lemon}} and {{ghee}}. Add the {{chicken}} and turn to coat well. Cover and refrigerate at least an hour, or overnight.",
-    "Lift the chicken out of the marinade and wipe it as clean as you can — reserve the marinade.",
-    "Sauté the chicken briefly over high heat in some of the {{butter}}, then take it out of the pot and set aside.",
-    "For the sauce, sauté the {{sauceginger}}, {{saucegarlic}} and {{chile}} in the fat left in the pot for a couple of minutes. Pour in the {{broth}} and scrape up all the browned bits from the bottom.",
-    "Add the {{saucepuree}} and {{dicedtomatoes}}, bring to a boil, then stir in the reserved marinade. Bring back to a boil and add the {{fenugreek}}.",
-    "Return the chicken to the pot, lower the heat to a simmer, and cook for one hour, until the sauce is thick and the chicken is falling off the bone."
+    "In a large nonstick sauté pan over medium heat, combine the {{rice}} and {{milk}}. Heat until it just begins to boil, then lower the heat and simmer, stirring frequently, until the mixture starts to thicken, about 5 minutes.",
+    "Raise the heat to medium and add the {{coconutmilk}}, {{sugar}}, {{cardamom}} and {{salt}}. Cook until it just begins to thicken again, 5 to 10 minutes, using a whisk to keep the cardamom from clumping.",
+    "As soon as it starts to thicken, take it off the heat and stir in the {{raisins}} and {{pistachios}}.",
+    "Transfer to individual dishes or a glass bowl and lay plastic wrap directly on the surface of the pudding. Serve chilled or at room temperature."
   ],
-  "notes": "Makes 4 to 5 servings. Cooking the marinade into the sauce is what gives this its body — don't discard it. Serve with hot steamed rice, or with rice and peas, or with naan. A beet salad with yogurt makes a good side, and a light granita is the right dessert."
+  "notes": "A good use for leftover rice. Use the whole can of coconut milk rather than measuring, go heavier on the cardamom than the original called for, and be generous with the pistachios. Pressing the plastic wrap directly onto the surface stops a skin forming as it cools. It thickens noticeably in the fridge — loosen with a splash of milk if it sets firmer than you want."
 }
 </script>
 

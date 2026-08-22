@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Butter Chicken</title>
+<title>Frikadeller (Danish Pork Burgers)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
 <style>
@@ -120,15 +120,15 @@
 </head>
 <body>
 <div class="sheet">
-  <div class="tab">INDIAN · CURRY</div>
+  <div class="tab">DANISH · SKILLET</div>
   <header>
-    <h1>Butter Chicken</h1>
+    <h1>Frikadeller (Danish Pork Burgers)</h1>
     <div class="meta">
-      <span>⏱ 1 hr marinate</span>
-      <span>🔥 1 hr 20 min cook</span>
+      <span>⏱ 10 min prep</span>
+      <span>🔥 20 min cook</span>
       <span>🍽 <span id="servings-label"></span> servings</span>
     </div>
-    <div class="source">Adapted from a family recipe, after Darrow Montgomery</div>
+    <div class="source">Adapted from <a href="https://www.simplyrecipes.com/recipes/danish_pork_burgers/">Simply Recipes</a></div>
   </header>
 
   <div class="body-grid">
@@ -157,134 +157,77 @@
   "baseServings": 4,
   "ingredients": [
     {
-      "id": "yogurt",
-      "name": "whole-milk Greek yogurt",
-      "baseAmount": 245,
+      "id": "pork",
+      "name": "ground pork",
+      "baseAmount": 450,
       "unit": "g",
       "category": "weight"
     },
     {
-      "id": "marinadeginger",
-      "name": "ginger, peeled and grated, for the marinade",
+      "id": "onion",
+      "name": "medium red onion, finely diced",
       "baseAmount": 1,
-      "unit": "tbsp",
-      "category": "small"
+      "unit": "",
+      "category": "count"
     },
     {
-      "id": "marinadegarlic",
-      "name": "garlic, peeled and minced, for the marinade",
-      "baseAmount": 2,
-      "unit": "tbsp",
-      "category": "small"
+      "id": "crackers",
+      "name": "saltine crackers, crumbled",
+      "baseAmount": 16,
+      "unit": "",
+      "category": "count"
     },
     {
-      "id": "masala",
-      "name": "Indian tandoori masala (Shan brand recommended)",
-      "baseAmount": 2,
-      "unit": "tbsp",
-      "category": "small"
-    },
-    {
-      "id": "marinadepuree",
-      "name": "canned tomato purée, for the marinade",
+      "id": "milk",
+      "name": "whole milk",
       "baseAmount": 120,
       "unit": "ml",
       "category": "volume"
     },
     {
-      "id": "lemon",
-      "name": "fresh lemon juice",
+      "id": "eggs",
+      "name": "large eggs, lightly beaten",
       "baseAmount": 2,
-      "unit": "tbsp",
-      "category": "small"
-    },
-    {
-      "id": "ghee",
-      "name": "ghee or butter, melted",
-      "baseAmount": 2,
-      "unit": "tbsp",
-      "category": "small"
-    },
-    {
-      "id": "chicken",
-      "name": "skinless bone-in chicken thighs, slashed so the marinade penetrates",
-      "baseAmount": 8,
       "unit": "",
       "category": "count"
     },
     {
       "id": "salt",
-      "name": "salt, to taste",
+      "name": "kosher salt",
       "baseAmount": 1,
       "unit": "tsp",
       "category": "small"
     },
     {
-      "id": "butter",
-      "name": "butter, for the sauce",
-      "baseAmount": 4,
-      "unit": "tbsp",
+      "id": "pepper",
+      "name": "freshly ground black pepper",
+      "baseAmount": 0.5,
+      "unit": "tsp",
       "category": "small"
     },
     {
-      "id": "sauceginger",
-      "name": "ginger, peeled and grated, for the sauce",
+      "id": "oil",
+      "name": "vegetable oil, for the pan",
       "baseAmount": 1,
       "unit": "tbsp",
       "category": "small"
     },
     {
-      "id": "saucegarlic",
-      "name": "garlic, peeled and minced, for the sauce",
-      "baseAmount": 1,
-      "unit": "tbsp",
-      "category": "small"
-    },
-    {
-      "id": "dicedtomatoes",
-      "name": "diced tomatoes",
-      "baseAmount": 120,
-      "unit": "ml",
-      "category": "volume"
-    },
-    {
-      "id": "saucepuree",
-      "name": "tomato purée, for the sauce",
-      "baseAmount": 120,
-      "unit": "ml",
-      "category": "volume"
-    },
-    {
-      "id": "chile",
-      "name": "serrano chile or jalapeño, finely minced",
-      "baseAmount": 1,
-      "unit": "",
-      "category": "count"
-    },
-    {
-      "id": "broth",
-      "name": "vegetable broth",
-      "baseAmount": 120,
-      "unit": "ml",
-      "category": "volume"
-    },
-    {
-      "id": "fenugreek",
-      "name": "dried fenugreek leaves",
+      "id": "mustard",
+      "name": "Dijon mustard, for serving",
       "baseAmount": 2,
       "unit": "tbsp",
       "category": "small"
     }
   ],
   "steps": [
-    "In a large bowl, mix the {{yogurt}}, {{marinadeginger}}, {{marinadegarlic}}, {{masala}}, {{marinadepuree}}, {{salt}}, {{lemon}} and {{ghee}}. Add the {{chicken}} and turn to coat well. Cover and refrigerate at least an hour, or overnight.",
-    "Lift the chicken out of the marinade and wipe it as clean as you can — reserve the marinade.",
-    "Sauté the chicken briefly over high heat in some of the {{butter}}, then take it out of the pot and set aside.",
-    "For the sauce, sauté the {{sauceginger}}, {{saucegarlic}} and {{chile}} in the fat left in the pot for a couple of minutes. Pour in the {{broth}} and scrape up all the browned bits from the bottom.",
-    "Add the {{saucepuree}} and {{dicedtomatoes}}, bring to a boil, then stir in the reserved marinade. Bring back to a boil and add the {{fenugreek}}.",
-    "Return the chicken to the pot, lower the heat to a simmer, and cook for one hour, until the sauce is thick and the chicken is falling off the bone."
+    "Using your hands, mix the {{pork}}, {{crackers}}, {{onion}}, {{eggs}}, {{milk}}, {{salt}} and {{pepper}} together in a large bowl.",
+    "Lightly brush a large nonstick frying pan with the {{oil}} and heat over medium-high. Divide the pork mixture into 8 equal portions.",
+    "Working in batches so the pan isn't crowded, drop each portion into the hot pan and pat it down with the back of a spoon to form a patty.",
+    "Cook, turning once, for 4 to 5 minutes per side, until golden brown.",
+    "Serve with the {{mustard}}."
   ],
-  "notes": "Makes 4 to 5 servings. Cooking the marinade into the sauce is what gives this its body — don't discard it. Serve with hot steamed rice, or with rice and peas, or with naan. A beet salad with yogurt makes a good side, and a light granita is the right dessert."
+  "notes": "Traditionally pork and veal — you can do half veal or half beef with the pork. Oven method: bake at 200°C (400°F) on a parchment-lined sheet for about 15 minutes, until they reach 71°C (160°F) internally, then broil 2 to 3 minutes for a browned top, watching closely. You can also pan-fry and finish in a 175°C (350°F) oven for 10 minutes."
 }
 </script>
 

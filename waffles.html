@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Roasted Red Potatoes</title>
+<title>Waffles</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
 <style>
@@ -120,15 +120,15 @@
 </head>
 <body>
 <div class="sheet">
-  <div class="tab">SIDE · ROASTED</div>
+  <div class="tab">BREAKFAST · WAFFLE IRON</div>
   <header>
-    <h1>Roasted Red Potatoes</h1>
+    <h1>Waffles</h1>
     <div class="meta">
       <span>⏱ 10 min prep</span>
-      <span>🔥 20 min cook</span>
+      <span>🔥 4 min per waffle</span>
       <span>🍽 <span id="servings-label"></span> servings</span>
     </div>
-    <div class="source">From the family recipe document</div>
+    <div class="source">Adapted from <a href="https://cooking.nytimes.com/recipes/1017409-waffles">NYT Cooking</a></div>
   </header>
 
   <div class="body-grid">
@@ -154,51 +154,81 @@
 
 <script id="recipe-data" type="application/json">
 {
-  "baseServings": 6,
+  "baseServings": 10,
   "ingredients": [
     {
-      "id": "potatoes",
-      "name": "red potatoes, quartered",
-      "baseAmount": 900,
+      "id": "butter",
+      "name": "unsalted butter, melted, plus more for the iron",
+      "baseAmount": 85,
       "unit": "g",
       "category": "weight"
     },
     {
-      "id": "oil",
-      "name": "vegetable oil",
-      "baseAmount": 2,
-      "unit": "tbsp",
-      "category": "small"
+      "id": "flour",
+      "name": "all-purpose flour",
+      "baseAmount": 240,
+      "unit": "g",
+      "category": "weight"
     },
     {
-      "id": "salt",
-      "name": "salt",
+      "id": "sugar",
+      "name": "sugar",
+      "baseAmount": 15,
+      "unit": "g",
+      "category": "weight"
+    },
+    {
+      "id": "bakingpowder",
+      "name": "baking powder",
       "baseAmount": 1,
       "unit": "tsp",
       "category": "small"
     },
     {
-      "id": "pepper",
-      "name": "freshly ground black pepper",
+      "id": "salt",
+      "name": "fine sea salt",
+      "baseAmount": 1,
+      "unit": "tsp",
+      "category": "small"
+    },
+    {
+      "id": "bakingsoda",
+      "name": "baking soda",
       "baseAmount": 0.5,
       "unit": "tsp",
       "category": "small"
     },
     {
-      "id": "herbs",
-      "name": "dried rosemary or mixed dried herbs, crushed",
-      "baseAmount": 0.5,
-      "unit": "tsp",
-      "category": "small"
+      "id": "yogurt",
+      "name": "plain yogurt",
+      "baseAmount": 240,
+      "unit": "ml",
+      "category": "volume"
+    },
+    {
+      "id": "milk",
+      "name": "milk",
+      "baseAmount": 240,
+      "unit": "ml",
+      "category": "volume"
+    },
+    {
+      "id": "eggs",
+      "name": "large eggs",
+      "baseAmount": 4,
+      "unit": "",
+      "category": "count"
     }
   ],
   "steps": [
-    "Heat the oven to 230°C (450°F).",
-    "Put the {{potatoes}} in a large bowl and toss with the {{oil}}, {{salt}}, {{pepper}} and {{herbs}} until evenly coated.",
-    "Spread the potatoes out on a roasting tray in a single layer — crowding them steams rather than roasts them.",
-    "Roast for about 20 minutes, stirring once or twice, until the edges are crisp and the centres are tender. Serve straight away."
+    "Melt the {{butter}} on the stove or in the microwave and set it aside.",
+    "In a large bowl, whisk together the {{flour}}, {{sugar}}, {{bakingpowder}}, {{salt}} and {{bakingsoda}}.",
+    "Whisk the {{eggs}} vigorously in a second bowl, then drizzle in the melted butter while still whisking. Add the {{yogurt}} and {{milk}} and whisk again.",
+    "Fold the wet ingredients into the dry. Stop as soon as they come together — overmixing makes them tough.",
+    "Heat the waffle iron. Cook using about 120 ml of batter per waffle, roughly 4 minutes, flipping at 3 if your iron flips.",
+    "Serve immediately, or hold them in a 95°C (200°F) oven until everyone is ready."
   ],
-  "notes": "Bacon variation: cut streaky bacon into small cubes and render until crisp in a skillet. Reserve the bacon and use the fat in place of the vegetable oil for the potatoes. When the potatoes come out, return them to the big bowl and toss the bacon back through."
+  "notes": "Scaled here for the full batch of about 10 waffles; halve it for a smaller morning. Our additions to the half batch: 20 g milk powder, 30 g protein powder, and a splash of vinegar. Greasing the iron turned out to be unnecessary. No yogurt? Substitute an equal volume of milk mixed with a tablespoon of lemon juice or vinegar; sour cream or buttermilk also work."
 }
 </script>
 

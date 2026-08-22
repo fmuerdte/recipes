@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Butter Chicken</title>
+<title>Fire-Roasted Guacamole</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
 <style>
@@ -120,15 +120,15 @@
 </head>
 <body>
 <div class="sheet">
-  <div class="tab">INDIAN · CURRY</div>
+  <div class="tab">MEXICAN · DIP</div>
   <header>
-    <h1>Butter Chicken</h1>
+    <h1>Fire-Roasted Guacamole</h1>
     <div class="meta">
-      <span>⏱ 1 hr marinate</span>
-      <span>🔥 1 hr 20 min cook</span>
+      <span>⏱ 20 min prep</span>
+      <span>🔥 15 min char</span>
       <span>🍽 <span id="servings-label"></span> servings</span>
     </div>
-    <div class="source">Adapted from a family recipe, after Darrow Montgomery</div>
+    <div class="source">From the family recipe document</div>
   </header>
 
   <div class="body-grid">
@@ -154,61 +154,61 @@
 
 <script id="recipe-data" type="application/json">
 {
-  "baseServings": 4,
+  "baseServings": 8,
   "ingredients": [
     {
-      "id": "yogurt",
-      "name": "whole-milk Greek yogurt",
-      "baseAmount": 245,
+      "id": "tomatillos",
+      "name": "tomatillos (about 4 medium)",
+      "baseAmount": 170,
       "unit": "g",
       "category": "weight"
     },
     {
-      "id": "marinadeginger",
-      "name": "ginger, peeled and grated, for the marinade",
-      "baseAmount": 1,
-      "unit": "tbsp",
-      "category": "small"
+      "id": "jalapenos",
+      "name": "jalapeños",
+      "baseAmount": 3,
+      "unit": "",
+      "category": "count"
     },
     {
-      "id": "marinadegarlic",
-      "name": "garlic, peeled and minced, for the marinade",
+      "id": "onion",
+      "name": "onion, chopped",
+      "baseAmount": 30,
+      "unit": "g",
+      "category": "weight"
+    },
+    {
+      "id": "cilantro",
+      "name": "cilantro leaves, loosely packed, plus more to garnish",
+      "baseAmount": 20,
+      "unit": "g",
+      "category": "weight"
+    },
+    {
+      "id": "limes",
+      "name": "limes",
       "baseAmount": 2,
-      "unit": "tbsp",
+      "unit": "",
+      "category": "count"
+    },
+    {
+      "id": "garlic",
+      "name": "garlic cloves, minced",
+      "baseAmount": 5,
+      "unit": "",
+      "category": "count"
+    },
+    {
+      "id": "oil",
+      "name": "olive oil",
+      "baseAmount": 4,
+      "unit": "tsp",
       "category": "small"
     },
     {
-      "id": "masala",
-      "name": "Indian tandoori masala (Shan brand recommended)",
-      "baseAmount": 2,
-      "unit": "tbsp",
-      "category": "small"
-    },
-    {
-      "id": "marinadepuree",
-      "name": "canned tomato purée, for the marinade",
-      "baseAmount": 120,
-      "unit": "ml",
-      "category": "volume"
-    },
-    {
-      "id": "lemon",
-      "name": "fresh lemon juice",
-      "baseAmount": 2,
-      "unit": "tbsp",
-      "category": "small"
-    },
-    {
-      "id": "ghee",
-      "name": "ghee or butter, melted",
-      "baseAmount": 2,
-      "unit": "tbsp",
-      "category": "small"
-    },
-    {
-      "id": "chicken",
-      "name": "skinless bone-in chicken thighs, slashed so the marinade penetrates",
-      "baseAmount": 8,
+      "id": "avocados",
+      "name": "medium, really ripe avocados (Hass preferred)",
+      "baseAmount": 5,
       "unit": "",
       "category": "count"
     },
@@ -218,73 +218,17 @@
       "baseAmount": 1,
       "unit": "tsp",
       "category": "small"
-    },
-    {
-      "id": "butter",
-      "name": "butter, for the sauce",
-      "baseAmount": 4,
-      "unit": "tbsp",
-      "category": "small"
-    },
-    {
-      "id": "sauceginger",
-      "name": "ginger, peeled and grated, for the sauce",
-      "baseAmount": 1,
-      "unit": "tbsp",
-      "category": "small"
-    },
-    {
-      "id": "saucegarlic",
-      "name": "garlic, peeled and minced, for the sauce",
-      "baseAmount": 1,
-      "unit": "tbsp",
-      "category": "small"
-    },
-    {
-      "id": "dicedtomatoes",
-      "name": "diced tomatoes",
-      "baseAmount": 120,
-      "unit": "ml",
-      "category": "volume"
-    },
-    {
-      "id": "saucepuree",
-      "name": "tomato purée, for the sauce",
-      "baseAmount": 120,
-      "unit": "ml",
-      "category": "volume"
-    },
-    {
-      "id": "chile",
-      "name": "serrano chile or jalapeño, finely minced",
-      "baseAmount": 1,
-      "unit": "",
-      "category": "count"
-    },
-    {
-      "id": "broth",
-      "name": "vegetable broth",
-      "baseAmount": 120,
-      "unit": "ml",
-      "category": "volume"
-    },
-    {
-      "id": "fenugreek",
-      "name": "dried fenugreek leaves",
-      "baseAmount": 2,
-      "unit": "tbsp",
-      "category": "small"
     }
   ],
   "steps": [
-    "In a large bowl, mix the {{yogurt}}, {{marinadeginger}}, {{marinadegarlic}}, {{masala}}, {{marinadepuree}}, {{salt}}, {{lemon}} and {{ghee}}. Add the {{chicken}} and turn to coat well. Cover and refrigerate at least an hour, or overnight.",
-    "Lift the chicken out of the marinade and wipe it as clean as you can — reserve the marinade.",
-    "Sauté the chicken briefly over high heat in some of the {{butter}}, then take it out of the pot and set aside.",
-    "For the sauce, sauté the {{sauceginger}}, {{saucegarlic}} and {{chile}} in the fat left in the pot for a couple of minutes. Pour in the {{broth}} and scrape up all the browned bits from the bottom.",
-    "Add the {{saucepuree}} and {{dicedtomatoes}}, bring to a boil, then stir in the reserved marinade. Bring back to a boil and add the {{fenugreek}}.",
-    "Return the chicken to the pot, lower the heat to a simmer, and cook for one hour, until the sauce is thick and the chicken is falling off the bone."
+    "If the {{tomatillos}} still have their papery husks, pull them off, pop off the stems, and rinse away the gummy coating. Dry them, then set them high under a broiler for a few minutes to char the tops. Flip and char the other side — you want them evenly blackened. Drop them into a food processor.",
+    "Char the {{jalapenos}} the same way and let them cool enough to handle. Trim the stem ends, open them up, and cut out the seeds and ribs (leave them in for more heat). Chop reasonably fine and add to the processor.",
+    "Add the {{onion}}, the {{cilantro}}, the juice of one of the {{limes}}, and a generous pinch of the {{salt}}. Pulse until it's essentially a liquid. Taste and add more salt as needed to make it savoury and balance the sourness.",
+    "In a small pan, heat the {{garlic}} and {{oil}} over medium heat. Swirl until the garlic turns a rich golden brown — golden, not brown-brown. Stir it into the tomatillo purée until the oil incorporates. At this point you have a very good salsa in its own right.",
+    "Split the {{avocados}}, peel off the skins gently, and cut the flesh into 5 mm or 1 cm dice — bigger dice gives more contrast between flavours, so go large if the avocados are excellent and smaller if they're merely good. Spritz with lime as you work to keep them from browning.",
+    "Season the avocado chunks with salt until they taste really good on their own, then gently fold in the salsa. Adjust the salt again and garnish with more chopped cilantro."
   ],
-  "notes": "Makes 4 to 5 servings. Cooking the marinade into the sauce is what gives this its body — don't discard it. Serve with hot steamed rice, or with rice and peas, or with naan. A beet salad with yogurt makes a good side, and a light granita is the right dessert."
+  "notes": "Substituting a little fish sauce for some of the salt sends this over the edge, and nobody will be able to tell you why it tastes so good. The garlic-oil step is worth not skipping — it changes the whole character of the salsa."
 }
 </script>
 

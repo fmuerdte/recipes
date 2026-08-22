@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Butter Chicken</title>
+<title>Emily's Cornbread</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
 <style>
@@ -120,15 +120,15 @@
 </head>
 <body>
 <div class="sheet">
-  <div class="tab">INDIAN · CURRY</div>
+  <div class="tab">SOUTHERN · SKILLET</div>
   <header>
-    <h1>Butter Chicken</h1>
+    <h1>Emily's Cornbread</h1>
     <div class="meta">
-      <span>⏱ 1 hr marinate</span>
-      <span>🔥 1 hr 20 min cook</span>
+      <span>⏱ 10 min prep</span>
+      <span>🔥 25 min bake</span>
       <span>🍽 <span id="servings-label"></span> servings</span>
     </div>
-    <div class="source">Adapted from a family recipe, after Darrow Montgomery</div>
+    <div class="source">Emily's recipe, from the family recipe document</div>
   </header>
 
   <div class="body-grid">
@@ -154,137 +154,73 @@
 
 <script id="recipe-data" type="application/json">
 {
-  "baseServings": 4,
+  "baseServings": 8,
   "ingredients": [
     {
-      "id": "yogurt",
-      "name": "whole-milk Greek yogurt",
-      "baseAmount": 245,
+      "id": "cornmeal",
+      "name": "fine cornmeal, white for preference",
+      "baseAmount": 140,
       "unit": "g",
       "category": "weight"
     },
     {
-      "id": "marinadeginger",
-      "name": "ginger, peeled and grated, for the marinade",
+      "id": "flour",
+      "name": "all-purpose flour",
+      "baseAmount": 60,
+      "unit": "g",
+      "category": "weight"
+    },
+    {
+      "id": "sugar",
+      "name": "sugar",
       "baseAmount": 1,
       "unit": "tbsp",
       "category": "small"
     },
     {
-      "id": "marinadegarlic",
-      "name": "garlic, peeled and minced, for the marinade",
-      "baseAmount": 2,
-      "unit": "tbsp",
-      "category": "small"
-    },
-    {
-      "id": "masala",
-      "name": "Indian tandoori masala (Shan brand recommended)",
-      "baseAmount": 2,
-      "unit": "tbsp",
-      "category": "small"
-    },
-    {
-      "id": "marinadepuree",
-      "name": "canned tomato purée, for the marinade",
-      "baseAmount": 120,
-      "unit": "ml",
-      "category": "volume"
-    },
-    {
-      "id": "lemon",
-      "name": "fresh lemon juice",
-      "baseAmount": 2,
-      "unit": "tbsp",
-      "category": "small"
-    },
-    {
-      "id": "ghee",
-      "name": "ghee or butter, melted",
-      "baseAmount": 2,
-      "unit": "tbsp",
-      "category": "small"
-    },
-    {
-      "id": "chicken",
-      "name": "skinless bone-in chicken thighs, slashed so the marinade penetrates",
-      "baseAmount": 8,
-      "unit": "",
-      "category": "count"
-    },
-    {
       "id": "salt",
-      "name": "salt, to taste",
+      "name": "salt",
       "baseAmount": 1,
       "unit": "tsp",
       "category": "small"
     },
     {
-      "id": "butter",
-      "name": "butter, for the sauce",
-      "baseAmount": 4,
-      "unit": "tbsp",
+      "id": "bakingpowder",
+      "name": "baking powder",
+      "baseAmount": 3,
+      "unit": "tsp",
       "category": "small"
     },
     {
-      "id": "sauceginger",
-      "name": "ginger, peeled and grated, for the sauce",
-      "baseAmount": 1,
-      "unit": "tbsp",
-      "category": "small"
-    },
-    {
-      "id": "saucegarlic",
-      "name": "garlic, peeled and minced, for the sauce",
-      "baseAmount": 1,
-      "unit": "tbsp",
-      "category": "small"
-    },
-    {
-      "id": "dicedtomatoes",
-      "name": "diced tomatoes",
-      "baseAmount": 120,
-      "unit": "ml",
-      "category": "volume"
-    },
-    {
-      "id": "saucepuree",
-      "name": "tomato purée, for the sauce",
-      "baseAmount": 120,
-      "unit": "ml",
-      "category": "volume"
-    },
-    {
-      "id": "chile",
-      "name": "serrano chile or jalapeño, finely minced",
+      "id": "egg",
+      "name": "large egg (or 2 medium)",
       "baseAmount": 1,
       "unit": "",
       "category": "count"
     },
     {
-      "id": "broth",
-      "name": "vegetable broth",
-      "baseAmount": 120,
+      "id": "buttermilk",
+      "name": "buttermilk",
+      "baseAmount": 240,
       "unit": "ml",
       "category": "volume"
     },
     {
-      "id": "fenugreek",
-      "name": "dried fenugreek leaves",
-      "baseAmount": 2,
-      "unit": "tbsp",
-      "category": "small"
+      "id": "oil",
+      "name": "oil, plus more for the skillet",
+      "baseAmount": 60,
+      "unit": "ml",
+      "category": "volume"
     }
   ],
   "steps": [
-    "In a large bowl, mix the {{yogurt}}, {{marinadeginger}}, {{marinadegarlic}}, {{masala}}, {{marinadepuree}}, {{salt}}, {{lemon}} and {{ghee}}. Add the {{chicken}} and turn to coat well. Cover and refrigerate at least an hour, or overnight.",
-    "Lift the chicken out of the marinade and wipe it as clean as you can — reserve the marinade.",
-    "Sauté the chicken briefly over high heat in some of the {{butter}}, then take it out of the pot and set aside.",
-    "For the sauce, sauté the {{sauceginger}}, {{saucegarlic}} and {{chile}} in the fat left in the pot for a couple of minutes. Pour in the {{broth}} and scrape up all the browned bits from the bottom.",
-    "Add the {{saucepuree}} and {{dicedtomatoes}}, bring to a boil, then stir in the reserved marinade. Bring back to a boil and add the {{fenugreek}}.",
-    "Return the chicken to the pot, lower the heat to a simmer, and cook for one hour, until the sauce is thick and the chicken is falling off the bone."
+    "Heat the oven to 220°C (425°F).",
+    "Mix the {{cornmeal}}, {{flour}}, {{sugar}}, {{salt}} and {{bakingpowder}} together.",
+    "Add the {{egg}}, {{buttermilk}} and {{oil}} and stir. The batter should be fairly fluid but not thin — thick and pourable, and a little lumpy is fine. Loosen with a splash of regular milk if needed.",
+    "Coat the bottom of a cast iron skillet generously with oil and heat it in the oven for a few minutes until hot. Pour the batter straight into the hot oil so the edges begin to fry.",
+    "Return the pan to the oven and bake 25 minutes."
   ],
-  "notes": "Makes 4 to 5 servings. Cooking the marinade into the sauce is what gives this its body — don't discard it. Serve with hot steamed rice, or with rice and peas, or with naan. A beet salad with yogurt makes a good side, and a light granita is the right dessert."
+  "notes": "Cornbread should be savoury, not sweet — the tablespoon of sugar is there to round it out, not to make it a cake. A higher ratio of cornmeal to flour is what makes it authentically Southern. Three teaspoons of baking powder instead of four works fine. To jazz it up, add 150–200 g of shredded sharp cheddar and some chopped jalapeños. The same method works in a muffin tin: about a teaspoon of oil in each cup, heated, then the batter poured in."
 }
 </script>
 

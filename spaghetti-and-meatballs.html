@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Butter Chicken</title>
+<title>Spaghetti and Meatballs</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
 <style>
@@ -120,15 +120,15 @@
 </head>
 <body>
 <div class="sheet">
-  <div class="tab">INDIAN · CURRY</div>
+  <div class="tab">PASTA · CLASSIC</div>
   <header>
-    <h1>Butter Chicken</h1>
+    <h1>Spaghetti and Meatballs</h1>
     <div class="meta">
-      <span>⏱ 1 hr marinate</span>
-      <span>🔥 1 hr 20 min cook</span>
+      <span>⏱ 30 min prep</span>
+      <span>🔥 50 min simmer</span>
       <span>🍽 <span id="servings-label"></span> servings</span>
     </div>
-    <div class="source">Adapted from a family recipe, after Darrow Montgomery</div>
+    <div class="source">Adapted from <a href="https://www.bonappetit.com/recipe/classic-spaghetti-and-meatballs">Bon Appétit</a></div>
   </header>
 
   <div class="body-grid">
@@ -154,137 +154,142 @@
 
 <script id="recipe-data" type="application/json">
 {
-  "baseServings": 4,
+  "baseServings": 6,
   "ingredients": [
     {
-      "id": "yogurt",
-      "name": "whole-milk Greek yogurt",
-      "baseAmount": 245,
+      "id": "bread",
+      "name": "thick slices white sandwich bread, crusts removed",
+      "baseAmount": 3,
+      "unit": "",
+      "category": "count"
+    },
+    {
+      "id": "eggs",
+      "name": "large eggs, beaten to blend",
+      "baseAmount": 2,
+      "unit": "",
+      "category": "count"
+    },
+    {
+      "id": "garlic",
+      "name": "garlic cloves, finely chopped",
+      "baseAmount": 2,
+      "unit": "",
+      "category": "count"
+    },
+    {
+      "id": "ricotta",
+      "name": "fresh whole-milk ricotta",
+      "baseAmount": 80,
       "unit": "g",
       "category": "weight"
     },
     {
-      "id": "marinadeginger",
-      "name": "ginger, peeled and grated, for the marinade",
-      "baseAmount": 1,
-      "unit": "tbsp",
-      "category": "small"
+      "id": "prosciutto",
+      "name": "prosciutto, finely chopped",
+      "baseAmount": 35,
+      "unit": "g",
+      "category": "weight"
     },
     {
-      "id": "marinadegarlic",
-      "name": "garlic, peeled and minced, for the marinade",
-      "baseAmount": 2,
-      "unit": "tbsp",
-      "category": "small"
+      "id": "parsley",
+      "name": "parsley, finely chopped",
+      "baseAmount": 15,
+      "unit": "g",
+      "category": "weight"
     },
     {
-      "id": "masala",
-      "name": "Indian tandoori masala (Shan brand recommended)",
-      "baseAmount": 2,
-      "unit": "tbsp",
-      "category": "small"
+      "id": "parmesan",
+      "name": "grated Parmesan, plus more for serving",
+      "baseAmount": 35,
+      "unit": "g",
+      "category": "weight"
     },
     {
-      "id": "marinadepuree",
-      "name": "canned tomato purée, for the marinade",
-      "baseAmount": 120,
-      "unit": "ml",
-      "category": "volume"
-    },
-    {
-      "id": "lemon",
-      "name": "fresh lemon juice",
-      "baseAmount": 2,
-      "unit": "tbsp",
-      "category": "small"
-    },
-    {
-      "id": "ghee",
-      "name": "ghee or butter, melted",
-      "baseAmount": 2,
-      "unit": "tbsp",
-      "category": "small"
-    },
-    {
-      "id": "chicken",
-      "name": "skinless bone-in chicken thighs, slashed so the marinade penetrates",
-      "baseAmount": 8,
-      "unit": "",
-      "category": "count"
-    },
-    {
-      "id": "salt",
-      "name": "salt, to taste",
-      "baseAmount": 1,
+      "id": "fennel",
+      "name": "fennel seeds, finely ground",
+      "baseAmount": 0.75,
       "unit": "tsp",
       "category": "small"
     },
     {
-      "id": "butter",
-      "name": "butter, for the sauce",
-      "baseAmount": 4,
-      "unit": "tbsp",
+      "id": "oregano",
+      "name": "dried oregano",
+      "baseAmount": 0.75,
+      "unit": "tsp",
       "category": "small"
     },
     {
-      "id": "sauceginger",
-      "name": "ginger, peeled and grated, for the sauce",
-      "baseAmount": 1,
-      "unit": "tbsp",
+      "id": "nutmeg",
+      "name": "ground nutmeg",
+      "baseAmount": 0.5,
+      "unit": "tsp",
       "category": "small"
     },
     {
-      "id": "saucegarlic",
-      "name": "garlic, peeled and minced, for the sauce",
-      "baseAmount": 1,
-      "unit": "tbsp",
+      "id": "pepper",
+      "name": "finely ground black pepper",
+      "baseAmount": 0.5,
+      "unit": "tsp",
       "category": "small"
     },
     {
-      "id": "dicedtomatoes",
-      "name": "diced tomatoes",
-      "baseAmount": 120,
-      "unit": "ml",
-      "category": "volume"
+      "id": "redpepper",
+      "name": "crushed red pepper flakes",
+      "baseAmount": 0.25,
+      "unit": "tsp",
+      "category": "small"
     },
     {
-      "id": "saucepuree",
-      "name": "tomato purée, for the sauce",
-      "baseAmount": 120,
-      "unit": "ml",
-      "category": "volume"
+      "id": "salt",
+      "name": "kosher salt, plus more",
+      "baseAmount": 1.25,
+      "unit": "tsp",
+      "category": "small"
     },
     {
-      "id": "chile",
-      "name": "serrano chile or jalapeño, finely minced",
-      "baseAmount": 1,
-      "unit": "",
-      "category": "count"
+      "id": "beef",
+      "name": "ground beef chuck, preferably 20% fat",
+      "baseAmount": 450,
+      "unit": "g",
+      "category": "weight"
     },
     {
-      "id": "broth",
-      "name": "vegetable broth",
-      "baseAmount": 120,
-      "unit": "ml",
-      "category": "volume"
-    },
-    {
-      "id": "fenugreek",
-      "name": "dried fenugreek leaves",
+      "id": "oil",
+      "name": "olive oil, plus more",
       "baseAmount": 2,
       "unit": "tbsp",
       "category": "small"
+    },
+    {
+      "id": "spaghetti",
+      "name": "spaghetti",
+      "baseAmount": 340,
+      "unit": "g",
+      "category": "weight"
+    },
+    {
+      "id": "basil",
+      "name": "torn basil, for serving (optional)",
+      "baseAmount": 10,
+      "unit": "g",
+      "category": "weight"
     }
   ],
   "steps": [
-    "In a large bowl, mix the {{yogurt}}, {{marinadeginger}}, {{marinadegarlic}}, {{masala}}, {{marinadepuree}}, {{salt}}, {{lemon}} and {{ghee}}. Add the {{chicken}} and turn to coat well. Cover and refrigerate at least an hour, or overnight.",
-    "Lift the chicken out of the marinade and wipe it as clean as you can — reserve the marinade.",
-    "Sauté the chicken briefly over high heat in some of the {{butter}}, then take it out of the pot and set aside.",
-    "For the sauce, sauté the {{sauceginger}}, {{saucegarlic}} and {{chile}} in the fat left in the pot for a couple of minutes. Pour in the {{broth}} and scrape up all the browned bits from the bottom.",
-    "Add the {{saucepuree}} and {{dicedtomatoes}}, bring to a boil, then stir in the reserved marinade. Bring back to a boil and add the {{fenugreek}}.",
-    "Return the chicken to the pot, lower the heat to a simmer, and cook for one hour, until the sauce is thick and the chicken is falling off the bone."
+    "Have your tomato sauce ready — this recipe assumes a pot of it warm and waiting.",
+    "Run the {{bread}} under cold running water until completely soaked, then wring it out firmly to expel as much water as possible. Chop it finely and mix in a large bowl with the {{eggs}}, {{garlic}}, {{ricotta}}, {{prosciutto}}, {{parsley}} and the {{parmesan}}.",
+    "Add the {{fennel}}, {{oregano}}, {{nutmeg}}, {{pepper}}, {{redpepper}} and {{salt}} to the bread mixture and mix well — it should resemble a coarse, wet paste.",
+    "Add the {{beef}} and break it up into small pieces (a couple of forks work well). Mix gently with your hands until smooth and evenly combined, being careful not to overmix.",
+    "Lightly oil your hands. Working one at a time, scoop out portions with a 60 ml measuring cup and roll gently into balls. Arrange on a rimmed baking sheet.",
+    "Get the sauce reheating now if it isn't already warm.",
+    "Heat half the {{oil}} in a medium nonstick skillet over medium heat. Add half the meatballs and cook, turning and rolling occasionally, until browned all over, about 5 minutes. Add them to the warm sauce, then repeat with the remaining oil and meatballs.",
+    "Simmer the meatballs in the sauce, mostly submerged, carefully scraping the bottom of the pot and adding a splash of water if it starts to stick, until cooked through and tender and the sauce tastes rich and meaty — 40 to 50 minutes.",
+    "Transfer the meatballs to a clean baking sheet and cover with foil. Pluck out and discard any basil from the sauce, then break up large pieces of tomato with a masher or immersion blender. Set aside 475 ml of sauce for serving.",
+    "Cook the {{spaghetti}} in a large pot of boiling salted water until al dente. Using tongs, transfer it to the pot with the sauce and stir gently, adding pasta water by the tablespoon until the sauce coats the pasta.",
+    "Transfer to a serving dish, top with the meatballs and some of the reserved sauce, and finish with more Parmesan and the {{basil}}."
   ],
-  "notes": "Makes 4 to 5 servings. Cooking the marinade into the sauce is what gives this its body — don't discard it. Serve with hot steamed rice, or with rice and peas, or with naan. A beet salad with yogurt makes a good side, and a light granita is the right dessert."
+  "notes": "The soaked-and-wrung bread (a panade) is what keeps these tender — don't substitute dry breadcrumbs. Make ahead: the meatballs can be formed a day ahead and chilled, or cooked in the sauce up to 3 days ahead, cooled, covered and chilled. Pair with the slow-roasted tomato sauce in this collection."
 }
 </script>
 

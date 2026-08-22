@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Butter Chicken</title>
+<title>Sancocho</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
 <style>
@@ -120,15 +120,15 @@
 </head>
 <body>
 <div class="sheet">
-  <div class="tab">INDIAN · CURRY</div>
+  <div class="tab">PUERTO RICAN · STEW</div>
   <header>
-    <h1>Butter Chicken</h1>
+    <h1>Sancocho</h1>
     <div class="meta">
-      <span>⏱ 1 hr marinate</span>
-      <span>🔥 1 hr 20 min cook</span>
+      <span>⏱ 45 min prep</span>
+      <span>🔥 1 hr cook</span>
       <span>🍽 <span id="servings-label"></span> servings</span>
     </div>
-    <div class="source">Adapted from a family recipe, after Darrow Montgomery</div>
+    <div class="source">From the family recipe document</div>
   </header>
 
   <div class="body-grid">
@@ -154,137 +154,117 @@
 
 <script id="recipe-data" type="application/json">
 {
-  "baseServings": 4,
+  "baseServings": 10,
   "ingredients": [
     {
-      "id": "yogurt",
-      "name": "whole-milk Greek yogurt",
-      "baseAmount": 245,
+      "id": "malanga",
+      "name": "malanga, peeled and chunked",
+      "baseAmount": 450,
       "unit": "g",
       "category": "weight"
     },
     {
-      "id": "marinadeginger",
-      "name": "ginger, peeled and grated, for the marinade",
-      "baseAmount": 1,
-      "unit": "tbsp",
-      "category": "small"
+      "id": "yautia",
+      "name": "yautía, peeled and chunked",
+      "baseAmount": 450,
+      "unit": "g",
+      "category": "weight"
     },
     {
-      "id": "marinadegarlic",
-      "name": "garlic, peeled and minced, for the marinade",
+      "id": "name",
+      "name": "ñame, peeled and chunked",
+      "baseAmount": 450,
+      "unit": "g",
+      "category": "weight"
+    },
+    {
+      "id": "batata",
+      "name": "batata (sweet potato), peeled and chunked",
+      "baseAmount": 450,
+      "unit": "g",
+      "category": "weight"
+    },
+    {
+      "id": "calabaza",
+      "name": "calabaza (pumpkin), peeled and chunked",
+      "baseAmount": 450,
+      "unit": "g",
+      "category": "weight"
+    },
+    {
+      "id": "carrots",
+      "name": "large carrots, sliced",
       "baseAmount": 2,
-      "unit": "tbsp",
-      "category": "small"
-    },
-    {
-      "id": "masala",
-      "name": "Indian tandoori masala (Shan brand recommended)",
-      "baseAmount": 2,
-      "unit": "tbsp",
-      "category": "small"
-    },
-    {
-      "id": "marinadepuree",
-      "name": "canned tomato purée, for the marinade",
-      "baseAmount": 120,
-      "unit": "ml",
-      "category": "volume"
-    },
-    {
-      "id": "lemon",
-      "name": "fresh lemon juice",
-      "baseAmount": 2,
-      "unit": "tbsp",
-      "category": "small"
-    },
-    {
-      "id": "ghee",
-      "name": "ghee or butter, melted",
-      "baseAmount": 2,
-      "unit": "tbsp",
-      "category": "small"
-    },
-    {
-      "id": "chicken",
-      "name": "skinless bone-in chicken thighs, slashed so the marinade penetrates",
-      "baseAmount": 8,
       "unit": "",
       "category": "count"
     },
     {
-      "id": "salt",
-      "name": "salt, to taste",
-      "baseAmount": 1,
-      "unit": "tsp",
-      "category": "small"
+      "id": "plantains",
+      "name": "plantains, sliced",
+      "baseAmount": 2,
+      "unit": "",
+      "category": "count"
     },
     {
-      "id": "butter",
-      "name": "butter, for the sauce",
+      "id": "sausage",
+      "name": "sausage meat (butifarra)",
+      "baseAmount": 900,
+      "unit": "g",
+      "category": "weight"
+    },
+    {
+      "id": "onions",
+      "name": "large onions",
+      "baseAmount": 2,
+      "unit": "",
+      "category": "count"
+    },
+    {
+      "id": "cubanelle",
+      "name": "cubanelle peppers",
       "baseAmount": 4,
-      "unit": "tbsp",
-      "category": "small"
+      "unit": "",
+      "category": "count"
     },
     {
-      "id": "sauceginger",
-      "name": "ginger, peeled and grated, for the sauce",
-      "baseAmount": 1,
-      "unit": "tbsp",
-      "category": "small"
-    },
-    {
-      "id": "saucegarlic",
-      "name": "garlic, peeled and minced, for the sauce",
-      "baseAmount": 1,
-      "unit": "tbsp",
-      "category": "small"
-    },
-    {
-      "id": "dicedtomatoes",
-      "name": "diced tomatoes",
-      "baseAmount": 120,
-      "unit": "ml",
-      "category": "volume"
-    },
-    {
-      "id": "saucepuree",
-      "name": "tomato purée, for the sauce",
-      "baseAmount": 120,
-      "unit": "ml",
-      "category": "volume"
-    },
-    {
-      "id": "chile",
-      "name": "serrano chile or jalapeño, finely minced",
+      "id": "cilantro",
+      "name": "pack of cilantro",
       "baseAmount": 1,
       "unit": "",
       "category": "count"
     },
     {
-      "id": "broth",
-      "name": "vegetable broth",
-      "baseAmount": 120,
-      "unit": "ml",
-      "category": "volume"
+      "id": "recao",
+      "name": "pack of recao (culantro)",
+      "baseAmount": 1,
+      "unit": "",
+      "category": "count"
     },
     {
-      "id": "fenugreek",
-      "name": "dried fenugreek leaves",
-      "baseAmount": 2,
-      "unit": "tbsp",
-      "category": "small"
+      "id": "garlic",
+      "name": "garlic cloves",
+      "baseAmount": 6,
+      "unit": "",
+      "category": "count"
+    },
+    {
+      "id": "water",
+      "name": "water, or enough to cover",
+      "baseAmount": 1000,
+      "unit": "ml",
+      "category": "volume"
     }
   ],
   "steps": [
-    "In a large bowl, mix the {{yogurt}}, {{marinadeginger}}, {{marinadegarlic}}, {{masala}}, {{marinadepuree}}, {{salt}}, {{lemon}} and {{ghee}}. Add the {{chicken}} and turn to coat well. Cover and refrigerate at least an hour, or overnight.",
-    "Lift the chicken out of the marinade and wipe it as clean as you can — reserve the marinade.",
-    "Sauté the chicken briefly over high heat in some of the {{butter}}, then take it out of the pot and set aside.",
-    "For the sauce, sauté the {{sauceginger}}, {{saucegarlic}} and {{chile}} in the fat left in the pot for a couple of minutes. Pour in the {{broth}} and scrape up all the browned bits from the bottom.",
-    "Add the {{saucepuree}} and {{dicedtomatoes}}, bring to a boil, then stir in the reserved marinade. Bring back to a boil and add the {{fenugreek}}.",
-    "Return the chicken to the pot, lower the heat to a simmer, and cook for one hour, until the sauce is thick and the chicken is falling off the bone."
+    "Blend the {{onions}}, {{garlic}}, {{cubanelle}}, {{recao}} and {{cilantro}} in a food processor to make the sofrito.",
+    "Brown the {{sausage}} in a large heavy-bottomed pot. If there is a lot of rendered fat you can pour some off, though leaving it in is no bad thing. You may need two pots — this does not all fit in one.",
+    "Add the sofrito. Extra fresh sofrito is a welcome addition if you have it.",
+    "Add the {{malanga}}, {{yautia}} and {{name}}, then the {{water}} — enough to cover. Bring to a light boil and wait 5 minutes.",
+    "Add the {{batata}}, {{plantains}} and {{carrots}}. Wait another 5 minutes.",
+    "Add the {{calabaza}} and cook until everything is tender, roughly 45 minutes depending on your chunks.",
+    "Season as it cooks with stock base, adobo, hot sauce, salt and pepper, tasting as you go."
   ],
-  "notes": "Makes 4 to 5 servings. Cooking the marinade into the sauce is what gives this its body — don't discard it. Serve with hot steamed rice, or with rice and peas, or with naan. A beet salad with yogurt makes a good side, and a light granita is the right dessert."
+  "notes": "Makes enough for 10 with leftovers. Serve with rice and avocado. The staggered additions matter — the hard roots need a head start, and the pumpkin will dissolve into the broth if it goes in early (which thickens it nicely, if that is what you want)."
 }
 </script>
 

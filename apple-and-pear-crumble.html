@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Butter Chicken</title>
+<title>Apple and Pear Crumble</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
 <style>
@@ -120,15 +120,15 @@
 </head>
 <body>
 <div class="sheet">
-  <div class="tab">INDIAN · CURRY</div>
+  <div class="tab">DESSERT · BAKED</div>
   <header>
-    <h1>Butter Chicken</h1>
+    <h1>Apple and Pear Crumble</h1>
     <div class="meta">
-      <span>⏱ 1 hr marinate</span>
-      <span>🔥 1 hr 20 min cook</span>
+      <span>⏱ 20 min prep</span>
+      <span>🔥 55 min bake</span>
       <span>🍽 <span id="servings-label"></span> servings</span>
     </div>
-    <div class="source">Adapted from a family recipe, after Darrow Montgomery</div>
+    <div class="source">Adapted from <a href="https://cooking.nytimes.com/recipes/1018638-apple-crumble">Samantha Seneviratne, NYT Cooking</a></div>
   </header>
 
   <div class="body-grid">
@@ -154,42 +154,77 @@
 
 <script id="recipe-data" type="application/json">
 {
-  "baseServings": 4,
+  "baseServings": 10,
   "ingredients": [
     {
-      "id": "yogurt",
-      "name": "whole-milk Greek yogurt",
-      "baseAmount": 245,
+      "id": "butter",
+      "name": "unsalted butter, melted, plus more for the pan",
+      "baseAmount": 170,
       "unit": "g",
       "category": "weight"
     },
     {
-      "id": "marinadeginger",
-      "name": "ginger, peeled and grated, for the marinade",
+      "id": "flour",
+      "name": "all-purpose flour",
+      "baseAmount": 180,
+      "unit": "g",
+      "category": "weight"
+    },
+    {
+      "id": "crumblesugar",
+      "name": "packed dark brown sugar, for the crumble",
+      "baseAmount": 100,
+      "unit": "g",
+      "category": "weight"
+    },
+    {
+      "id": "oats",
+      "name": "old-fashioned rolled oats",
+      "baseAmount": 80,
+      "unit": "g",
+      "category": "weight"
+    },
+    {
+      "id": "walnuts",
+      "name": "walnuts, chopped",
+      "baseAmount": 113,
+      "unit": "g",
+      "category": "weight"
+    },
+    {
+      "id": "salt",
+      "name": "kosher salt",
+      "baseAmount": 1,
+      "unit": "tsp",
+      "category": "small"
+    },
+    {
+      "id": "apples",
+      "name": "mixed apples (Granny Smith, Macintosh, Pink Lady), peeled, cored and cut into 1 cm wedges",
+      "baseAmount": 900,
+      "unit": "g",
+      "category": "weight"
+    },
+    {
+      "id": "pears",
+      "name": "pears, peeled, cored and cut into 1 cm wedges",
+      "baseAmount": 900,
+      "unit": "g",
+      "category": "weight"
+    },
+    {
+      "id": "fruitsugar",
+      "name": "packed dark brown sugar, for the fruit",
+      "baseAmount": 50,
+      "unit": "g",
+      "category": "weight"
+    },
+    {
+      "id": "cinnamon",
+      "name": "ground cinnamon",
       "baseAmount": 1,
       "unit": "tbsp",
       "category": "small"
-    },
-    {
-      "id": "marinadegarlic",
-      "name": "garlic, peeled and minced, for the marinade",
-      "baseAmount": 2,
-      "unit": "tbsp",
-      "category": "small"
-    },
-    {
-      "id": "masala",
-      "name": "Indian tandoori masala (Shan brand recommended)",
-      "baseAmount": 2,
-      "unit": "tbsp",
-      "category": "small"
-    },
-    {
-      "id": "marinadepuree",
-      "name": "canned tomato purée, for the marinade",
-      "baseAmount": 120,
-      "unit": "ml",
-      "category": "volume"
     },
     {
       "id": "lemon",
@@ -197,94 +232,17 @@
       "baseAmount": 2,
       "unit": "tbsp",
       "category": "small"
-    },
-    {
-      "id": "ghee",
-      "name": "ghee or butter, melted",
-      "baseAmount": 2,
-      "unit": "tbsp",
-      "category": "small"
-    },
-    {
-      "id": "chicken",
-      "name": "skinless bone-in chicken thighs, slashed so the marinade penetrates",
-      "baseAmount": 8,
-      "unit": "",
-      "category": "count"
-    },
-    {
-      "id": "salt",
-      "name": "salt, to taste",
-      "baseAmount": 1,
-      "unit": "tsp",
-      "category": "small"
-    },
-    {
-      "id": "butter",
-      "name": "butter, for the sauce",
-      "baseAmount": 4,
-      "unit": "tbsp",
-      "category": "small"
-    },
-    {
-      "id": "sauceginger",
-      "name": "ginger, peeled and grated, for the sauce",
-      "baseAmount": 1,
-      "unit": "tbsp",
-      "category": "small"
-    },
-    {
-      "id": "saucegarlic",
-      "name": "garlic, peeled and minced, for the sauce",
-      "baseAmount": 1,
-      "unit": "tbsp",
-      "category": "small"
-    },
-    {
-      "id": "dicedtomatoes",
-      "name": "diced tomatoes",
-      "baseAmount": 120,
-      "unit": "ml",
-      "category": "volume"
-    },
-    {
-      "id": "saucepuree",
-      "name": "tomato purée, for the sauce",
-      "baseAmount": 120,
-      "unit": "ml",
-      "category": "volume"
-    },
-    {
-      "id": "chile",
-      "name": "serrano chile or jalapeño, finely minced",
-      "baseAmount": 1,
-      "unit": "",
-      "category": "count"
-    },
-    {
-      "id": "broth",
-      "name": "vegetable broth",
-      "baseAmount": 120,
-      "unit": "ml",
-      "category": "volume"
-    },
-    {
-      "id": "fenugreek",
-      "name": "dried fenugreek leaves",
-      "baseAmount": 2,
-      "unit": "tbsp",
-      "category": "small"
     }
   ],
   "steps": [
-    "In a large bowl, mix the {{yogurt}}, {{marinadeginger}}, {{marinadegarlic}}, {{masala}}, {{marinadepuree}}, {{salt}}, {{lemon}} and {{ghee}}. Add the {{chicken}} and turn to coat well. Cover and refrigerate at least an hour, or overnight.",
-    "Lift the chicken out of the marinade and wipe it as clean as you can — reserve the marinade.",
-    "Sauté the chicken briefly over high heat in some of the {{butter}}, then take it out of the pot and set aside.",
-    "For the sauce, sauté the {{sauceginger}}, {{saucegarlic}} and {{chile}} in the fat left in the pot for a couple of minutes. Pour in the {{broth}} and scrape up all the browned bits from the bottom.",
-    "Add the {{saucepuree}} and {{dicedtomatoes}}, bring to a boil, then stir in the reserved marinade. Bring back to a boil and add the {{fenugreek}}.",
-    "Return the chicken to the pot, lower the heat to a simmer, and cook for one hour, until the sauce is thick and the chicken is falling off the bone."
+    "Heat the oven to 175°C (350°F) and butter a 33×23 cm baking dish.",
+    "In a medium bowl, combine the {{flour}}, {{crumblesugar}}, {{oats}}, {{walnuts}} and {{salt}}. Add the melted {{butter}} and stir with a fork until the crumbs are evenly moistened.",
+    "Put the {{apples}} and {{pears}} in the buttered dish and toss with the {{fruitsugar}}, {{cinnamon}} and {{lemon}}. Spread into an even layer.",
+    "Press the crumb mixture together into clumps of varying sizes and scatter over the fruit.",
+    "Bake until the fruit is tender and the topping is crisp and deep golden brown, 50 to 60 minutes.",
+    "Serve warm or at room temperature."
   ],
-  "notes": "Makes 4 to 5 servings. Cooking the marinade into the sauce is what gives this its body — don't discard it. Serve with hot steamed rice, or with rice and peas, or with naan. A beet salad with yogurt makes a good side, and a light granita is the right dessert."
+  "notes": "Halved sugar throughout compared to the original — 100 g in the crumble and 50 g on the fruit rather than 200 g and 100 g. Walnuts in place of pecans, and half pears instead of all apples, at slightly more total weight than the original 1.6 kg. Using apples that soften at different rates keeps the texture interesting; pears break down faster still, so don't cut them smaller than the apples. Good with ice cream for dessert, or with plain whole-milk yogurt for breakfast."
 }
 </script>
 

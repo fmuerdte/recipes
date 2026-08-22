@@ -3,17 +3,19 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Recipe Box</title>
+<title>Recipes</title>
+<meta name="description" content="A cooking index of 57 recipes, each with an adjustable serving scaler.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
 <style>
   :root{
     --paper:#EFE9DA;
     --card:#FFFDF8;
     --ink:#2B2620;
-    --ink-soft:#6B6355;
-    --sage:#4A5D3A;
-    --mustard:#C17817;
+    --ink-soft:#5C5545;
+    --sage:#3F5131;
+    --mustard:#9A5D08;
     --rule:#C9BFA6;
   }
   *{box-sizing:border-box;}
@@ -25,14 +27,26 @@
     color:var(--ink);
     font-family:'Inter',sans-serif;
     padding:40px 20px 80px;
+    line-height:1.5;
   }
-  .sheet{
-    max-width:920px;
-    margin:0 auto;
+  .skip{
+    position:absolute; left:-9999px; top:0;
+    background:var(--sage); color:#fff; padding:10px 16px; border-radius:0 0 6px 0; z-index:10;
+  }
+  .skip:focus{ left:0; }
+  a:focus-visible, input:focus-visible, button:focus-visible{
+    outline:3px solid var(--mustard); outline-offset:2px;
+  }
+
+  .wrap{ max-width:940px; margin:0 auto; }
+
+  header.masthead{
     background:var(--card);
     border-radius:4px;
     box-shadow:0 1px 2px rgba(43,38,32,0.08), 0 12px 32px rgba(43,38,32,0.10);
+    padding:0 0 24px;
     overflow:hidden;
+    margin-bottom:28px;
   }
   .tab{
     display:inline-block;
@@ -45,347 +59,800 @@
     padding:6px 16px;
     border-radius:0 0 6px 0;
   }
-  header{ padding:28px 40px 22px; border-bottom:1px solid var(--rule); }
   h1{
     font-family:'Fraunces',serif;
     font-weight:600;
-    font-size:clamp(28px,4vw,42px);
-    margin:14px 0 8px;
+    font-size:clamp(30px,5vw,46px);
+    margin:16px 40px 6px;
     line-height:1.05;
   }
-  .sub{ color:var(--ink-soft); font-size:14.5px; margin-top:6px; max-width:56ch; }
+  .blurb{ margin:0 40px; color:var(--ink-soft); font-size:15px; max-width:52ch; }
 
-  .categories{ padding:8px 40px 36px; }
-  .category{ margin-top:32px; }
-  .category:first-child{ margin-top:28px; }
+  .filter{ margin:20px 40px 0; display:flex; flex-wrap:wrap; gap:12px; align-items:center; }
+  .filter label{
+    font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.1em;
+    text-transform:uppercase; color:var(--ink-soft);
+  }
+  #q{
+    flex:1 1 260px; min-width:0;
+    font-family:'Inter',sans-serif; font-size:15px; color:var(--ink);
+    background:var(--paper); border:1px solid var(--rule); border-radius:999px;
+    padding:9px 16px;
+  }
+  #count{ font-family:'IBM Plex Mono',monospace; font-size:12.5px; color:var(--ink-soft); }
 
-  h2.section-title{
-    font-family:'Fraunces',serif; font-size:14px; text-transform:uppercase;
-    letter-spacing:.1em; color:var(--sage); margin:0 0 4px;
+  .group{ margin-bottom:34px; }
+  .group-heading{
     display:flex; align-items:baseline; gap:10px;
+    font-family:'Fraunces',serif; font-size:15px; text-transform:uppercase;
+    letter-spacing:.1em; color:var(--sage); margin:0 0 12px;
   }
-  h2.section-title .count{
-    font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:normal;
-    text-transform:none; color:var(--ink-soft); font-weight:500;
-  }
-  .rule{ border:none; border-top:1px dashed var(--rule); margin:10px 0 16px; }
+  .group-heading::after{ content:""; flex:1; height:1px; background:var(--rule); }
+  .group-count{ font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--ink-soft); letter-spacing:0; }
 
-  .recipe-grid{ display:grid; grid-template-columns:1fr 1fr; gap:14px; }
-  @media (max-width:640px){ .recipe-grid{ grid-template-columns:1fr; } }
-
-  a.recipe-card{
-    display:block; text-decoration:none; color:inherit;
-    border:1px solid var(--rule); border-radius:6px;
-    padding:16px 18px; background:var(--card);
-    transition:border-color .15s ease, transform .15s ease, box-shadow .15s ease;
+  ul.cards{ list-style:none; margin:0; padding:0; display:grid; gap:14px; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); }
+  .card{
+    background:var(--card); border-radius:4px; padding:16px 18px 14px;
+    box-shadow:0 1px 2px rgba(43,38,32,0.08);
+    border-left:3px solid var(--sage);
+    display:flex; flex-direction:column; gap:8px;
   }
-  a.recipe-card:hover{
-    border-color:var(--mustard);
-    transform:translateY(-1px);
-    box-shadow:0 6px 16px rgba(43,38,32,0.10);
-  }
-  .card-tag{
-    font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:.1em;
-    text-transform:uppercase; color:var(--mustard); margin-bottom:6px;
-  }
+  .card:hover{ box-shadow:0 1px 2px rgba(43,38,32,0.08), 0 6px 18px rgba(43,38,32,0.10); }
+  .card-link{ text-decoration:none; color:inherit; }
   .card-title{
-    font-family:'Fraunces',serif; font-weight:600; font-size:18px; line-height:1.15; margin:0 0 8px;
+    font-family:'Fraunces',serif; font-weight:600; font-size:19px; line-height:1.2;
+    display:block; text-decoration:underline; text-decoration-color:var(--rule);
+    text-underline-offset:3px;
   }
-  .card-meta{ color:var(--ink-soft); font-size:12.5px; display:flex; gap:12px; flex-wrap:wrap; }
-  .card-meta span{ display:inline-flex; align-items:center; gap:4px; }
+  .card-link:hover .card-title{ text-decoration-color:var(--mustard); }
+  .card-tags{ margin:0; display:flex; flex-wrap:wrap; gap:6px; }
+  .tag{
+    font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:.08em;
+    text-transform:uppercase; color:var(--ink-soft);
+    border:1px solid var(--rule); border-radius:3px; padding:2px 7px;
+  }
+  dl.card-meta{ margin:2px 0 0; display:flex; gap:16px; flex-wrap:wrap; }
+  dl.card-meta div{ display:flex; gap:5px; align-items:baseline; }
+  dl.card-meta dt{
+    font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.08em;
+    text-transform:uppercase; color:var(--ink-soft);
+  }
+  dl.card-meta dd{ margin:0; font-size:13px; color:var(--ink); }
 
-  footer{
-    padding:16px 40px 28px; border-top:1px solid var(--rule);
-    font-size:12.5px; color:var(--ink-soft);
+  .empty{ display:none; background:var(--card); border-radius:4px; padding:22px 24px; color:var(--ink-soft); }
+  body.no-results .empty{ display:block; }
+  body.no-results .group{ display:none; }
+  .group[hidden]{ display:none; }
+  .card[hidden]{ display:none; }
+
+  footer{ margin-top:36px; padding-top:18px; border-top:1px solid var(--rule); font-size:13px; color:var(--ink-soft); }
+
+  @media (prefers-reduced-motion: no-preference){
+    .card{ transition:box-shadow .18s ease; }
+  }
+  @media print{
+    body{ background:#fff; padding:0; }
+    header.masthead, .card{ box-shadow:none; }
+    .filter{ display:none; }
   }
 </style>
 </head>
 <body>
-<div class="sheet">
-  <div class="tab">COOKING · INDEX</div>
-  <header>
-    <h1>Recipe Box</h1>
-    <div class="sub">A running collection, grouped by kind. Click a card to open the full recipe with scalable servings.</div>
+<a class="skip" href="#recipes">Skip to recipes</a>
+<div class="wrap">
+  <header class="masthead">
+    <div class="tab">Recipe index</div>
+    <h1>Recipes</h1>
+    <p class="blurb">Everything rescued from the old Word document, one card per recipe. Each card scales its own ingredient amounts &mdash; set the servings you actually want and the quantities follow.</p>
+    <div class="filter">
+      <label for="q">Find a recipe</label>
+      <input id="q" type="search" placeholder="chicken, eggplant, cookies&hellip;" autocomplete="off">
+      <span id="count" role="status" aria-live="polite">57 recipes</span>
+    </div>
   </header>
 
-  <div class="categories">
+  <main id="recipes">
+      <section class="group" id="mains" aria-labelledby="mains-h">
+        <h2 class="group-heading" id="mains-h"><span class="group-name">Mains</span><span class="group-count">13</span></h2>
+        <ul class="cards">
+        <li class="card" data-search="award winning chili chili · big batch beef stew meat, cut into 1 cm cubes extra-virgin olive oil medium jalapeño peppers, seeded and chopped medium poblano peppers, seeded and chopped large red bell pepper, seeded and chopped large green bell pepper, seeded and chopped large onion, chopped bulb of garlic, chopped dried ancho chiles, seeded and chopped dried chiles negros, seeded and chopped dried new mexico (hatch) chiles, seeded and chopped chili powder cocoa powder ground cumin black pepper adobo seasoning beef base water or beer canned chopped tomatoes">
+          <a class="card-link" href="award-winning-chili.html">
+            <span class="card-title">Award Winning Chili</span>
+          </a>
+          <p class="card-tags"><span class="tag">Chili</span><span class="tag">Big Batch</span></p>
+          <dl class="card-meta">
+            <div><dt>Prep</dt><dd>1 hr prep</dd></div>
+            <div><dt>Cook</dt><dd>4 hr simmer</dd></div>
+            <div><dt>Serves</dt><dd>24</dd></div>
+          </dl>
+        </li>
+        <li class="card" data-search="butter chicken indian · curry whole-milk greek yogurt ginger, peeled and grated, for the marinade garlic, peeled and minced, for the marinade indian tandoori masala (shan brand recommended) canned tomato purée, for the marinade fresh lemon juice ghee or butter, melted skinless bone-in chicken thighs, slashed so the marinade penetrates salt, to taste butter, for the sauce ginger, peeled and grated, for the sauce garlic, peeled and minced, for the sauce diced tomatoes tomato purée, for the sauce serrano chile or jalapeño, finely minced vegetable broth dried fenugreek leaves">
+          <a class="card-link" href="butter-chicken.html">
+            <span class="card-title">Butter Chicken</span>
+          </a>
+          <p class="card-tags"><span class="tag">Indian</span><span class="tag">Curry</span></p>
+          <dl class="card-meta">
+            <div><dt>Prep</dt><dd>1 hr marinate</dd></div>
+            <div><dt>Cook</dt><dd>1 hr 20 min cook</dd></div>
+            <div><dt>Serves</dt><dd>4</dd></div>
+          </dl>
+        </li>
+        <li class="card" data-search="dak jin chicken family recipe · braise chicken pieces, skin and bone on (breasts, thighs and legs) soy sauce sesame oil garlic, finely chopped cayenne pepper green onions, finely chopped salt — a pinch, not a full measure">
+          <a class="card-link" href="dak-jin-chicken.html">
+            <span class="card-title">Dak Jin Chicken</span>
+          </a>
+          <p class="card-tags"><span class="tag">Family Recipe</span><span class="tag">Braise</span></p>
+          <dl class="card-meta">
+            <div><dt>Prep</dt><dd>2 hr marinate</dd></div>
+            <div><dt>Cook</dt><dd>2–3 hr braise</dd></div>
+            <div><dt>Serves</dt><dd>4</dd></div>
+          </dl>
+        </li>
+        <li class="card" data-search="frikadeller (danish pork burgers) danish · skillet ground pork medium red onion, finely diced saltine crackers, crumbled whole milk large eggs, lightly beaten kosher salt freshly ground black pepper vegetable oil, for the pan dijon mustard, for serving">
+          <a class="card-link" href="frikadeller-danish-pork-burgers.html">
+            <span class="card-title">Frikadeller (Danish Pork Burgers)</span>
+          </a>
+          <p class="card-tags"><span class="tag">Danish</span><span class="tag">Skillet</span></p>
+          <dl class="card-meta">
+            <div><dt>Prep</dt><dd>10 min prep</dd></div>
+            <div><dt>Cook</dt><dd>20 min cook</dd></div>
+            <div><dt>Serves</dt><dd>4</dd></div>
+          </dl>
+        </li>
+        <li class="card" data-search="grilled cheese sandwich lunch · 10 minutes slices white bread butter, softened slices cheddar cheese">
+          <a class="card-link" href="grilled-cheese-sandwich.html">
+            <span class="card-title">Grilled Cheese Sandwich</span>
+          </a>
+          <p class="card-tags"><span class="tag">Lunch</span><span class="tag">10 Minutes</span></p>
+          <dl class="card-meta">
+            <div><dt>Prep</dt><dd>2 min prep</dd></div>
+            <div><dt>Cook</dt><dd>8 min cook</dd></div>
+            <div><dt>Serves</dt><dd>2</dd></div>
+          </dl>
+        </li>
+        <li class="card" data-search="pan seared rib eye steak · cast iron boneless rib eye steak, about 4 cm thick canola oil, for coating kosher salt freshly ground black pepper">
+          <a class="card-link" href="pan-seared-rib-eye.html">
+            <span class="card-title">Pan Seared Rib Eye</span>
+          </a>
+          <p class="card-tags"><span class="tag">Steak</span><span class="tag">Cast Iron</span></p>
+          <dl class="card-meta">
+            <div><dt>Prep</dt><dd>30 min to temper</dd></div>
+            <div><dt>Cook</dt><dd>5 min cook</dd></div>
+            <div><dt>Serves</dt><dd>2</dd></div>
+          </dl>
+        </li>
+        <li class="card" data-search="pecan-crusted honey mustard salmon weeknight · fish salmon fillets, about 115 g each butter, melted dijon mustard honey dry breadcrumbs pecans, finely chopped fresh parsley, chopped lemon, cut into wedges for serving">
+          <a class="card-link" href="pecan-crusted-honey-mustard-salmon.html">
+            <span class="card-title">Pecan-Crusted Honey Mustard Salmon</span>
+          </a>
+          <p class="card-tags"><span class="tag">Weeknight</span><span class="tag">Fish</span></p>
+          <dl class="card-meta">
+            <div><dt>Prep</dt><dd>10 min prep</dd></div>
+            <div><dt>Cook</dt><dd>15 min bake</dd></div>
+            <div><dt>Serves</dt><dd>2</dd></div>
+          </dl>
+        </li>
+        <li class="card" data-search="pernil al horno puerto rican · roast pork shoulder, picnic cut, fat on garlic cloves black pepper dried oregano, crushed olive oil salt, plus more for the skin">
+          <a class="card-link" href="pernil-al-horno.html">
+            <span class="card-title">Pernil al Horno</span>
+          </a>
+          <p class="card-tags"><span class="tag">Puerto Rican</span><span class="tag">Roast</span></p>
+          <dl class="card-meta">
+            <div><dt>Prep</dt><dd>24 hr marinate</dd></div>
+            <div><dt>Cook</dt><dd>5 hr roast</dd></div>
+            <div><dt>Serves</dt><dd>10</dd></div>
+          </dl>
+        </li>
+        <li class="card" data-search="portuguese poached fish in seasoned broth portuguese · fish stew thick white fish (halibut, hake, pollock or cod), cut into 2.5 cm steaks or thick fillets water, or enough to barely cover the fish sprigs parsley medium onions, thinly sliced bay leaves coarse salt, for the stew olive oil, for the stew garlic cloves, coarsely chopped coarse salt, for the paste cumin seed (or ½ tsp ground cumin) parsley, finely chopped pickled chili peppers, about 2.5 cm long, finely chopped (optional) ground safflower or paprika tomato paste sugar ground nutmeg olive oil, for the paste wine vinegar">
+          <a class="card-link" href="portuguese-poached-fish-in-seasoned-broth.html">
+            <span class="card-title">Portuguese Poached Fish in Seasoned Broth</span>
+          </a>
+          <p class="card-tags"><span class="tag">Portuguese</span><span class="tag">Fish Stew</span></p>
+          <dl class="card-meta">
+            <div><dt>Prep</dt><dd>25 min prep</dd></div>
+            <div><dt>Cook</dt><dd>30 min cook</dd></div>
+            <div><dt>Serves</dt><dd>7</dd></div>
+          </dl>
+        </li>
+        <li class="card" data-search="quiche (conchi&#x27;s recipe) brunch · tart eggs milk ground nutmeg salt grated cheese pre-made pie crust vegetables or other add-ins, cooked">
+          <a class="card-link" href="quiche-conchis-recipe.html">
+            <span class="card-title">Quiche (Conchi&#x27;s Recipe)</span>
+          </a>
+          <p class="card-tags"><span class="tag">Brunch</span><span class="tag">Tart</span></p>
+          <dl class="card-meta">
+            <div><dt>Prep</dt><dd>20 min prep</dd></div>
+            <div><dt>Cook</dt><dd>40 min bake</dd></div>
+            <div><dt>Serves</dt><dd>6</dd></div>
+          </dl>
+        </li>
+        <li class="card" data-search="sancocho puerto rican · stew malanga, peeled and chunked yautía, peeled and chunked ñame, peeled and chunked batata (sweet potato), peeled and chunked calabaza (pumpkin), peeled and chunked large carrots, sliced plantains, sliced sausage meat (butifarra) large onions cubanelle peppers pack of cilantro pack of recao (culantro) garlic cloves water, or enough to cover">
+          <a class="card-link" href="sancocho.html">
+            <span class="card-title">Sancocho</span>
+          </a>
+          <p class="card-tags"><span class="tag">Puerto Rican</span><span class="tag">Stew</span></p>
+          <dl class="card-meta">
+            <div><dt>Prep</dt><dd>45 min prep</dd></div>
+            <div><dt>Cook</dt><dd>1 hr cook</dd></div>
+            <div><dt>Serves</dt><dd>10</dd></div>
+          </dl>
+        </li>
+        <li class="card" data-search="sriracha roast chicken with vegetables roast · one pan soy sauce sriracha extra-virgin olive oil, for the marinade freshly squeezed lemon juice dijon mustard light brown sugar salt, for the marinade freshly ground black pepper, for the marinade whole chicken baby sweet peppers (or 2 bell peppers), cut into 2 cm strips garlic cloves, smashed medium yellow onions, quartered medium sweet potatoes, cut into 4 cm pieces small cauliflower, broken into 4 cm florets extra-virgin olive oil, for the vegetables salt, for the vegetables freshly ground black pepper, for the vegetables">
+          <a class="card-link" href="sriracha-roast-chicken-with-vegetables.html">
+            <span class="card-title">Sriracha Roast Chicken with Vegetables</span>
+          </a>
+          <p class="card-tags"><span class="tag">Roast</span><span class="tag">One Pan</span></p>
+          <dl class="card-meta">
+            <div><dt>Prep</dt><dd>20 min prep</dd></div>
+            <div><dt>Cook</dt><dd>70 min roast</dd></div>
+            <div><dt>Serves</dt><dd>6</dd></div>
+          </dl>
+        </li>
+        <li class="card" data-search="tortilla española spanish · skillet potatoes, peeled and sliced small onions, thinly sliced eggs olive oil, for cooking (most of it gets drained off) salt black pepper sweet paprika">
+          <a class="card-link" href="tortilla-espanola.html">
+            <span class="card-title">Tortilla Española</span>
+          </a>
+          <p class="card-tags"><span class="tag">Spanish</span><span class="tag">Skillet</span></p>
+          <dl class="card-meta">
+            <div><dt>Prep</dt><dd>30 min prep</dd></div>
+            <div><dt>Cook</dt><dd>25 min cook</dd></div>
+            <div><dt>Serves</dt><dd>8</dd></div>
+          </dl>
+        </li>
+        </ul>
+      </section>
 
-    <div class="category">
-      <h2 class="section-title">Breakfast <span class="count">3</span></h2>
-      <hr class="rule">
-      <div class="recipe-grid">
-        <a class="recipe-card" href="challah-french-toast.html">
-          <div class="card-tag">French Toast</div>
-          <h3 class="card-title">Challah French Toast with Orange, Nutmeg &amp; Brandy</h3>
-          <div class="card-meta">
-            <span>⏱ 15 min (+ drying)</span>
-            <span>🔥 20 min</span>
-          </div>
-        </a>
-        <a class="recipe-card" href="chocolate-swirl-buns.html">
-          <div class="card-tag">Sweet Rolls</div>
-          <h3 class="card-title">Chocolate Swirl Buns</h3>
-          <div class="card-meta">
-            <span>⏱ 1 hr 45 min rise</span>
-            <span>🔥 20 min bake</span>
-          </div>
-        </a>
-        <a class="recipe-card" href="flax-greek-yogurt-pancakes.html">
-          <div class="card-tag">Pancakes</div>
-          <h3 class="card-title">Flaxseed Greek Yogurt Pancakes</h3>
-          <div class="card-meta">
-            <span>⏱ 10 min prep</span>
-            <span>🔥 10 min cook</span>
-          </div>
-        </a>
-      </div>
-    </div>
+      <section class="group" id="pasta" aria-labelledby="pasta-h">
+        <h2 class="group-heading" id="pasta-h"><span class="group-name">Pasta</span><span class="group-count">4</span></h2>
+        <ul class="cards">
+        <li class="card" data-search="fettuccine al ragù pasta · slow extra-virgin olive oil medium onions, finely chopped celery stalks, finely chopped carrots, peeled and finely chopped ground beef (85% lean) ground veal thinly sliced pancetta, finely chopped dry red wine beef or chicken stock tomato paste kosher salt freshly ground black pepper whole milk tagliatelle or fettuccine, preferably fresh egg finely grated parmesan, for serving">
+          <a class="card-link" href="fettuccine-al-ragu.html">
+            <span class="card-title">Fettuccine al Ragù</span>
+          </a>
+          <p class="card-tags"><span class="tag">Pasta</span><span class="tag">Slow</span></p>
+          <dl class="card-meta">
+            <div><dt>Prep</dt><dd>20 min prep</dd></div>
+            <div><dt>Cook</dt><dd>2 hr 30 min simmer</dd></div>
+            <div><dt>Serves</dt><dd>4</dd></div>
+          </dl>
+        </li>
+        <li class="card" data-search="linguine with slow-cooked zucchini, basil and cream pasta · summer extra-virgin olive oil thickly sliced pancetta, cut into narrow strips garlic cloves, sliced paper-thin small to medium zucchini or summer squash, sliced into thin coins kosher or fine sea salt freshly ground black pepper heavy cream large fresh basil leaves, cut into chiffonade dried linguine freshly grated parmigiano-reggiano freshly grated pecorino romano">
+          <a class="card-link" href="linguine-with-slow-cooked-zucchini-basil-and-cream.html">
+            <span class="card-title">Linguine with Slow-Cooked Zucchini, Basil and Cream</span>
+          </a>
+          <p class="card-tags"><span class="tag">Pasta</span><span class="tag">Summer</span></p>
+          <dl class="card-meta">
+            <div><dt>Prep</dt><dd>15 min prep</dd></div>
+            <div><dt>Cook</dt><dd>45 min cook</dd></div>
+            <div><dt>Serves</dt><dd>5</dd></div>
+          </dl>
+        </li>
+        <li class="card" data-search="red lentil ragu with a kick vegan · pasta sauce dry red split lentils, rinsed and drained walnuts, toasted and ground red onion, chopped garlic cloves, minced salt tomato paste chipotle peppers in adobo, chopped ground cumin vegetable broth marinara or tomato sauce">
+          <a class="card-link" href="red-lentil-ragu-with-a-kick.html">
+            <span class="card-title">Red Lentil Ragu with a Kick</span>
+          </a>
+          <p class="card-tags"><span class="tag">Vegan</span><span class="tag">Pasta Sauce</span></p>
+          <dl class="card-meta">
+            <div><dt>Prep</dt><dd>15 min prep</dd></div>
+            <div><dt>Cook</dt><dd>35 min cook</dd></div>
+            <div><dt>Serves</dt><dd>6</dd></div>
+          </dl>
+        </li>
+        <li class="card" data-search="spaghetti and meatballs pasta · classic thick slices white sandwich bread, crusts removed large eggs, beaten to blend garlic cloves, finely chopped fresh whole-milk ricotta prosciutto, finely chopped parsley, finely chopped grated parmesan, plus more for serving fennel seeds, finely ground dried oregano ground nutmeg finely ground black pepper crushed red pepper flakes kosher salt, plus more ground beef chuck, preferably 20% fat olive oil, plus more spaghetti torn basil, for serving (optional)">
+          <a class="card-link" href="spaghetti-and-meatballs.html">
+            <span class="card-title">Spaghetti and Meatballs</span>
+          </a>
+          <p class="card-tags"><span class="tag">Pasta</span><span class="tag">Classic</span></p>
+          <dl class="card-meta">
+            <div><dt>Prep</dt><dd>30 min prep</dd></div>
+            <div><dt>Cook</dt><dd>50 min simmer</dd></div>
+            <div><dt>Serves</dt><dd>6</dd></div>
+          </dl>
+        </li>
+        </ul>
+      </section>
 
-    <div class="category">
-      <h2 class="section-title">Mains <span class="count">7</span></h2>
-      <hr class="rule">
-      <div class="recipe-grid">
-        <a class="recipe-card" href="braised-soy-and-sesame-chicken.html">
-          <div class="card-tag">Braise</div>
-          <h3 class="card-title">Braised Soy and Sesame Chicken</h3>
-          <div class="card-meta">
-            <span>⏱ 2 hr marinate</span>
-            <span>🔥 2–3 hr braise</span>
-          </div>
-        </a>
-        <a class="recipe-card" href="butter-chicken.html">
-          <div class="card-tag">Curry</div>
-          <h3 class="card-title">Butter Chicken</h3>
-          <div class="card-meta">
-            <span>⏱ 1 hr marinate</span>
-            <span>🔥 1 hr 20 min cook</span>
-          </div>
-        </a>
-        <a class="recipe-card" href="cast-iron-rib-eye-steak.html">
-          <div class="card-tag">Cast Iron</div>
-          <h3 class="card-title">Cast Iron Rib Eye Steak</h3>
-          <div class="card-meta">
-            <span>⏱ 30 min to temper</span>
-            <span>🔥 5 min cook</span>
-          </div>
-        </a>
-        <a class="recipe-card" href="pecan-crusted-honey-mustard-salmon.html">
-          <div class="card-tag">Fish</div>
-          <h3 class="card-title">Pecan-Crusted Honey Mustard Salmon</h3>
-          <div class="card-meta">
-            <span>⏱ 10 min prep</span>
-            <span>🔥 15 min bake</span>
-          </div>
-        </a>
-        <a class="recipe-card" href="pernil-puerto-rican-roast-pork-shoulder.html">
-          <div class="card-tag">Roast</div>
-          <h3 class="card-title">Pernil (Puerto Rican Roast Pork Shoulder)</h3>
-          <div class="card-meta">
-            <span>⏱ 24 hr marinate</span>
-            <span>🔥 5 hr roast</span>
-          </div>
-        </a>
-        <a class="recipe-card" href="portuguese-poached-fish-in-seasoned-broth.html">
-          <div class="card-tag">Fish Stew</div>
-          <h3 class="card-title">Portuguese Poached Fish in Seasoned Broth</h3>
-          <div class="card-meta">
-            <span>⏱ 25 min prep</span>
-            <span>🔥 30 min cook</span>
-          </div>
-        </a>
-        <a class="recipe-card" href="sriracha-roast-chicken-with-vegetables.html">
-          <div class="card-tag">One Pan</div>
-          <h3 class="card-title">Sriracha Roast Chicken with Vegetables</h3>
-          <div class="card-meta">
-            <span>⏱ 20 min prep</span>
-            <span>🔥 70 min roast</span>
-          </div>
-        </a>
-      </div>
-    </div>
+      <section class="group" id="vegetarian" aria-labelledby="vegetarian-h">
+        <h2 class="group-heading" id="vegetarian-h"><span class="group-name">Vegetarian</span><span class="group-count">7</span></h2>
+        <ul class="cards">
+        <li class="card" data-search="couscous and feta-stuffed peppers vegetarian · stuffed chicken or vegetable broth couscous large bell peppers, mixed colours olive oil onion, chopped zucchini, quartered lengthwise and thinly sliced yellow squash, quartered lengthwise and thinly sliced fennel seeds dried oregano salt cherry tomatoes, halved canned chickpeas, drained and rinsed crumbled goat cheese or feta tomato paste">
+          <a class="card-link" href="couscous-and-feta-stuffed-peppers.html">
+            <span class="card-title">Couscous and Feta-Stuffed Peppers</span>
+          </a>
+          <p class="card-tags"><span class="tag">Vegetarian</span><span class="tag">Stuffed</span></p>
+          <dl class="card-meta">
+            <div><dt>Prep</dt><dd>30 min prep</dd></div>
+            <div><dt>Cook</dt><dd>15 min bake</dd></div>
+            <div><dt>Serves</dt><dd>4</dd></div>
+          </dl>
+        </li>
+        <li class="card" data-search="creamy stewed indian black lentils indian · slow cooker whole black urad dal dried red kidney beans butter canola oil tomato paste (optional) fresh ginger, thinly sliced then pounded or finely minced small onion, chopped garlic cloves, chopped bay leaves whole cumin seeds ground turmeric cayenne pepper ground black pepper salt, plus more to taste sugar heavy cream or evaporated milk chopped cilantro, to serve">
+          <a class="card-link" href="creamy-stewed-indian-black-lentils.html">
+            <span class="card-title">Creamy Stewed Indian Black Lentils</span>
+          </a>
+          <p class="card-tags"><span class="tag">Indian</span><span class="tag">Slow Cooker</span></p>
+          <dl class="card-meta">
+            <div><dt>Prep</dt><dd>8 hr soak</dd></div>
+            <div><dt>Cook</dt><dd>10–12 hr slow cook</dd></div>
+            <div><dt>Serves</dt><dd>8</dd></div>
+          </dl>
+        </li>
+        <li class="card" data-search="curried lentils with sweet potatoes and swiss chard vegetarian · one pot extra-virgin olive oil medium onion, chopped garlic cloves, minced fresh ginger, peeled and grated garam masala curry powder jalapeño, seeded if you like and minced vegetable broth, plus more as needed orange-fleshed sweet potatoes, peeled and cut into 1 cm cubes dried lentils bay leaf swiss chard, ribs removed and leaves thinly sliced kosher salt, more to taste ground black pepper fresh cilantro, chopped lime — all the zest, half the juice tamari almonds, finely chopped, for garnish (optional) scallions, chopped, for garnish">
+          <a class="card-link" href="curried-lentils-with-sweet-potatoes-and-swiss-chard.html">
+            <span class="card-title">Curried Lentils with Sweet Potatoes and Swiss Chard</span>
+          </a>
+          <p class="card-tags"><span class="tag">Vegetarian</span><span class="tag">One Pot</span></p>
+          <dl class="card-meta">
+            <div><dt>Prep</dt><dd>20 min prep</dd></div>
+            <div><dt>Cook</dt><dd>45 min cook</dd></div>
+            <div><dt>Serves</dt><dd>6</dd></div>
+          </dl>
+        </li>
+        <li class="card" data-search="fresh pea soup soup · quick butter medium shallots or onions, finely chopped water frozen green peas salt black pepper fresh ginger, chopped, or a handful of mint (optional)">
+          <a class="card-link" href="fresh-pea-soup.html">
+            <span class="card-title">Fresh Pea Soup</span>
+          </a>
+          <p class="card-tags"><span class="tag">Soup</span><span class="tag">Quick</span></p>
+          <dl class="card-meta">
+            <div><dt>Prep</dt><dd>10 min prep</dd></div>
+            <div><dt>Cook</dt><dd>15 min cook</dd></div>
+            <div><dt>Serves</dt><dd>4</dd></div>
+          </dl>
+        </li>
+        <li class="card" data-search="indian eggplant bhurtha indian · vegetarian eggplants vegetable oil cumin seeds medium onion, sliced fresh ginger, chopped large tomato, peeled, seeded and diced garlic clove, minced ground turmeric ground cumin ground coriander cayenne pepper salt, or to taste ground black pepper fresh cilantro, chopped">
+          <a class="card-link" href="indian-eggplant-bhurtha.html">
+            <span class="card-title">Indian Eggplant Bhurtha</span>
+          </a>
+          <p class="card-tags"><span class="tag">Indian</span><span class="tag">Vegetarian</span></p>
+          <dl class="card-meta">
+            <div><dt>Prep</dt><dd>15 min prep</dd></div>
+            <div><dt>Cook</dt><dd>45 min cook</dd></div>
+            <div><dt>Serves</dt><dd>4</dd></div>
+          </dl>
+        </li>
+        <li class="card" data-search="lesco (hungarian pepper stew) hungarian · braise mini sweet peppers, halved lengthwise (quartered if large) lard white onion, sliced garlic cloves tomato paste, heaped chicken stock sweet paprika, generous cayenne ground cinnamon dried thyme dried oregano salt lemon — juice and zest cilantro or parsley, chopped">
+          <a class="card-link" href="lesco-hungarian-pepper-stew.html">
+            <span class="card-title">Lesco (Hungarian Pepper Stew)</span>
+          </a>
+          <p class="card-tags"><span class="tag">Hungarian</span><span class="tag">Braise</span></p>
+          <dl class="card-meta">
+            <div><dt>Prep</dt><dd>15 min prep</dd></div>
+            <div><dt>Cook</dt><dd>45 min braise</dd></div>
+            <div><dt>Serves</dt><dd>4</dd></div>
+          </dl>
+        </li>
+        <li class="card" data-search="ratatouille vegetarian · baked olive oil, divided garlic cloves, minced dried parsley eggplant, cut into 1cm cubes grated parmesan cheese zucchini, sliced large onion, sliced into rings fresh mushrooms, sliced green bell pepper, sliced large tomatoes, chopped salt, for seasoning the layers">
+          <a class="card-link" href="ratatouille.html">
+            <span class="card-title">Ratatouille</span>
+          </a>
+          <p class="card-tags"><span class="tag">Vegetarian</span><span class="tag">Baked</span></p>
+          <dl class="card-meta">
+            <div><dt>Prep</dt><dd>25 min prep</dd></div>
+            <div><dt>Cook</dt><dd>55 min cook</dd></div>
+            <div><dt>Serves</dt><dd>6</dd></div>
+          </dl>
+        </li>
+        </ul>
+      </section>
 
-    <div class="category">
-      <h2 class="section-title">Vegetarian Mains <span class="count">6</span></h2>
-      <hr class="rule">
-      <div class="recipe-grid">
-        <a class="recipe-card" href="baingan-bharta-roasted-eggplant-curry.html">
-          <div class="card-tag">Curry</div>
-          <h3 class="card-title">Baingan Bharta (Roasted Eggplant Curry)</h3>
-          <div class="card-meta">
-            <span>⏱ 15 min prep</span>
-            <span>🔥 45 min cook</span>
-          </div>
-        </a>
-        <a class="recipe-card" href="couscous-stuffed-bell-peppers.html">
-          <div class="card-tag">Stuffed</div>
-          <h3 class="card-title">Couscous-Stuffed Bell Peppers</h3>
-          <div class="card-meta">
-            <span>⏱ 30 min prep</span>
-            <span>🔥 15 min bake</span>
-          </div>
-        </a>
-        <a class="recipe-card" href="curried-lentils-with-sweet-potatoes-and-swiss-chard.html">
-          <div class="card-tag">One Pot</div>
-          <h3 class="card-title">Curried Lentils with Sweet Potatoes and Swiss Chard</h3>
-          <div class="card-meta">
-            <span>⏱ 20 min prep</span>
-            <span>🔥 45 min cook</span>
-          </div>
-        </a>
-        <a class="recipe-card" href="layered-eggplant-and-summer-vegetable-casserole.html">
-          <div class="card-tag">Baked</div>
-          <h3 class="card-title">Layered Eggplant and Summer Vegetable Casserole</h3>
-          <div class="card-meta">
-            <span>⏱ 25 min prep</span>
-            <span>🔥 55 min cook</span>
-          </div>
-        </a>
-        <a class="recipe-card" href="linguine-with-slow-cooked-zucchini-basil-and-cream.html">
-          <div class="card-tag">Pasta</div>
-          <h3 class="card-title">Linguine with Slow-Cooked Zucchini, Basil and Cream</h3>
-          <div class="card-meta">
-            <span>⏱ 15 min prep</span>
-            <span>🔥 45 min cook</span>
-          </div>
-        </a>
-        <a class="recipe-card" href="slow-cooker-dal-makhani.html">
-          <div class="card-tag">Slow Cooker</div>
-          <h3 class="card-title">Slow Cooker Dal Makhani</h3>
-          <div class="card-meta">
-            <span>⏱ 8 hr soak</span>
-            <span>🔥 10–12 hr slow cook</span>
-          </div>
-        </a>
-      </div>
-    </div>
+      <section class="group" id="sides-starters" aria-labelledby="sides-starters-h">
+        <h2 class="group-heading" id="sides-starters-h"><span class="group-name">Sides & starters</span><span class="group-count">10</span></h2>
+        <ul class="cards">
+        <li class="card" data-search="crunchy cucumber salad with crushed peanuts indian · salad english or other unwaxed cucumbers, cut into 5 mm dice medium green serrano chile, minced (seed it first if you prefer) peanuts, preferably raw (toasted unsalted will do) lemon juice, or more as needed salt sugar cayenne canola oil mustard seeds">
+          <a class="card-link" href="crunchy-cucumber-salad-with-crushed-peanuts.html">
+            <span class="card-title">Crunchy Cucumber Salad with Crushed Peanuts</span>
+          </a>
+          <p class="card-tags"><span class="tag">Indian</span><span class="tag">Salad</span></p>
+          <dl class="card-meta">
+            <div><dt>Prep</dt><dd>15 min prep</dd></div>
+            <div><dt>Cook</dt><dd>2 min tadka</dd></div>
+            <div><dt>Serves</dt><dd>4</dd></div>
+          </dl>
+        </li>
+        <li class="card" data-search="emily&#x27;s cornbread southern · skillet fine cornmeal, white for preference all-purpose flour sugar salt baking powder large egg (or 2 medium) buttermilk oil, plus more for the skillet">
+          <a class="card-link" href="emilys-cornbread.html">
+            <span class="card-title">Emily&#x27;s Cornbread</span>
+          </a>
+          <p class="card-tags"><span class="tag">Southern</span><span class="tag">Skillet</span></p>
+          <dl class="card-meta">
+            <div><dt>Prep</dt><dd>10 min prep</dd></div>
+            <div><dt>Cook</dt><dd>25 min bake</dd></div>
+            <div><dt>Serves</dt><dd>8</dd></div>
+          </dl>
+        </li>
+        <li class="card" data-search="fire-roasted guacamole mexican · dip tomatillos (about 4 medium) jalapeños onion, chopped cilantro leaves, loosely packed, plus more to garnish limes garlic cloves, minced olive oil medium, really ripe avocados (hass preferred) salt, to taste">
+          <a class="card-link" href="fire-roasted-guacamole.html">
+            <span class="card-title">Fire-Roasted Guacamole</span>
+          </a>
+          <p class="card-tags"><span class="tag">Mexican</span><span class="tag">Dip</span></p>
+          <dl class="card-meta">
+            <div><dt>Prep</dt><dd>20 min prep</dd></div>
+            <div><dt>Cook</dt><dd>15 min char</dd></div>
+            <div><dt>Serves</dt><dd>8</dd></div>
+          </dl>
+        </li>
+        <li class="card" data-search="marinated roasted peppers with capers and mozzarella antipasto · make ahead bell peppers, mixed colours if possible red wine vinegar garlic clove, minced salt freshly ground black pepper extra-virgin olive oil capers, drained flat-leaf parsley, chopped (optional) mozzarella, sliced">
+          <a class="card-link" href="marinated-roasted-peppers-with-capers-and-mozzarella.html">
+            <span class="card-title">Marinated Roasted Peppers with Capers and Mozzarella</span>
+          </a>
+          <p class="card-tags"><span class="tag">Antipasto</span><span class="tag">Make Ahead</span></p>
+          <dl class="card-meta">
+            <div><dt>Prep</dt><dd>20 min prep</dd></div>
+            <div><dt>Cook</dt><dd>1 hr roast + 1 hr marinate</dd></div>
+            <div><dt>Serves</dt><dd>6</dd></div>
+          </dl>
+        </li>
+        <li class="card" data-search="nini&#x27;s spoonbread southern · side onions, diced corn kernels butter milk half and half grits baking powder sugar eggs, separated">
+          <a class="card-link" href="ninis-spoonbread.html">
+            <span class="card-title">Nini&#x27;s Spoonbread</span>
+          </a>
+          <p class="card-tags"><span class="tag">Southern</span><span class="tag">Side</span></p>
+          <dl class="card-meta">
+            <div><dt>Prep</dt><dd>30 min prep</dd></div>
+            <div><dt>Cook</dt><dd>35 min bake</dd></div>
+            <div><dt>Serves</dt><dd>12</dd></div>
+          </dl>
+        </li>
+        <li class="card" data-search="okra raita indian · side okra canola oil (5 tbsp for the okra, 1 for the tadka) yogurt — not greek; the kind from indian groceries works best salt sugar cayenne ground turmeric mustard seeds">
+          <a class="card-link" href="okra-raita.html">
+            <span class="card-title">Okra Raita</span>
+          </a>
+          <p class="card-tags"><span class="tag">Indian</span><span class="tag">Side</span></p>
+          <dl class="card-meta">
+            <div><dt>Prep</dt><dd>40 min prep</dd></div>
+            <div><dt>Cook</dt><dd>20 min fry</dd></div>
+            <div><dt>Serves</dt><dd>3</dd></div>
+          </dl>
+        </li>
+        <li class="card" data-search="oven roasted potatoes side · roasted red potatoes, quartered vegetable oil salt freshly ground black pepper dried rosemary or mixed dried herbs, crushed">
+          <a class="card-link" href="oven-roasted-potatoes.html">
+            <span class="card-title">Oven Roasted Potatoes</span>
+          </a>
+          <p class="card-tags"><span class="tag">Side</span><span class="tag">Roasted</span></p>
+          <dl class="card-meta">
+            <div><dt>Prep</dt><dd>10 min prep</dd></div>
+            <div><dt>Cook</dt><dd>20 min cook</dd></div>
+            <div><dt>Serves</dt><dd>6</dd></div>
+          </dl>
+        </li>
+        <li class="card" data-search="rice and peas indian · side basmati rice vegetable oil whole cumin seeds frozen peas, unthawed (more is fine) salt, to taste water">
+          <a class="card-link" href="rice-and-peas.html">
+            <span class="card-title">Rice and Peas</span>
+          </a>
+          <p class="card-tags"><span class="tag">Indian</span><span class="tag">Side</span></p>
+          <dl class="card-meta">
+            <div><dt>Prep</dt><dd>5 min prep</dd></div>
+            <div><dt>Cook</dt><dd>25 min cook</dd></div>
+            <div><dt>Serves</dt><dd>4</dd></div>
+          </dl>
+        </li>
+        <li class="card" data-search="soy-marinated eggs snack · make ahead large eggs garlic cloves, peeled dried chiles de árbol (or 1 tsp crushed red pepper flakes) soy sauce mirin unseasoned rice vinegar water toasted sesame seeds, for serving (optional)">
+          <a class="card-link" href="soy-marinated-eggs.html">
+            <span class="card-title">Soy-Marinated Eggs</span>
+          </a>
+          <p class="card-tags"><span class="tag">Snack</span><span class="tag">Make Ahead</span></p>
+          <dl class="card-meta">
+            <div><dt>Prep</dt><dd>15 min prep</dd></div>
+            <div><dt>Cook</dt><dd>1 hr marinate</dd></div>
+            <div><dt>Serves</dt><dd>6</dd></div>
+          </dl>
+        </li>
+        <li class="card" data-search="toasted couscous side · pantry couscous olive oil boiling water">
+          <a class="card-link" href="toasted-couscous.html">
+            <span class="card-title">Toasted Couscous</span>
+          </a>
+          <p class="card-tags"><span class="tag">Side</span><span class="tag">Pantry</span></p>
+          <dl class="card-meta">
+            <div><dt>Prep</dt><dd>2 min prep</dd></div>
+            <div><dt>Cook</dt><dd>17 min</dd></div>
+            <div><dt>Serves</dt><dd>4</dd></div>
+          </dl>
+        </li>
+        </ul>
+      </section>
 
-    <div class="category">
-      <h2 class="section-title">Soups &amp; Starters <span class="count">5</span></h2>
-      <hr class="rule">
-      <div class="recipe-grid">
-        <a class="recipe-card" href="charred-tomatillo-guacamole.html">
-          <div class="card-tag">Dip</div>
-          <h3 class="card-title">Charred Tomatillo Guacamole</h3>
-          <div class="card-meta">
-            <span>⏱ 20 min prep</span>
-            <span>🔥 15 min char</span>
-          </div>
-        </a>
-        <a class="recipe-card" href="fresh-pea-soup-with-shallots.html">
-          <div class="card-tag">Soup</div>
-          <h3 class="card-title">Fresh Pea Soup with Shallots</h3>
-          <div class="card-meta">
-            <span>⏱ 10 min prep</span>
-            <span>🔥 20 min cook</span>
-          </div>
-        </a>
-        <a class="recipe-card" href="grilled-cheese-sandwich.html">
-          <div class="card-tag">10 Minutes</div>
-          <h3 class="card-title">Grilled Cheese Sandwich</h3>
-          <div class="card-meta">
-            <span>⏱ 2 min prep</span>
-            <span>🔥 8 min cook</span>
-          </div>
-        </a>
-        <a class="recipe-card" href="marinated-roasted-peppers-with-capers-and-mozzarella.html">
-          <div class="card-tag">Make Ahead</div>
-          <h3 class="card-title">Marinated Roasted Peppers with Capers and Mozzarella</h3>
-          <div class="card-meta">
-            <span>⏱ 20 min prep</span>
-            <span>🔥 1 hr roast + 1 hr marinate</span>
-          </div>
-        </a>
-        <a class="recipe-card" href="tortilla-de-patatas-spanish-potato-omelette.html">
-          <div class="card-tag">Skillet</div>
-          <h3 class="card-title">Tortilla de Patatas (Spanish Potato Omelette)</h3>
-          <div class="card-meta">
-            <span>⏱ 30 min prep</span>
-            <span>🔥 25 min cook</span>
-          </div>
-        </a>
-      </div>
-    </div>
+      <section class="group" id="sauces-preserves" aria-labelledby="sauces-preserves-h">
+        <h2 class="group-heading" id="sauces-preserves-h"><span class="group-name">Sauces & preserves</span><span class="group-count">4</span></h2>
+        <ul class="cards">
+        <li class="card" data-search="cranberry-pear sauce thanksgiving · sauce pears, peeled, cored and diced fresh cranberries apple cider (or water at a pinch) lemons, juiced sugar, plus up to 100 g more to taste vanilla bean, split">
+          <a class="card-link" href="cranberry-pear-sauce.html">
+            <span class="card-title">Cranberry-Pear Sauce</span>
+          </a>
+          <p class="card-tags"><span class="tag">Thanksgiving</span><span class="tag">Sauce</span></p>
+          <dl class="card-meta">
+            <div><dt>Prep</dt><dd>15 min prep</dd></div>
+            <div><dt>Cook</dt><dd>30 min cook</dd></div>
+            <div><dt>Serves</dt><dd>10</dd></div>
+          </dl>
+        </li>
+        <li class="card" data-search="overnight-macerated peach jam preserves · stone fruit ripe peaches, peeled, pitted and chopped (weighed after prepping) granulated sugar, for the overnight macerate lemon, juiced sachets dr. oetker gelfix extra 2:1 granulated sugar, to mix with the gelfix granulated sugar, for the boil">
+          <a class="card-link" href="overnight-macerated-peach-jam.html">
+            <span class="card-title">Overnight-Macerated Peach Jam</span>
+          </a>
+          <p class="card-tags"><span class="tag">Preserves</span><span class="tag">Stone Fruit</span></p>
+          <dl class="card-meta">
+            <div><dt>Prep</dt><dd>25 min + overnight</dd></div>
+            <div><dt>Cook</dt><dd>2 × 15 min</dd></div>
+            <div><dt>Serves</dt><dd>9</dd></div>
+          </dl>
+        </li>
+        <li class="card" data-search="slow-roasted tomato sauce sauce · big batch canned whole peeled tomatoes, preferably d.o.p. san marzano extra-virgin olive oil, plus more for finishing butter garlic cloves, minced red pepper flakes dried oregano medium carrot, cut into large chunks medium onion, split in half large stem fresh basil kosher salt fish sauce, such as red boat (optional) fresh parsley or basil, minced (or a mix)">
+          <a class="card-link" href="slow-roasted-tomato-sauce.html">
+            <span class="card-title">Slow-Roasted Tomato Sauce</span>
+          </a>
+          <p class="card-tags"><span class="tag">Sauce</span><span class="tag">Big Batch</span></p>
+          <dl class="card-meta">
+            <div><dt>Prep</dt><dd>20 min prep</dd></div>
+            <div><dt>Cook</dt><dd>6 hr oven</dd></div>
+            <div><dt>Serves</dt><dd>12</dd></div>
+          </dl>
+        </li>
+        <li class="card" data-search="yogurt dressing sauce · 5 minutes full-fat greek yogurt olive oil rice vinegar ground coriander lemon, zested salt black pepper">
+          <a class="card-link" href="yogurt-dressing.html">
+            <span class="card-title">Yogurt Dressing</span>
+          </a>
+          <p class="card-tags"><span class="tag">Sauce</span><span class="tag">5 Minutes</span></p>
+          <dl class="card-meta">
+            <div><dt>Prep</dt><dd>5 min prep</dd></div>
+            <div><dt>Cook</dt><dd>no cooking</dd></div>
+            <div><dt>Serves</dt><dd>4</dd></div>
+          </dl>
+        </li>
+        </ul>
+      </section>
 
-    <div class="category">
-      <h2 class="section-title">Sides &amp; Pantry <span class="count">3</span></h2>
-      <hr class="rule">
-      <div class="recipe-grid">
-        <a class="recipe-card" href="rice-and-peas.html">
-          <div class="card-tag">Side</div>
-          <h3 class="card-title">Rice and Peas</h3>
-          <div class="card-meta">
-            <span>⏱ 5 min prep</span>
-            <span>🔥 25 min cook</span>
-          </div>
-        </a>
-        <a class="recipe-card" href="roasted-red-potatoes.html">
-          <div class="card-tag">Roasted</div>
-          <h3 class="card-title">Roasted Red Potatoes</h3>
-          <div class="card-meta">
-            <span>⏱ 10 min prep</span>
-            <span>🔥 20 min cook</span>
-          </div>
-        </a>
-        <a class="recipe-card" href="toasted-couscous.html">
-          <div class="card-tag">Pantry</div>
-          <h3 class="card-title">Toasted Couscous</h3>
-          <div class="card-meta">
-            <span>⏱ 2 min prep</span>
-            <span>🔥 17 min</span>
-          </div>
-        </a>
-      </div>
-    </div>
+      <section class="group" id="breakfast" aria-labelledby="breakfast-h">
+        <h2 class="group-heading" id="breakfast-h"><span class="group-name">Breakfast</span><span class="group-count">8</span></h2>
+        <ul class="cards">
+        <li class="card" data-search="challah french toast with orange, nutmeg &amp;amp; brandy breakfast · french toast thick slices of challah (2–3 cm), preferably a day old large eggs heavy cream granulated sugar orange, zest only nutmeg, freshly grated fine salt vanilla extract brandy unsalted butter, for the pan and for serving maple syrup, to serve">
+          <a class="card-link" href="challah-french-toast.html">
+            <span class="card-title">Challah French Toast with Orange, Nutmeg &amp;amp; Brandy</span>
+          </a>
+          <p class="card-tags"><span class="tag">Breakfast</span><span class="tag">French Toast</span></p>
+          <dl class="card-meta">
+            <div><dt>Prep</dt><dd>15 min (+ drying the bread)</dd></div>
+            <div><dt>Cook</dt><dd>20 min</dd></div>
+            <div><dt>Serves</dt><dd>4</dd></div>
+          </dl>
+        </li>
+        <li class="card" data-search="chocolate swirl buns baking · breakfast milk, preferably whole granulated sugar, for the dough, plus a pinch for the yeast active dry yeast large egg, at room temperature all-purpose flour, plus more for the work surface table salt unsalted butter, at room temperature, for the dough, plus more for the bowl and tin unsalted butter, at room temperature, for the filling granulated sugar, for the filling semisweet chocolate salt, for the filling ground cinnamon (optional) egg, for the wash (optional) heavy cream or milk, for the wash">
+          <a class="card-link" href="chocolate-swirl-buns.html">
+            <span class="card-title">Chocolate Swirl Buns</span>
+          </a>
+          <p class="card-tags"><span class="tag">Baking</span><span class="tag">Breakfast</span></p>
+          <dl class="card-meta">
+            <div><dt>Prep</dt><dd>1 hr 45 min rise</dd></div>
+            <div><dt>Cook</dt><dd>20 min bake</dd></div>
+            <div><dt>Serves</dt><dd>12</dd></div>
+          </dl>
+        </li>
+        <li class="card" data-search="crepes breakfast · skillet low-fat milk (we use half oat milk, half water) large eggs salt sugar unbleached all-purpose flour, sifted whole wheat or whole wheat pastry flour, sifted unsalted butter, melted, plus more for the pan lime, finely zested (about half a lime)">
+          <a class="card-link" href="crepes.html">
+            <span class="card-title">Crepes</span>
+          </a>
+          <p class="card-tags"><span class="tag">Breakfast</span><span class="tag">Skillet</span></p>
+          <dl class="card-meta">
+            <div><dt>Prep</dt><dd>10 min prep + 30 min rest</dd></div>
+            <div><dt>Cook</dt><dd>15 min cook</dd></div>
+            <div><dt>Serves</dt><dd>8</dd></div>
+          </dl>
+        </li>
+        <li class="card" data-search="flaxseed greek yogurt pancakes breakfast · pancakes all-purpose flour ground flaxseed (flaxseed meal) sugar baking powder, aluminum-free baking soda salt greek yogurt, any flavor milk or water large eggs vanilla extract butter, melted">
+          <a class="card-link" href="flax-greek-yogurt-pancakes.html">
+            <span class="card-title">Flaxseed Greek Yogurt Pancakes</span>
+          </a>
+          <p class="card-tags"><span class="tag">Breakfast</span><span class="tag">Pancakes</span></p>
+          <dl class="card-meta">
+            <div><dt>Prep</dt><dd>10 min prep</dd></div>
+            <div><dt>Cook</dt><dd>10 min cook</dd></div>
+            <div><dt>Serves</dt><dd>4</dd></div>
+          </dl>
+        </li>
+        <li class="card" data-search="fluffy pancakes breakfast · griddle milk white vinegar all-purpose flour sugar baking powder baking soda salt egg butter, melted, plus more for cooking">
+          <a class="card-link" href="fluffy-pancakes.html">
+            <span class="card-title">Fluffy Pancakes</span>
+          </a>
+          <p class="card-tags"><span class="tag">Breakfast</span><span class="tag">Griddle</span></p>
+          <dl class="card-meta">
+            <div><dt>Prep</dt><dd>10 min prep</dd></div>
+            <div><dt>Cook</dt><dd>15 min cook</dd></div>
+            <div><dt>Serves</dt><dd>4</dd></div>
+          </dl>
+        </li>
+        <li class="card" data-search="katie&#x27;s scones baking · scones unsalted butter, frozen whole raspberries and blueberries, one small container of each sugar, to sprinkle over the berries sour cream heavy cream egg vanilla extract all-purpose flour, plus more for dusting sugar baking powder salt lemon zest, finely grated (about 3 lemons) unsalted butter, melted, for brushing sugar, for sprinkling on top">
+          <a class="card-link" href="katies-scones.html">
+            <span class="card-title">Katie&#x27;s Scones</span>
+          </a>
+          <p class="card-tags"><span class="tag">Baking</span><span class="tag">Scones</span></p>
+          <dl class="card-meta">
+            <div><dt>Prep</dt><dd>20 min prep</dd></div>
+            <div><dt>Cook</dt><dd>18–25 min bake</dd></div>
+            <div><dt>Serves</dt><dd>8</dd></div>
+          </dl>
+        </li>
+        <li class="card" data-search="semolina pudding breakfast · 10 minutes milk semolina sugar salt cinnamon or other warm spices berries, to serve">
+          <a class="card-link" href="semolina-pudding.html">
+            <span class="card-title">Semolina Pudding</span>
+          </a>
+          <p class="card-tags"><span class="tag">Breakfast</span><span class="tag">10 Minutes</span></p>
+          <dl class="card-meta">
+            <div><dt>Prep</dt><dd>2 min prep</dd></div>
+            <div><dt>Cook</dt><dd>8 min cook</dd></div>
+            <div><dt>Serves</dt><dd>2</dd></div>
+          </dl>
+        </li>
+        <li class="card" data-search="waffles breakfast · waffle iron unsalted butter, melted, plus more for the iron all-purpose flour sugar baking powder fine sea salt baking soda plain yogurt milk large eggs">
+          <a class="card-link" href="waffles.html">
+            <span class="card-title">Waffles</span>
+          </a>
+          <p class="card-tags"><span class="tag">Breakfast</span><span class="tag">Waffle Iron</span></p>
+          <dl class="card-meta">
+            <div><dt>Prep</dt><dd>10 min prep</dd></div>
+            <div><dt>Cook</dt><dd>4 min per waffle</dd></div>
+            <div><dt>Serves</dt><dd>10</dd></div>
+          </dl>
+        </li>
+        </ul>
+      </section>
 
-    <div class="category">
-      <h2 class="section-title">Baking &amp; Desserts <span class="count">3</span></h2>
-      <hr class="rule">
-      <div class="recipe-grid">
-        <a class="recipe-card" href="brown-butter-coconut-chocolate-chunk-cookies.html">
-          <div class="card-tag">Cookies</div>
-          <h3 class="card-title">Brown Butter Coconut Chocolate Chunk Cookies</h3>
-          <div class="card-meta">
-            <span>⏱ 25 min prep</span>
-            <span>🔥 10–14 min bake</span>
-          </div>
-        </a>
-        <a class="recipe-card" href="coconut-rice-pudding-with-cardamom-and-pistachios.html">
-          <div class="card-tag">Stovetop</div>
-          <h3 class="card-title">Coconut Rice Pudding with Cardamom and Pistachios</h3>
-          <div class="card-meta">
-            <span>⏱ 5 min prep</span>
-            <span>🔥 15 min cook</span>
-          </div>
-        </a>
-        <a class="recipe-card" href="perfect-chocolate-chip-cookies.html">
-          <div class="card-tag">Cookies</div>
-          <h3 class="card-title">Perfect Chocolate Chip Cookies</h3>
-          <div class="card-meta">
-            <span>⏱ 25 min prep</span>
-            <span>🔥 14 min bake</span>
-          </div>
-        </a>
-      </div>
-    </div>
+      <section class="group" id="sweet" aria-labelledby="sweet-h">
+        <h2 class="group-heading" id="sweet-h"><span class="group-name">Sweet</span><span class="group-count">11</span></h2>
+        <ul class="cards">
+        <li class="card" data-search="apple and pear crumble dessert · baked unsalted butter, melted, plus more for the pan all-purpose flour packed dark brown sugar, for the crumble old-fashioned rolled oats walnuts, chopped kosher salt mixed apples (granny smith, macintosh, pink lady), peeled, cored and cut into 1 cm wedges pears, peeled, cored and cut into 1 cm wedges packed dark brown sugar, for the fruit ground cinnamon fresh lemon juice">
+          <a class="card-link" href="apple-and-pear-crumble.html">
+            <span class="card-title">Apple and Pear Crumble</span>
+          </a>
+          <p class="card-tags"><span class="tag">Dessert</span><span class="tag">Baked</span></p>
+          <dl class="card-meta">
+            <div><dt>Prep</dt><dd>20 min prep</dd></div>
+            <div><dt>Cook</dt><dd>55 min bake</dd></div>
+            <div><dt>Serves</dt><dd>10</dd></div>
+          </dl>
+        </li>
+        <li class="card" data-search="basque cheesecake baking · cheesecake cream cheese, at room temperature fine sugar medium eggs (3 whole, plus the yolk of a 4th) heavy cream salt vanilla extract cake flour">
+          <a class="card-link" href="basque-cheesecake.html">
+            <span class="card-title">Basque Cheesecake</span>
+          </a>
+          <p class="card-tags"><span class="tag">Baking</span><span class="tag">Cheesecake</span></p>
+          <dl class="card-meta">
+            <div><dt>Prep</dt><dd>20 min prep</dd></div>
+            <div><dt>Cook</dt><dd>60 min bake</dd></div>
+            <div><dt>Serves</dt><dd>8</dd></div>
+          </dl>
+        </li>
+        <li class="card" data-search="chocolate chip tahini cookies baking · cookies unsalted butter, at room temperature tahini, well stirred granulated sugar large egg egg yolk vanilla extract all-purpose flour, or matzo cake meal baking soda baking powder kosher salt bittersweet or semisweet chocolate chips or chunks flaky salt, such as maldon">
+          <a class="card-link" href="chocolate-chip-tahini-cookies.html">
+            <span class="card-title">Chocolate Chip Tahini Cookies</span>
+          </a>
+          <p class="card-tags"><span class="tag">Baking</span><span class="tag">Cookies</span></p>
+          <dl class="card-meta">
+            <div><dt>Prep</dt><dd>15 min prep + 12 hr chill</dd></div>
+            <div><dt>Cook</dt><dd>15 min bake</dd></div>
+            <div><dt>Serves</dt><dd>15</dd></div>
+          </dl>
+        </li>
+        <li class="card" data-search="chocolate chip, pecan and coconut cookies baking · cookies unbleached all-purpose flour baking soda unsalted butter (140 g browned, 60 g stirred in after) granulated sugar packed dark brown sugar salt vanilla extract large egg large egg yolk dark chocolate, chopped pecans or walnuts, chopped and toasted (optional) coconut flakes, for rolling">
+          <a class="card-link" href="chocolate-chip-pecan-and-coconut-cookies.html">
+            <span class="card-title">Chocolate Chip, Pecan and Coconut Cookies</span>
+          </a>
+          <p class="card-tags"><span class="tag">Baking</span><span class="tag">Cookies</span></p>
+          <dl class="card-meta">
+            <div><dt>Prep</dt><dd>25 min prep</dd></div>
+            <div><dt>Cook</dt><dd>10–14 min bake</dd></div>
+            <div><dt>Serves</dt><dd>16</dd></div>
+          </dl>
+        </li>
+        <li class="card" data-search="country blueberry pie baking · pie sugar, for the filling cornstarch ground cinnamon water, for the filling blueberries fresh lemon juice all-purpose flour, plus more for dusting sugar, for the pastry, plus more for sprinkling salt shortening egg (add a second if the dough looks too dry) water, for the pastry vinegar">
+          <a class="card-link" href="country-blueberry-pie.html">
+            <span class="card-title">Country Blueberry Pie</span>
+          </a>
+          <p class="card-tags"><span class="tag">Baking</span><span class="tag">Pie</span></p>
+          <dl class="card-meta">
+            <div><dt>Prep</dt><dd>40 min prep</dd></div>
+            <div><dt>Cook</dt><dd>45 min bake</dd></div>
+            <div><dt>Serves</dt><dd>8</dd></div>
+          </dl>
+        </li>
+        <li class="card" data-search="easy vegan chocolate cake baking · vegan all-purpose flour granulated sugar unsweetened cocoa powder baking soda kosher salt ground cinnamon (optional) ground nutmeg (optional) water, or half coffee and half water dark rum (optional) canola oil vanilla extract apple cider or white vinegar chocolate chips (optional) confectioners&#x27; sugar, for dusting (optional)">
+          <a class="card-link" href="easy-vegan-chocolate-cake.html">
+            <span class="card-title">Easy Vegan Chocolate Cake</span>
+          </a>
+          <p class="card-tags"><span class="tag">Baking</span><span class="tag">Vegan</span></p>
+          <dl class="card-meta">
+            <div><dt>Prep</dt><dd>10 min prep</dd></div>
+            <div><dt>Cook</dt><dd>30 min bake</dd></div>
+            <div><dt>Serves</dt><dd>9</dd></div>
+          </dl>
+        </li>
+        <li class="card" data-search="german sour cherry cake baking · cake all-purpose flour baking powder ground cinnamon ground cardamom fine salt unsalted butter, softened granulated sugar large egg almond extract (or vanilla) milk, dairy or non-dairy tart or sour cherries, drained (or fresh, pitted) powdered sugar, for dusting">
+          <a class="card-link" href="german-sour-cherry-cake.html">
+            <span class="card-title">German Sour Cherry Cake</span>
+          </a>
+          <p class="card-tags"><span class="tag">Baking</span><span class="tag">Cake</span></p>
+          <dl class="card-meta">
+            <div><dt>Prep</dt><dd>20 min prep</dd></div>
+            <div><dt>Cook</dt><dd>45 min bake</dd></div>
+            <div><dt>Serves</dt><dd>10</dd></div>
+          </dl>
+        </li>
+        <li class="card" data-search="indian rice pudding dessert · stovetop cooked long grain or basmati rice whole milk coconut milk (just use the whole can) sugar ground cardamom salt golden raisins unsalted pistachios, chopped">
+          <a class="card-link" href="indian-rice-pudding.html">
+            <span class="card-title">Indian Rice Pudding</span>
+          </a>
+          <p class="card-tags"><span class="tag">Dessert</span><span class="tag">Stovetop</span></p>
+          <dl class="card-meta">
+            <div><dt>Prep</dt><dd>5 min prep</dd></div>
+            <div><dt>Cook</dt><dd>15 min cook</dd></div>
+            <div><dt>Serves</dt><dd>4</dd></div>
+          </dl>
+        </li>
+        <li class="card" data-search="nini&#x27;s beignets dessert · fried hot water sugar butter evaporated milk pack of yeast egg, beaten all-purpose flour salt oil, for frying — enough for them to float confectioners&#x27; sugar, for dusting">
+          <a class="card-link" href="ninis-beignets.html">
+            <span class="card-title">Nini&#x27;s Beignets</span>
+          </a>
+          <p class="card-tags"><span class="tag">Dessert</span><span class="tag">Fried</span></p>
+          <dl class="card-meta">
+            <div><dt>Prep</dt><dd>1 hr rise</dd></div>
+            <div><dt>Cook</dt><dd>15 min fry</dd></div>
+            <div><dt>Serves</dt><dd>8</dd></div>
+          </dl>
+        </li>
+        <li class="card" data-search="oat chocolate chip cookies baking · cookies light or dark brown sugar unsalted butter (room temperature for a hand mixer, cold is fine for a stand mixer) fine sea salt, plus flakes for the tops large egg vanilla extract baking soda baking powder rye flour (or whole wheat) pecans, chopped old-fashioned rolled oats dark chocolate, chopped into chunks">
+          <a class="card-link" href="oat-chocolate-chip-cookies.html">
+            <span class="card-title">Oat Chocolate Chip Cookies</span>
+          </a>
+          <p class="card-tags"><span class="tag">Baking</span><span class="tag">Cookies</span></p>
+          <dl class="card-meta">
+            <div><dt>Prep</dt><dd>15 min prep</dd></div>
+            <div><dt>Cook</dt><dd>13 min bake</dd></div>
+            <div><dt>Serves</dt><dd>14</dd></div>
+          </dl>
+        </li>
+        <li class="card" data-search="perfect chocolate chip cookies baking · cookies unbleached all-purpose flour baking soda unsalted butter (200 g browned, 55 g stirred in after) granulated sugar packed dark brown sugar table salt vanilla extract large egg large egg yolk semisweet chocolate chips or chunks pecans or walnuts, chopped and toasted (optional)">
+          <a class="card-link" href="perfect-chocolate-chip-cookies.html">
+            <span class="card-title">Perfect Chocolate Chip Cookies</span>
+          </a>
+          <p class="card-tags"><span class="tag">Baking</span><span class="tag">Cookies</span></p>
+          <dl class="card-meta">
+            <div><dt>Prep</dt><dd>25 min prep</dd></div>
+            <div><dt>Cook</dt><dd>14 min bake</dd></div>
+            <div><dt>Serves</dt><dd>16</dd></div>
+          </dl>
+        </li>
+        </ul>
+      </section>
+    <p class="empty">Nothing matches that. Try an ingredient, a cuisine, or clear the box.</p>
+  </main>
 
-    <div class="category">
-      <h2 class="section-title">Preserves <span class="count">1</span></h2>
-      <hr class="rule">
-      <div class="recipe-grid">
-        <a class="recipe-card" href="overnight-macerated-peach-jam.html">
-          <div class="card-tag">Stone Fruit</div>
-          <h3 class="card-title">Overnight-Macerated Peach Jam</h3>
-          <div class="card-meta">
-            <span>⏱ 25 min + overnight</span>
-            <span>🔥 2 × 15 min</span>
-          </div>
-        </a>
-      </div>
-    </div>
-
-  </div>
-
-  <footer>28 recipes</footer>
+  <footer>
+    Search covers titles, tags and ingredients. Measurements are metric for weights and volumes; spoon measures stay as spoons.
+  </footer>
 </div>
+
+<script>
+(function(){
+  var q = document.getElementById('q');
+  var count = document.getElementById('count');
+  var cards = Array.prototype.slice.call(document.querySelectorAll('.card'));
+  var groups = Array.prototype.slice.call(document.querySelectorAll('.group'));
+
+  function apply(){
+    var term = q.value.trim().toLowerCase();
+    var shown = 0;
+    cards.forEach(function(card){
+      var hit = !term || card.dataset.search.indexOf(term) !== -1;
+      card.hidden = !hit;
+      if (hit) shown++;
+    });
+    groups.forEach(function(group){
+      group.hidden = !group.querySelector('.card:not([hidden])');
+    });
+    document.body.classList.toggle('no-results', shown === 0);
+    count.textContent = shown === 1 ? '1 recipe' : shown + ' recipes';
+  }
+
+  q.addEventListener('input', apply);
+  apply();
+})();
+</script>
 </body>
 </html>

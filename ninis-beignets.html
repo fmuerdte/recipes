@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Butter Chicken</title>
+<title>Nini's Beignets</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
 <style>
@@ -120,15 +120,15 @@
 </head>
 <body>
 <div class="sheet">
-  <div class="tab">INDIAN · CURRY</div>
+  <div class="tab">DESSERT · FRIED</div>
   <header>
-    <h1>Butter Chicken</h1>
+    <h1>Nini's Beignets</h1>
     <div class="meta">
-      <span>⏱ 1 hr marinate</span>
-      <span>🔥 1 hr 20 min cook</span>
+      <span>⏱ 1 hr rise</span>
+      <span>🔥 15 min fry</span>
       <span>🍽 <span id="servings-label"></span> servings</span>
     </div>
-    <div class="source">Adapted from a family recipe, after Darrow Montgomery</div>
+    <div class="source">Nini's recipe, from the family recipe document</div>
   </header>
 
   <div class="body-grid">
@@ -154,137 +154,91 @@
 
 <script id="recipe-data" type="application/json">
 {
-  "baseServings": 4,
+  "baseServings": 8,
   "ingredients": [
     {
-      "id": "yogurt",
-      "name": "whole-milk Greek yogurt",
-      "baseAmount": 245,
+      "id": "water",
+      "name": "hot water",
+      "baseAmount": 180,
+      "unit": "ml",
+      "category": "volume"
+    },
+    {
+      "id": "sugar",
+      "name": "sugar",
+      "baseAmount": 50,
       "unit": "g",
       "category": "weight"
     },
     {
-      "id": "marinadeginger",
-      "name": "ginger, peeled and grated, for the marinade",
-      "baseAmount": 1,
-      "unit": "tbsp",
-      "category": "small"
+      "id": "butter",
+      "name": "butter",
+      "baseAmount": 55,
+      "unit": "g",
+      "category": "weight"
     },
     {
-      "id": "marinadegarlic",
-      "name": "garlic, peeled and minced, for the marinade",
-      "baseAmount": 2,
-      "unit": "tbsp",
-      "category": "small"
-    },
-    {
-      "id": "masala",
-      "name": "Indian tandoori masala (Shan brand recommended)",
-      "baseAmount": 2,
-      "unit": "tbsp",
-      "category": "small"
-    },
-    {
-      "id": "marinadepuree",
-      "name": "canned tomato purée, for the marinade",
+      "id": "evapmilk",
+      "name": "evaporated milk",
       "baseAmount": 120,
       "unit": "ml",
       "category": "volume"
     },
     {
-      "id": "lemon",
-      "name": "fresh lemon juice",
-      "baseAmount": 2,
-      "unit": "tbsp",
-      "category": "small"
-    },
-    {
-      "id": "ghee",
-      "name": "ghee or butter, melted",
-      "baseAmount": 2,
-      "unit": "tbsp",
-      "category": "small"
-    },
-    {
-      "id": "chicken",
-      "name": "skinless bone-in chicken thighs, slashed so the marinade penetrates",
-      "baseAmount": 8,
+      "id": "yeast",
+      "name": "pack of yeast",
+      "baseAmount": 1,
       "unit": "",
       "category": "count"
     },
     {
+      "id": "egg",
+      "name": "egg, beaten",
+      "baseAmount": 1,
+      "unit": "",
+      "category": "count"
+    },
+    {
+      "id": "flour",
+      "name": "all-purpose flour",
+      "baseAmount": 440,
+      "unit": "g",
+      "category": "weight"
+    },
+    {
       "id": "salt",
-      "name": "salt, to taste",
+      "name": "salt",
       "baseAmount": 1,
       "unit": "tsp",
       "category": "small"
     },
     {
-      "id": "butter",
-      "name": "butter, for the sauce",
-      "baseAmount": 4,
-      "unit": "tbsp",
-      "category": "small"
-    },
-    {
-      "id": "sauceginger",
-      "name": "ginger, peeled and grated, for the sauce",
-      "baseAmount": 1,
-      "unit": "tbsp",
-      "category": "small"
-    },
-    {
-      "id": "saucegarlic",
-      "name": "garlic, peeled and minced, for the sauce",
-      "baseAmount": 1,
-      "unit": "tbsp",
-      "category": "small"
-    },
-    {
-      "id": "dicedtomatoes",
-      "name": "diced tomatoes",
-      "baseAmount": 120,
+      "id": "oil",
+      "name": "oil, for frying — enough for them to float",
+      "baseAmount": 1000,
       "unit": "ml",
       "category": "volume"
     },
     {
-      "id": "saucepuree",
-      "name": "tomato purée, for the sauce",
-      "baseAmount": 120,
-      "unit": "ml",
-      "category": "volume"
-    },
-    {
-      "id": "chile",
-      "name": "serrano chile or jalapeño, finely minced",
-      "baseAmount": 1,
-      "unit": "",
-      "category": "count"
-    },
-    {
-      "id": "broth",
-      "name": "vegetable broth",
-      "baseAmount": 120,
-      "unit": "ml",
-      "category": "volume"
-    },
-    {
-      "id": "fenugreek",
-      "name": "dried fenugreek leaves",
-      "baseAmount": 2,
-      "unit": "tbsp",
-      "category": "small"
+      "id": "confectioners",
+      "name": "confectioners' sugar, for dusting",
+      "baseAmount": 60,
+      "unit": "g",
+      "category": "weight"
     }
   ],
   "steps": [
-    "In a large bowl, mix the {{yogurt}}, {{marinadeginger}}, {{marinadegarlic}}, {{masala}}, {{marinadepuree}}, {{salt}}, {{lemon}} and {{ghee}}. Add the {{chicken}} and turn to coat well. Cover and refrigerate at least an hour, or overnight.",
-    "Lift the chicken out of the marinade and wipe it as clean as you can — reserve the marinade.",
-    "Sauté the chicken briefly over high heat in some of the {{butter}}, then take it out of the pot and set aside.",
-    "For the sauce, sauté the {{sauceginger}}, {{saucegarlic}} and {{chile}} in the fat left in the pot for a couple of minutes. Pour in the {{broth}} and scrape up all the browned bits from the bottom.",
-    "Add the {{saucepuree}} and {{dicedtomatoes}}, bring to a boil, then stir in the reserved marinade. Bring back to a boil and add the {{fenugreek}}.",
-    "Return the chicken to the pot, lower the heat to a simmer, and cook for one hour, until the sauce is thick and the chicken is falling off the bone."
+    "Dissolve the {{sugar}} and {{butter}} in the {{water}}.",
+    "Add the {{evapmilk}} and mix.",
+    "Add the {{yeast}} and {{egg}} and mix.",
+    "Add the {{flour}} a little at a time, then the {{salt}}.",
+    "Let the dough stand about an hour — this is the part you do before sitting down to dinner.",
+    "Heat a pan with a generous depth of {{oil}}; the beignets should float.",
+    "Roll the dough out on a floured surface and cut it into squares.",
+    "Drop them into the oil. They should puff up like pillows. Cook until browned on both sides.",
+    "Dust with the {{confectioners}} and eat immediately."
   ],
-  "notes": "Makes 4 to 5 servings. Cooking the marinade into the sauce is what gives this its body — don't discard it. Serve with hot steamed rice, or with rice and peas, or with naan. A beet salad with yogurt makes a good side, and a light granita is the right dessert."
+  "notes": "Make the batter before you sit down for dinner, let it hang out while you eat, then roll and fry when you're done. They are only good for about ten minutes after frying, which is the correct amount of time for everyone to eat them."
 }
 </script>
 

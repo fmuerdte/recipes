@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Recipe Box</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#EFE9DA;
+    --card:#FFFDF8;
+    --ink:#2B2620;
+    --ink-soft:#6B6355;
+    --sage:#4A5D3A;
+    --mustard:#C17817;
+    --rule:#C9BFA6;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--paper);
+    background-image:radial-gradient(circle at 1px 1px, rgba(43,38,32,0.05) 1px, transparent 0);
+    background-size:18px 18px;
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    padding:40px 20px 80px;
+  }
+  .sheet{
+    max-width:920px;
+    margin:0 auto;
+    background:var(--card);
+    border-radius:4px;
+    box-shadow:0 1px 2px rgba(43,38,32,0.08), 0 12px 32px rgba(43,38,32,0.10);
+    overflow:hidden;
+  }
+  .tab{
+    display:inline-block;
+    background:var(--sage);
+    color:var(--card);
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11px;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    padding:6px 16px;
+    border-radius:0 0 6px 0;
+  }
+  header{ padding:28px 40px 22px; border-bottom:1px solid var(--rule); }
+  h1{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    font-size:clamp(28px,4vw,42px);
+    margin:14px 0 8px;
+    line-height:1.05;
+  }
+  .sub{ color:var(--ink-soft); font-size:14.5px; margin-top:6px; max-width:56ch; }
+
+  .categories{ padding:8px 40px 36px; }
+  .category{ margin-top:32px; }
+  .category:first-child{ margin-top:28px; }
+
+  h2.section-title{
+    font-family:'Fraunces',serif; font-size:14px; text-transform:uppercase;
+    letter-spacing:.1em; color:var(--sage); margin:0 0 4px;
+    display:flex; align-items:baseline; gap:10px;
+  }
+  h2.section-title .count{
+    font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:normal;
+    text-transform:none; color:var(--ink-soft); font-weight:500;
+  }
+  .rule{ border:none; border-top:1px dashed var(--rule); margin:10px 0 16px; }
+
+  .recipe-grid{ display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+  @media (max-width:640px){ .recipe-grid{ grid-template-columns:1fr; } }
+
+  a.recipe-card{
+    display:block; text-decoration:none; color:inherit;
+    border:1px solid var(--rule); border-radius:6px;
+    padding:16px 18px; background:var(--card);
+    transition:border-color .15s ease, transform .15s ease, box-shadow .15s ease;
+  }
+  a.recipe-card:hover{
+    border-color:var(--mustard);
+    transform:translateY(-1px);
+    box-shadow:0 6px 16px rgba(43,38,32,0.10);
+  }
+  .card-tag{
+    font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:.1em;
+    text-transform:uppercase; color:var(--mustard); margin-bottom:6px;
+  }
+  .card-title{
+    font-family:'Fraunces',serif; font-weight:600; font-size:18px; line-height:1.15; margin:0 0 8px;
+  }
+  .card-meta{ color:var(--ink-soft); font-size:12.5px; display:flex; gap:12px; flex-wrap:wrap; }
+  .card-meta span{ display:inline-flex; align-items:center; gap:4px; }
+
+  footer{
+    padding:16px 40px 28px; border-top:1px solid var(--rule);
+    font-size:12.5px; color:var(--ink-soft);
+  }
+</style>
+</head>
+<body>
+<div class="sheet">
+  <div class="tab">COOKING · INDEX</div>
+  <header>
+    <h1>Recipe Box</h1>
+    <div class="sub">A running collection, grouped by kind. Click a card to open the full recipe with scalable servings.</div>
+  </header>
+
+  <div class="categories">
+
+    <div class="category">
+      <h2 class="section-title">Breakfast <span class="count">3</span></h2>
+      <hr class="rule">
+      <div class="recipe-grid">
+        <a class="recipe-card" href="challah-french-toast.html">
+          <div class="card-tag">French Toast</div>
+          <h3 class="card-title">Challah French Toast with Orange, Nutmeg &amp; Brandy</h3>
+          <div class="card-meta">
+            <span>⏱ 15 min (+ drying)</span>
+            <span>🔥 20 min</span>
+          </div>
+        </a>
+        <a class="recipe-card" href="chocolate-swirl-buns.html">
+          <div class="card-tag">Sweet Rolls</div>
+          <h3 class="card-title">Chocolate Swirl Buns</h3>
+          <div class="card-meta">
+            <span>⏱ 1 hr 45 min rise</span>
+            <span>🔥 20 min bake</span>
+          </div>
+        </a>
+        <a class="recipe-card" href="flax-greek-yogurt-pancakes.html">
+          <div class="card-tag">Pancakes</div>
+          <h3 class="card-title">Flaxseed Greek Yogurt Pancakes</h3>
+          <div class="card-meta">
+            <span>⏱ 10 min prep</span>
+            <span>🔥 10 min cook</span>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <div class="category">
+      <h2 class="section-title">Mains <span class="count">7</span></h2>
+      <hr class="rule">
+      <div class="recipe-grid">
+        <a class="recipe-card" href="braised-soy-and-sesame-chicken.html">
+          <div class="card-tag">Braise</div>
+          <h3 class="card-title">Braised Soy and Sesame Chicken</h3>
+          <div class="card-meta">
+            <span>⏱ 2 hr marinate</span>
+            <span>🔥 2–3 hr braise</span>
+          </div>
+        </a>
+        <a class="recipe-card" href="butter-chicken.html">
+          <div class="card-tag">Curry</div>
+          <h3 class="card-title">Butter Chicken</h3>
+          <div class="card-meta">
+            <span>⏱ 1 hr marinate</span>
+            <span>🔥 1 hr 20 min cook</span>
+          </div>
+        </a>
+        <a class="recipe-card" href="cast-iron-rib-eye-steak.html">
+          <div class="card-tag">Cast Iron</div>
+          <h3 class="card-title">Cast Iron Rib Eye Steak</h3>
+          <div class="card-meta">
+            <span>⏱ 30 min to temper</span>
+            <span>🔥 5 min cook</span>
+          </div>
+        </a>
+        <a class="recipe-card" href="pecan-crusted-honey-mustard-salmon.html">
+          <div class="card-tag">Fish</div>
+          <h3 class="card-title">Pecan-Crusted Honey Mustard Salmon</h3>
+          <div class="card-meta">
+            <span>⏱ 10 min prep</span>
+            <span>🔥 15 min bake</span>
+          </div>
+        </a>
+        <a class="recipe-card" href="pernil-puerto-rican-roast-pork-shoulder.html">
+          <div class="card-tag">Roast</div>
+          <h3 class="card-title">Pernil (Puerto Rican Roast Pork Shoulder)</h3>
+          <div class="card-meta">
+            <span>⏱ 24 hr marinate</span>
+            <span>🔥 5 hr roast</span>
+          </div>
+        </a>
+        <a class="recipe-card" href="portuguese-poached-fish-in-seasoned-broth.html">
+          <div class="card-tag">Fish Stew</div>
+          <h3 class="card-title">Portuguese Poached Fish in Seasoned Broth</h3>
+          <div class="card-meta">
+            <span>⏱ 25 min prep</span>
+            <span>🔥 30 min cook</span>
+          </div>
+        </a>
+        <a class="recipe-card" href="sriracha-roast-chicken-with-vegetables.html">
+          <div class="card-tag">One Pan</div>
+          <h3 class="card-title">Sriracha Roast Chicken with Vegetables</h3>
+          <div class="card-meta">
+            <span>⏱ 20 min prep</span>
+            <span>🔥 70 min roast</span>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <div class="category">
+      <h2 class="section-title">Vegetarian Mains <span class="count">6</span></h2>
+      <hr class="rule">
+      <div class="recipe-grid">
+        <a class="recipe-card" href="baingan-bharta-roasted-eggplant-curry.html">
+          <div class="card-tag">Curry</div>
+          <h3 class="card-title">Baingan Bharta (Roasted Eggplant Curry)</h3>
+          <div class="card-meta">
+            <span>⏱ 15 min prep</span>
+            <span>🔥 45 min cook</span>
+          </div>
+        </a>
+        <a class="recipe-card" href="couscous-stuffed-bell-peppers.html">
+          <div class="card-tag">Stuffed</div>
+          <h3 class="card-title">Couscous-Stuffed Bell Peppers</h3>
+          <div class="card-meta">
+            <span>⏱ 30 min prep</span>
+            <span>🔥 15 min bake</span>
+          </div>
+        </a>
+        <a class="recipe-card" href="curried-lentils-with-sweet-potatoes-and-swiss-chard.html">
+          <div class="card-tag">One Pot</div>
+          <h3 class="card-title">Curried Lentils with Sweet Potatoes and Swiss Chard</h3>
+          <div class="card-meta">
+            <span>⏱ 20 min prep</span>
+            <span>🔥 45 min cook</span>
+          </div>
+        </a>
+        <a class="recipe-card" href="layered-eggplant-and-summer-vegetable-casserole.html">
+          <div class="card-tag">Baked</div>
+          <h3 class="card-title">Layered Eggplant and Summer Vegetable Casserole</h3>
+          <div class="card-meta">
+            <span>⏱ 25 min prep</span>
+            <span>🔥 55 min cook</span>
+          </div>
+        </a>
+        <a class="recipe-card" href="linguine-with-slow-cooked-zucchini-basil-and-cream.html">
+          <div class="card-tag">Pasta</div>
+          <h3 class="card-title">Linguine with Slow-Cooked Zucchini, Basil and Cream</h3>
+          <div class="card-meta">
+            <span>⏱ 15 min prep</span>
+            <span>🔥 45 min cook</span>
+          </div>
+        </a>
+        <a class="recipe-card" href="slow-cooker-dal-makhani.html">
+          <div class="card-tag">Slow Cooker</div>
+          <h3 class="card-title">Slow Cooker Dal Makhani</h3>
+          <div class="card-meta">
+            <span>⏱ 8 hr soak</span>
+            <span>🔥 10–12 hr slow cook</span>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <div class="category">
+      <h2 class="section-title">Soups &amp; Starters <span class="count">5</span></h2>
+      <hr class="rule">
+      <div class="recipe-grid">
+        <a class="recipe-card" href="charred-tomatillo-guacamole.html">
+          <div class="card-tag">Dip</div>
+          <h3 class="card-title">Charred Tomatillo Guacamole</h3>
+          <div class="card-meta">
+            <span>⏱ 20 min prep</span>
+            <span>🔥 15 min char</span>
+          </div>
+        </a>
+        <a class="recipe-card" href="fresh-pea-soup-with-shallots.html">
+          <div class="card-tag">Soup</div>
+          <h3 class="card-title">Fresh Pea Soup with Shallots</h3>
+          <div class="card-meta">
+            <span>⏱ 10 min prep</span>
+            <span>🔥 20 min cook</span>
+          </div>
+        </a>
+        <a class="recipe-card" href="grilled-cheese-sandwich.html">
+          <div class="card-tag">10 Minutes</div>
+          <h3 class="card-title">Grilled Cheese Sandwich</h3>
+          <div class="card-meta">
+            <span>⏱ 2 min prep</span>
+            <span>🔥 8 min cook</span>
+          </div>
+        </a>
+        <a class="recipe-card" href="marinated-roasted-peppers-with-capers-and-mozzarella.html">
+          <div class="card-tag">Make Ahead</div>
+          <h3 class="card-title">Marinated Roasted Peppers with Capers and Mozzarella</h3>
+          <div class="card-meta">
+            <span>⏱ 20 min prep</span>
+            <span>🔥 1 hr roast + 1 hr marinate</span>
+          </div>
+        </a>
+        <a class="recipe-card" href="tortilla-de-patatas-spanish-potato-omelette.html">
+          <div class="card-tag">Skillet</div>
+          <h3 class="card-title">Tortilla de Patatas (Spanish Potato Omelette)</h3>
+          <div class="card-meta">
+            <span>⏱ 30 min prep</span>
+            <span>🔥 25 min cook</span>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <div class="category">
+      <h2 class="section-title">Sides &amp; Pantry <span class="count">3</span></h2>
+      <hr class="rule">
+      <div class="recipe-grid">
+        <a class="recipe-card" href="rice-and-peas.html">
+          <div class="card-tag">Side</div>
+          <h3 class="card-title">Rice and Peas</h3>
+          <div class="card-meta">
+            <span>⏱ 5 min prep</span>
+            <span>🔥 25 min cook</span>
+          </div>
+        </a>
+        <a class="recipe-card" href="roasted-red-potatoes.html">
+          <div class="card-tag">Roasted</div>
+          <h3 class="card-title">Roasted Red Potatoes</h3>
+          <div class="card-meta">
+            <span>⏱ 10 min prep</span>
+            <span>🔥 20 min cook</span>
+          </div>
+        </a>
+        <a class="recipe-card" href="toasted-couscous.html">
+          <div class="card-tag">Pantry</div>
+          <h3 class="card-title">Toasted Couscous</h3>
+          <div class="card-meta">
+            <span>⏱ 2 min prep</span>
+            <span>🔥 17 min</span>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <div class="category">
+      <h2 class="section-title">Baking &amp; Desserts <span class="count">3</span></h2>
+      <hr class="rule">
+      <div class="recipe-grid">
+        <a class="recipe-card" href="brown-butter-coconut-chocolate-chunk-cookies.html">
+          <div class="card-tag">Cookies</div>
+          <h3 class="card-title">Brown Butter Coconut Chocolate Chunk Cookies</h3>
+          <div class="card-meta">
+            <span>⏱ 25 min prep</span>
+            <span>🔥 10–14 min bake</span>
+          </div>
+        </a>
+        <a class="recipe-card" href="coconut-rice-pudding-with-cardamom-and-pistachios.html">
+          <div class="card-tag">Stovetop</div>
+          <h3 class="card-title">Coconut Rice Pudding with Cardamom and Pistachios</h3>
+          <div class="card-meta">
+            <span>⏱ 5 min prep</span>
+            <span>🔥 15 min cook</span>
+          </div>
+        </a>
+        <a class="recipe-card" href="perfect-chocolate-chip-cookies.html">
+          <div class="card-tag">Cookies</div>
+          <h3 class="card-title">Perfect Chocolate Chip Cookies</h3>
+          <div class="card-meta">
+            <span>⏱ 25 min prep</span>
+            <span>🔥 14 min bake</span>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <div class="category">
+      <h2 class="section-title">Preserves <span class="count">1</span></h2>
+      <hr class="rule">
+      <div class="recipe-grid">
+        <a class="recipe-card" href="overnight-macerated-peach-jam.html">
+          <div class="card-tag">Stone Fruit</div>
+          <h3 class="card-title">Overnight-Macerated Peach Jam</h3>
+          <div class="card-meta">
+            <span>⏱ 25 min + overnight</span>
+            <span>🔥 2 × 15 min</span>
+          </div>
+        </a>
+      </div>
+    </div>
+
+  </div>
+
+  <footer>28 recipes</footer>
+</div>
+</body>
+</html>

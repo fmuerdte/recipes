@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Challah French Toast with Orange, Nutmeg &amp; Brandy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#EFE9DA;
+    --card:#FFFDF8;
+    --ink:#2B2620;
+    --ink-soft:#6B6355;
+    --sage:#4A5D3A;
+    --mustard:#C17817;
+    --rule:#C9BFA6;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--paper);
+    background-image:radial-gradient(circle at 1px 1px, rgba(43,38,32,0.05) 1px, transparent 0);
+    background-size:18px 18px;
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    padding:40px 20px 80px;
+  }
+  .sheet{
+    max-width:880px;
+    margin:0 auto;
+    background:var(--card);
+    border-radius:4px;
+    box-shadow:0 1px 2px rgba(43,38,32,0.08), 0 12px 32px rgba(43,38,32,0.10);
+    overflow:hidden;
+  }
+  .tab{
+    display:inline-block;
+    background:var(--sage);
+    color:var(--card);
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11px;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    padding:6px 16px;
+    border-radius:0 0 6px 0;
+  }
+  header{ padding:28px 40px 20px; border-bottom:1px solid var(--rule); }
+  h1{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    font-size:clamp(28px,4vw,42px);
+    margin:14px 0 8px;
+    line-height:1.05;
+  }
+  .meta{ color:var(--ink-soft); font-size:14px; display:flex; gap:18px; flex-wrap:wrap; margin-top:6px;}
+  .meta span{ display:inline-flex; align-items:center; gap:6px; }
+  .source{ font-size:12.5px; color:var(--ink-soft); margin-top:10px; }
+  .source a{ color:var(--sage); }
+
+  .body-grid{ display:grid; grid-template-columns:270px 1fr; }
+  @media (max-width:640px){ .body-grid{ grid-template-columns:1fr; } }
+
+  .ingredients-col{ border-right:1px solid var(--rule); padding:24px 28px; }
+  @media (max-width:640px){ .ingredients-col{ border-right:none; border-bottom:1px solid var(--rule);} }
+
+  .servings-dial{
+    display:flex; align-items:center; justify-content:space-between;
+    background:var(--paper); border-radius:999px; padding:6px 6px 6px 16px;
+    margin-bottom:20px;
+  }
+  .servings-dial .label{ font-size:12px; color:var(--ink-soft); text-transform:uppercase; letter-spacing:.08em; }
+  .servings-dial .controls{ display:flex; align-items:center; gap:2px; }
+  .servings-dial button{
+    width:28px; height:28px; border-radius:50%; border:1px solid var(--rule);
+    background:var(--card); color:var(--ink); font-size:15px; cursor:pointer; line-height:1;
+  }
+  .servings-dial button:hover{ background:var(--mustard); color:#fff; border-color:var(--mustard); }
+  #servings-count{
+    font-family:'IBM Plex Mono',monospace; font-weight:600; font-size:16px;
+    width:34px; text-align:center; display:inline-block;
+  }
+
+  h2.section-title{
+    font-family:'Fraunces',serif; font-size:14px; text-transform:uppercase;
+    letter-spacing:.1em; color:var(--sage); margin:0 0 12px;
+  }
+  ul.ingredients{ list-style:none; margin:0; padding:0; }
+  ul.ingredients li{
+    display:flex; gap:10px; padding:7px 0; border-bottom:1px dashed var(--rule);
+    font-size:14.5px; align-items:baseline;
+  }
+  ul.ingredients li:last-child{ border-bottom:none; }
+  .amt{ font-family:'IBM Plex Mono',monospace; font-weight:600; color:var(--mustard); min-width:64px; }
+
+  .steps-col{ padding:24px 32px 32px; }
+  ol.steps{ list-style:none; margin:0; padding:0; counter-reset:step; }
+  ol.steps li{
+    counter-increment:step; position:relative; padding:0 0 20px 40px; font-size:15px; line-height:1.6;
+  }
+  ol.steps li::before{
+    content:counter(step);
+    position:absolute; left:0; top:0;
+    width:26px; height:26px; border-radius:50%;
+    background:var(--sage); color:#fff;
+    font-family:'IBM Plex Mono',monospace; font-size:12px; font-weight:600;
+    display:flex; align-items:center; justify-content:center;
+  }
+  ol.steps li .inline-amt{ font-family:'IBM Plex Mono',monospace; font-weight:600; color:var(--mustard); }
+
+  .notes{ margin-top:8px; padding:16px 32px 28px; border-top:1px solid var(--rule); font-size:13.5px; color:var(--ink-soft); }
+
+  @media print{
+    body{ background:#fff; padding:0; }
+    .sheet{ box-shadow:none; border-radius:0; }
+    .servings-dial button{ display:none; }
+    .tab{ background:none; color:var(--ink); }
+  }
+</style>
+</head>
+<body>
+<div class="sheet">
+  <div class="tab">BREAKFAST · FRENCH TOAST</div>
+  <header>
+    <h1>Challah French Toast with Orange, Nutmeg &amp; Brandy</h1>
+    <div class="meta">
+      <span>⏱ 15 min (+ drying the bread)</span>
+      <span>🔥 20 min</span>
+      <span>🍽 <span id="servings-label"></span> servings</span>
+    </div>
+    <div class="source">Adapted from an ingredient list posted by @Lida.535 — measurements filled in</div>
+  </header>
+
+  <div class="body-grid">
+    <div class="ingredients-col">
+      <div class="servings-dial">
+        <span class="label">Servings</span>
+        <div class="controls">
+          <button id="dec">–</button>
+          <span id="servings-count"></span>
+          <button id="inc">+</button>
+        </div>
+      </div>
+      <h2 class="section-title">Ingredients</h2>
+      <ul class="ingredients" id="ingredients-list"></ul>
+    </div>
+    <div class="steps-col">
+      <h2 class="section-title">Method</h2>
+      <ol class="steps" id="steps-list"></ol>
+    </div>
+  </div>
+  <div class="notes" id="notes-block" style="display:none;"></div>
+</div>
+
+<script id="recipe-data" type="application/json">
+{
+  "baseServings": 4,
+  "ingredients": [
+    { "id": "challah", "name": "thick slices of challah (2–3 cm), preferably a day old", "baseAmount": 8, "unit": "", "category": "count" },
+    { "id": "eggs", "name": "large eggs", "baseAmount": 4, "unit": "", "category": "count" },
+    { "id": "cream", "name": "heavy cream", "baseAmount": 480, "unit": "ml", "category": "volume" },
+    { "id": "sugar", "name": "granulated sugar", "baseAmount": 2.5, "unit": "tbsp", "category": "small" },
+    { "id": "orange", "name": "orange, zest only", "baseAmount": 1, "unit": "", "category": "count" },
+    { "id": "nutmeg", "name": "nutmeg, freshly grated", "baseAmount": 0.25, "unit": "tsp", "category": "small" },
+    { "id": "salt", "name": "fine salt", "baseAmount": 0.5, "unit": "tsp", "category": "small" },
+    { "id": "vanilla", "name": "vanilla extract", "baseAmount": 2, "unit": "tsp", "category": "small" },
+    { "id": "brandy", "name": "brandy", "baseAmount": 2, "unit": "tbsp", "category": "small" },
+    { "id": "butter", "name": "unsalted butter, for the pan and for serving", "baseAmount": 45, "unit": "g", "category": "weight" },
+    { "id": "syrup", "name": "maple syrup, to serve", "baseAmount": 120, "unit": "ml", "category": "volume" }
+  ],
+  "steps": [
+    "If the challah is fresh, cut it into {{challah}} and leave them out on a rack for an hour or two — or dry them in a 150°C / 300°F oven for 10 minutes. Dry bread drinks up custard instead of collapsing into it.",
+    "Whisk {{eggs}} in a wide, shallow dish until no streaks of white remain.",
+    "Add {{cream}}, {{sugar}}, {{salt}}, {{nutmeg}}, the zest of {{orange}}, {{vanilla}} and {{brandy}}. Whisk until the sugar has dissolved and the custard looks smooth and pale.",
+    "Soak the bread two slices at a time, about 45 seconds a side. It should feel heavy and saturated to the centre but still hold its shape — press gently with a finger to check. Let the excess drip off before it goes in the pan.",
+    "Heat a large non-stick or cast-iron skillet over medium-low and melt a knob of {{butter}}, enough to coat the surface. Low and slow is the whole trick here: the custard is rich, and high heat will brown the outside before the middle sets.",
+    "Cook the slices 3–4 minutes per side, until deeply golden and just springy in the centre. Wipe the pan and add fresh butter between batches so the milk solids don't burn.",
+    "Hold finished slices on a rack in a 100°C / 200°F oven while you cook the rest — a rack, not a plate, or the bottoms will steam soft.",
+    "Serve hot with the remaining {{butter}} melting on top and {{syrup}} poured generously over."
+  ],
+  "notes": "The original comment listed ingredients without amounts, so these are calibrated around the two fixed quantities given: 2 cups of heavy cream and 4 eggs. That ratio makes a loose, very rich custard — closer to crème brûlée than to a diner batter — which is why the bread needs to be dry and the heat needs to be gentle. For a lighter version, swap half the cream for whole milk. The brandy is a flavouring, not a soak: 2 tbsp perfumes the custard without any raw-alcohol bite, and most of it cooks off. Cognac, dark rum or Grand Marnier all work; leave it out entirely and add another ½ tsp vanilla. Leftover slices reheat well in a 180°C / 350°F oven for 8 minutes — never the microwave."
+}
+
+</script>
+
+<script>
+const data = JSON.parse(document.getElementById('recipe-data').textContent);
+let servings = data.baseServings;
+
+// --- unit-aware rounding & fraction display ---
+const FRACTIONS = [[0,''],[1/8,'⅛'],[1/4,'¼'],[1/3,'⅓'],[3/8,'⅜'],[1/2,'½'],[5/8,'⅝'],[2/3,'⅔'],[3/4,'¾'],[7/8,'⅞']];
+function toFraction(x){
+  const whole = Math.floor(x);
+  const rem = x - whole;
+  let best = FRACTIONS[0], bestDiff = Infinity;
+  for(const f of FRACTIONS){ const d = Math.abs(f[0]-rem); if(d<bestDiff){bestDiff=d; best=f;} }
+  let out = '';
+  if(whole>0) out += whole;
+  if(best[1]) out += (whole>0?' ':'') + best[1];
+  if(!out) out = '0';
+  return out;
+}
+function roundAmount(amount, unit, category){
+  if(category === 'count'){
+    const r = Math.max(1, Math.round(amount));
+    return String(r);
+  }
+  if(category === 'small'){ // tsp/tbsp — show as friendly fractions
+    return toFraction(amount);
+  }
+  if(unit === 'g'){
+    if(amount < 20) return String(Math.round(amount));
+    if(amount < 200) return String(Math.round(amount/5)*5);
+    return String(Math.round(amount/10)*10);
+  }
+  if(unit === 'ml'){
+    if(amount < 50) return String(Math.round(amount/5)*5);
+    if(amount < 500) return String(Math.round(amount/25)*25);
+    return String(Math.round(amount/50)*50);
+  }
+  // fallback: 1 decimal
+  return String(Math.round(amount*10)/10);
+}
+function scaledAmount(ing){
+  const ratio = servings / data.baseServings;
+  const raw = ing.baseAmount * ratio;
+  return roundAmount(raw, ing.unit, ing.category);
+}
+function amountText(ing){
+  const val = scaledAmount(ing);
+  return ing.unit && ing.category !== 'count' ? `${val} ${ing.unit}` : val;
+}
+
+function render(){
+  document.getElementById('servings-count').textContent = servings;
+  document.getElementById('servings-label').textContent = servings;
+
+  const list = document.getElementById('ingredients-list');
+  list.innerHTML = '';
+  data.ingredients.forEach(ing=>{
+    const li = document.createElement('li');
+    li.innerHTML = `<span class="amt">${amountText(ing)}</span><span>${ing.name}</span>`;
+    list.appendChild(li);
+  });
+
+  const steps = document.getElementById('steps-list');
+  steps.innerHTML = '';
+  data.steps.forEach(stepTemplate=>{
+    let text = stepTemplate.replace(/\{\{(\w[\w-]*)\}\}/g, (_, id)=>{
+      const ing = data.ingredients.find(i=>i.id === id);
+      return ing ? `<span class="inline-amt">${amountText(ing)}</span> ${ing.name}` : '';
+    });
+    const li = document.createElement('li');
+    li.innerHTML = text;
+    steps.appendChild(li);
+  });
+
+  if(data.notes){
+    const notesBlock = document.getElementById('notes-block');
+    notesBlock.style.display = 'block';
+    notesBlock.innerHTML = `<strong>Notes:</strong> ${data.notes}`;
+  }
+}
+
+document.getElementById('inc').addEventListener('click', ()=>{ servings++; render(); });
+document.getElementById('dec').addEventListener('click', ()=>{ if(servings>1) servings--; render(); });
+
+render();
+</script>
+</body>
+</html>

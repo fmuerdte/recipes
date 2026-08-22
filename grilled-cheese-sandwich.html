@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grilled Cheese Sandwich</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#EFE9DA;
+    --card:#FFFDF8;
+    --ink:#2B2620;
+    --ink-soft:#6B6355;
+    --sage:#4A5D3A;
+    --mustard:#C17817;
+    --rule:#C9BFA6;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--paper);
+    background-image:radial-gradient(circle at 1px 1px, rgba(43,38,32,0.05) 1px, transparent 0);
+    background-size:18px 18px;
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    padding:40px 20px 80px;
+  }
+  .sheet{
+    max-width:880px;
+    margin:0 auto;
+    background:var(--card);
+    border-radius:4px;
+    box-shadow:0 1px 2px rgba(43,38,32,0.08), 0 12px 32px rgba(43,38,32,0.10);
+    overflow:hidden;
+  }
+  .tab{
+    display:inline-block;
+    background:var(--sage);
+    color:var(--card);
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11px;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    padding:6px 16px;
+    border-radius:0 0 6px 0;
+  }
+  header{ padding:28px 40px 20px; border-bottom:1px solid var(--rule); }
+  h1{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    font-size:clamp(28px,4vw,42px);
+    margin:14px 0 8px;
+    line-height:1.05;
+  }
+  .meta{ color:var(--ink-soft); font-size:14px; display:flex; gap:18px; flex-wrap:wrap; margin-top:6px;}
+  .meta span{ display:inline-flex; align-items:center; gap:6px; }
+  .source{ font-size:12.5px; color:var(--ink-soft); margin-top:10px; }
+  .source a{ color:var(--sage); }
+
+  .body-grid{ display:grid; grid-template-columns:270px 1fr; }
+  @media (max-width:640px){ .body-grid{ grid-template-columns:1fr; } }
+
+  .ingredients-col{ border-right:1px solid var(--rule); padding:24px 28px; }
+  @media (max-width:640px){ .ingredients-col{ border-right:none; border-bottom:1px solid var(--rule);} }
+
+  .servings-dial{
+    display:flex; align-items:center; justify-content:space-between;
+    background:var(--paper); border-radius:999px; padding:6px 6px 6px 16px;
+    margin-bottom:20px;
+  }
+  .servings-dial .label{ font-size:12px; color:var(--ink-soft); text-transform:uppercase; letter-spacing:.08em; }
+  .servings-dial .controls{ display:flex; align-items:center; gap:2px; }
+  .servings-dial button{
+    width:28px; height:28px; border-radius:50%; border:1px solid var(--rule);
+    background:var(--card); color:var(--ink); font-size:15px; cursor:pointer; line-height:1;
+  }
+  .servings-dial button:hover{ background:var(--mustard); color:#fff; border-color:var(--mustard); }
+  #servings-count{
+    font-family:'IBM Plex Mono',monospace; font-weight:600; font-size:16px;
+    width:34px; text-align:center; display:inline-block;
+  }
+
+  h2.section-title{
+    font-family:'Fraunces',serif; font-size:14px; text-transform:uppercase;
+    letter-spacing:.1em; color:var(--sage); margin:0 0 12px;
+  }
+  ul.ingredients{ list-style:none; margin:0; padding:0; }
+  ul.ingredients li{
+    display:flex; gap:10px; padding:7px 0; border-bottom:1px dashed var(--rule);
+    font-size:14.5px; align-items:baseline;
+  }
+  ul.ingredients li:last-child{ border-bottom:none; }
+  .amt{ font-family:'IBM Plex Mono',monospace; font-weight:600; color:var(--mustard); min-width:64px; }
+
+  .steps-col{ padding:24px 32px 32px; }
+  ol.steps{ list-style:none; margin:0; padding:0; counter-reset:step; }
+  ol.steps li{
+    counter-increment:step; position:relative; padding:0 0 20px 40px; font-size:15px; line-height:1.6;
+  }
+  ol.steps li::before{
+    content:counter(step);
+    position:absolute; left:0; top:0;
+    width:26px; height:26px; border-radius:50%;
+    background:var(--sage); color:#fff;
+    font-family:'IBM Plex Mono',monospace; font-size:12px; font-weight:600;
+    display:flex; align-items:center; justify-content:center;
+  }
+  ol.steps li .inline-amt{ font-family:'IBM Plex Mono',monospace; font-weight:600; color:var(--mustard); }
+
+  .notes{ margin-top:8px; padding:16px 32px 28px; border-top:1px solid var(--rule); font-size:13.5px; color:var(--ink-soft); }
+
+  @media print{
+    body{ background:#fff; padding:0; }
+    .sheet{ box-shadow:none; border-radius:0; }
+    .servings-dial button{ display:none; }
+    .tab{ background:none; color:var(--ink); }
+  }
+</style>
+</head>
+<body>
+<div class="sheet">
+  <div class="tab">LUNCH · 10 MINUTES</div>
+  <header>
+    <h1>Grilled Cheese Sandwich</h1>
+    <div class="meta">
+      <span>⏱ 2 min prep</span>
+      <span>🔥 8 min cook</span>
+      <span>🍽 <span id="servings-label"></span> servings</span>
+    </div>
+    <div class="source">From the family recipe document</div>
+  </header>
+
+  <div class="body-grid">
+    <div class="ingredients-col">
+      <div class="servings-dial">
+        <span class="label">Servings</span>
+        <div class="controls">
+          <button id="dec">–</button>
+          <span id="servings-count"></span>
+          <button id="inc">+</button>
+        </div>
+      </div>
+      <h2 class="section-title">Ingredients</h2>
+      <ul class="ingredients" id="ingredients-list"></ul>
+    </div>
+    <div class="steps-col">
+      <h2 class="section-title">Method</h2>
+      <ol class="steps" id="steps-list"></ol>
+    </div>
+  </div>
+  <div class="notes" id="notes-block" style="display:none;"></div>
+</div>
+
+<script id="recipe-data" type="application/json">
+{
+  "baseServings": 2,
+  "ingredients": [
+    {
+      "id": "bread",
+      "name": "slices white bread",
+      "baseAmount": 4,
+      "unit": "",
+      "category": "count"
+    },
+    {
+      "id": "butter",
+      "name": "butter, softened",
+      "baseAmount": 3,
+      "unit": "tbsp",
+      "category": "small"
+    },
+    {
+      "id": "cheese",
+      "name": "slices Cheddar cheese",
+      "baseAmount": 2,
+      "unit": "",
+      "category": "count"
+    }
+  ],
+  "steps": [
+    "Heat a skillet over medium heat.",
+    "Generously butter one side of a slice of the {{bread}} using some of the {{butter}}. Lay it butter-side down in the pan and top with a slice of the {{cheese}}.",
+    "Butter one side of a second slice and set it butter-side up on top of the sandwich.",
+    "Grill until the underside is lightly browned, then flip and continue until the cheese has melted through.",
+    "Repeat with the remaining bread, butter and cheese."
+  ],
+  "notes": "Medium heat and patience — too hot and the bread browns before the cheese melts. Grating the cheese instead of slicing it melts faster and more evenly."
+}
+</script>
+
+<script>
+const data = JSON.parse(document.getElementById('recipe-data').textContent);
+let servings = data.baseServings;
+
+// --- unit-aware rounding & fraction display ---
+const FRACTIONS = [[0,''],[1/8,'⅛'],[1/4,'¼'],[1/3,'⅓'],[3/8,'⅜'],[1/2,'½'],[5/8,'⅝'],[2/3,'⅔'],[3/4,'¾'],[7/8,'⅞']];
+function toFraction(x){
+  const whole = Math.floor(x);
+  const rem = x - whole;
+  let best = FRACTIONS[0], bestDiff = Infinity;
+  for(const f of FRACTIONS){ const d = Math.abs(f[0]-rem); if(d<bestDiff){bestDiff=d; best=f;} }
+  let out = '';
+  if(whole>0) out += whole;
+  if(best[1]) out += (whole>0?' ':'') + best[1];
+  if(!out) out = '0';
+  return out;
+}
+function roundAmount(amount, unit, category){
+  if(category === 'count'){
+    const r = Math.max(1, Math.round(amount));
+    return String(r);
+  }
+  if(category === 'small'){ // tsp/tbsp — show as friendly fractions
+    return toFraction(amount);
+  }
+  if(unit === 'g'){
+    if(amount < 20) return String(Math.round(amount));
+    if(amount < 200) return String(Math.round(amount/5)*5);
+    return String(Math.round(amount/10)*10);
+  }
+  if(unit === 'ml'){
+    if(amount < 50) return String(Math.round(amount/5)*5);
+    if(amount < 500) return String(Math.round(amount/25)*25);
+    return String(Math.round(amount/50)*50);
+  }
+  // fallback: 1 decimal
+  return String(Math.round(amount*10)/10);
+}
+function scaledAmount(ing){
+  const ratio = servings / data.baseServings;
+  const raw = ing.baseAmount * ratio;
+  return roundAmount(raw, ing.unit, ing.category);
+}
+function amountText(ing){
+  const val = scaledAmount(ing);
+  return ing.unit && ing.category !== 'count' ? `${val} ${ing.unit}` : val;
+}
+
+function render(){
+  document.getElementById('servings-count').textContent = servings;
+  document.getElementById('servings-label').textContent = servings;
+
+  const list = document.getElementById('ingredients-list');
+  list.innerHTML = '';
+  data.ingredients.forEach(ing=>{
+    const li = document.createElement('li');
+    li.innerHTML = `<span class="amt">${amountText(ing)}</span><span>${ing.name}</span>`;
+    list.appendChild(li);
+  });
+
+  const steps = document.getElementById('steps-list');
+  steps.innerHTML = '';
+  data.steps.forEach(stepTemplate=>{
+    let text = stepTemplate.replace(/\{\{(\w[\w-]*)\}\}/g, (_, id)=>{
+      const ing = data.ingredients.find(i=>i.id === id);
+      return ing ? `<span class="inline-amt">${amountText(ing)}</span> ${ing.name}` : '';
+    });
+    const li = document.createElement('li');
+    li.innerHTML = text;
+    steps.appendChild(li);
+  });
+
+  if(data.notes){
+    const notesBlock = document.getElementById('notes-block');
+    notesBlock.style.display = 'block';
+    notesBlock.innerHTML = `<strong>Notes:</strong> ${data.notes}`;
+  }
+}
+
+document.getElementById('inc').addEventListener('click', ()=>{ servings++; render(); });
+document.getElementById('dec').addEventListener('click', ()=>{ if(servings>1) servings--; render(); });
+
+render();
+</script>
+</body>
+</html>

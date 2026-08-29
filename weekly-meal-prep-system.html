@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Weekly Meal Prep System</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#EFE9DA;
+    --card:#FFFDF8;
+    --ink:#2B2620;
+    --ink-soft:#6B6355;
+    --sage:#4A5D3A;
+    --mustard:#C17817;
+    --rule:#C9BFA6;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--paper);
+    background-image:radial-gradient(circle at 1px 1px, rgba(43,38,32,0.05) 1px, transparent 0);
+    background-size:18px 18px;
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    padding:40px 20px 80px;
+  }
+  .sheet{
+    max-width:880px;
+    margin:0 auto;
+    background:var(--card);
+    border-radius:4px;
+    box-shadow:0 1px 2px rgba(43,38,32,0.08), 0 12px 32px rgba(43,38,32,0.10);
+    overflow:hidden;
+  }
+  .tab{
+    display:inline-block;
+    background:var(--sage);
+    color:var(--card);
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11px;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    padding:6px 16px;
+    border-radius:0 0 6px 0;
+  }
+  header{ padding:28px 40px 20px; border-bottom:1px solid var(--rule); }
+  h1{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    font-size:clamp(28px,4vw,42px);
+    margin:14px 0 8px;
+    line-height:1.05;
+  }
+  .subtitle{ color:var(--ink-soft); font-size:15px; margin-top:6px; }
+
+  .content{ padding:32px 40px 40px; }
+
+  h2.section-title{
+    font-family:'Fraunces',serif; font-size:16px; text-transform:uppercase;
+    letter-spacing:.08em; color:var(--sage); margin:36px 0 14px;
+  }
+  h2.section-title:first-child{ margin-top:0; }
+
+  p{ font-size:15px; line-height:1.65; margin:0 0 12px; }
+
+  .step-list{ list-style:none; margin:0; padding:0; counter-reset:step; }
+  .step-list li{
+    counter-increment:step; position:relative; padding:0 0 14px 40px; font-size:15px; line-height:1.6;
+  }
+  .step-list li::before{
+    content:counter(step);
+    position:absolute; left:0; top:0;
+    width:26px; height:26px; border-radius:50%;
+    background:var(--sage); color:#fff;
+    font-family:'IBM Plex Mono',monospace; font-size:12px; font-weight:600;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .step-list li strong{ color:var(--ink); }
+
+  table.week-table{ width:100%; border-collapse:collapse; margin:8px 0 4px; font-size:14.5px; }
+  table.week-table th{
+    text-align:left; font-family:'IBM Plex Mono',monospace; font-size:11px;
+    text-transform:uppercase; letter-spacing:.08em; color:var(--ink-soft);
+    padding:8px 10px; border-bottom:2px solid var(--rule);
+  }
+  table.week-table td{ padding:10px; border-bottom:1px dashed var(--rule); }
+  table.week-table td:first-child{ font-weight:600; color:var(--sage); white-space:nowrap; }
+
+  ul.bullets{ margin:0 0 4px; padding-left:20px; }
+  ul.bullets li{ font-size:14.5px; line-height:1.6; margin-bottom:6px; }
+
+  .callout{
+    background:var(--paper); border-left:3px solid var(--mustard);
+    padding:14px 18px; border-radius:4px; font-size:14px; color:var(--ink-soft); margin-top:8px;
+  }
+
+  @media (max-width:640px){
+    header{ padding:22px 20px 16px; }
+    .content{ padding:24px 20px 32px; }
+    table.week-table{ font-size:13px; }
+  }
+
+  @media print{
+    body{ background:#fff; padding:0; }
+    .sheet{ box-shadow:none; border-radius:0; }
+    .tab{ background:none; color:var(--ink); }
+  }
+</style>
+</head>
+<body>
+<div class="sheet">
+  <div class="tab">MEAL PREP · STRATEGY</div>
+  <header>
+    <h1>Weekly Meal Prep System</h1>
+    <div class="subtitle">Protein + veggies, remixed across rice, tortillas, and salad — without cooking every day.</div>
+  </header>
+
+  <div class="content">
+
+    <h2 class="section-title">The 3-Part System</h2>
+    <ol class="step-list">
+      <li><strong>Two proteins, not one.</strong> Cook two different protein + veggie batches (e.g. lemon-herb chicken and ginger-soy tofu, or beef and chickpea curry) so you're never eating the same thing five days straight. Alternate them through the week.</li>
+      <li><strong>One big batch of rice.</strong> Cook fresh as needed in the rice cooker — no need to batch this ahead.</li>
+      <li><strong>One crunchy prep-ahead salad or slaw.</strong> Cabbage, carrots, and cucumber hold up far better over a week than lettuce. Keep the dressing in a separate small container and toss fresh each day so it doesn't wilt.</li>
+    </ol>
+
+    <h2 class="section-title">Sample Week</h2>
+    <table class="week-table">
+      <tr><th>Day</th><th>Format</th></tr>
+      <tr><td>Mon</td><td>Chicken + rice bowl, slaw on the side</td></tr>
+      <tr><td>Tue</td><td>Tofu + rice bowl, slaw on the side</td></tr>
+      <tr><td>Wed</td><td>Chicken in a tortilla, slaw stuffed in</td></tr>
+      <tr><td>Thu</td><td>Tofu in a tortilla</td></tr>
+      <tr><td>Fri</td><td>Whichever protein's left, over rice, with a fried egg or extra sauce to keep it feeling fresh</td></tr>
+    </table>
+
+    <h2 class="section-title">Keeping It From Feeling Repetitive</h2>
+    <ul class="bullets">
+      <li>Keep 2-3 cheap flavor boosters on hand to add at serving time, not during cooking: lime, hot sauce, yogurt or sour cream, a drizzle of sesame oil, or fresh herbs. Same base, different meal.</li>
+      <li>Warm the tortilla in a dry pan for 30 seconds before filling — makes the wrap format feel distinct from "leftovers in bread."</li>
+      <li>Keep a small jar of quick-pickled onions or cucumbers (vinegar + salt + sugar, ready in an hour) for crunch and acidity across bowls, wraps, or the slaw.</li>
+    </ul>
+
+    <h2 class="section-title">Keeping It Healthy</h2>
+    <ul class="bullets">
+      <li>Both proteins are lean-ish already; to cut fat further, swap to chicken breast or reduce oil by a tablespoon per batch — the sauce carries plenty of flavor.</li>
+      <li>The slaw/salad supplies a raw-veggie component daily that the cooked-veggie bowls alone don't — good for fiber and micronutrients you'd otherwise miss all week.</li>
+      <li>Swap rice half-and-half with cauliflower rice or a grain like farro for more fiber and fewer refined carbs, without changing anything else about the plan.</li>
+    </ul>
+
+    <h2 class="section-title">Sunday Prep Sequence</h2>
+    <ol class="step-list">
+      <li>Cook protein batch #1 (~25 min).</li>
+      <li>Cook protein batch #2 while #1 cools (~25 min).</li>
+      <li>Shred or slice slaw veggies and make the dressing (~15 min, can overlap with step 2).</li>
+      <li>Portion proteins into containers; keep the slaw and dressing separate. Cook rice fresh each day in the rice cooker.</li>
+    </ol>
+
+    <div class="callout">Total hands-on time: roughly 60-70 minutes, no rice batching needed since it's made fresh daily.</div>
+
+  </div>
+</div>
+</body>
+</html>

@@ -283,8 +283,10 @@ function roundAmount(amount, unit, category){
     return String(Math.round(amount/10)*10);
   }
   if(unit === 'ml'){
-    if(amount < 50) return String(Math.round(amount/5)*5);
-    if(amount < 500) return String(Math.round(amount/25)*25);
+    if(amount < 10) return String(Math.round(amount));
+    if(amount < 100) return String(Math.round(amount/5)*5);
+    if(amount < 250) return String(Math.round(amount/10)*10);
+    if(amount < 1000) return String(Math.round(amount/25)*25);
     return String(Math.round(amount/50)*50);
   }
   // fallback: 1 decimal

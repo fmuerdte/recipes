@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flaxseed Greek Yogurt Johnny Cakes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#EFE9DA;
+    --card:#FFFDF8;
+    --ink:#2B2620;
+    --ink-soft:#6B6355;
+    --sage:#4A5D3A;
+    --mustard:#C17817;
+    --rule:#C9BFA6;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--paper);
+    background-image:radial-gradient(circle at 1px 1px, rgba(43,38,32,0.05) 1px, transparent 0);
+    background-size:18px 18px;
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    padding:40px 20px 80px;
+  }
+  .sheet{
+    max-width:880px;
+    margin:0 auto;
+    background:var(--card);
+    border-radius:4px;
+    box-shadow:0 1px 2px rgba(43,38,32,0.08), 0 12px 32px rgba(43,38,32,0.10);
+    overflow:hidden;
+  }
+  .tab{
+    display:inline-block;
+    background:var(--sage);
+    color:var(--card);
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11px;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    padding:6px 16px;
+    border-radius:0 0 6px 0;
+  }
+  .tab a{ color:inherit; text-decoration:none; }
+  .tab a:hover{ text-decoration:underline; }
+  header{ padding:28px 40px 20px; border-bottom:1px solid var(--rule); }
+  h1{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    font-size:clamp(28px,4vw,42px);
+    margin:14px 0 8px;
+    line-height:1.05;
+  }
+  .meta{ color:var(--ink-soft); font-size:14px; display:flex; gap:18px; flex-wrap:wrap; margin-top:6px;}
+  .meta span{ display:inline-flex; align-items:center; gap:6px; }
+  .source{ font-size:12.5px; color:var(--ink-soft); margin-top:10px; }
+  .source a{ color:var(--sage); }
+
+  .body-grid{ display:grid; grid-template-columns:270px 1fr; }
+  @media (max-width:640px){ .body-grid{ grid-template-columns:1fr; } }
+
+  .ingredients-col{ border-right:1px solid var(--rule); padding:24px 28px; }
+  @media (max-width:640px){ .ingredients-col{ border-right:none; border-bottom:1px solid var(--rule);} }
+
+  .servings-dial{
+    display:flex; align-items:center; justify-content:space-between;
+    background:var(--paper); border-radius:999px; padding:6px 6px 6px 16px;
+    margin-bottom:20px;
+  }
+  .servings-dial .label{ font-size:12px; color:var(--ink-soft); text-transform:uppercase; letter-spacing:.08em; }
+  .servings-dial .controls{ display:flex; align-items:center; gap:2px; }
+  .servings-dial button{
+    width:28px; height:28px; border-radius:50%; border:1px solid var(--rule);
+    background:var(--card); color:var(--ink); font-size:15px; cursor:pointer; line-height:1;
+  }
+  .servings-dial button:hover{ background:var(--mustard); color:#fff; border-color:var(--mustard); }
+  #servings-count{
+    font-family:'IBM Plex Mono',monospace; font-weight:600; font-size:16px;
+    width:34px; text-align:center; display:inline-block;
+  }
+
+  h2.section-title{
+    font-family:'Fraunces',serif; font-size:14px; text-transform:uppercase;
+    letter-spacing:.1em; color:var(--sage); margin:0 0 12px;
+  }
+  ul.ingredients{ list-style:none; margin:0; padding:0; }
+  ul.ingredients li{
+    display:flex; gap:10px; padding:7px 0; border-bottom:1px dashed var(--rule);
+    font-size:14.5px; align-items:baseline;
+  }
+  ul.ingredients li:last-child{ border-bottom:none; }
+  .amt{ font-family:'IBM Plex Mono',monospace; font-weight:600; color:var(--mustard); min-width:64px; }
+
+  .steps-col{ padding:24px 32px 32px; }
+  ol.steps{ list-style:none; margin:0; padding:0; counter-reset:step; }
+  ol.steps li{
+    counter-increment:step; position:relative; padding:0 0 20px 40px; font-size:15px; line-height:1.6;
+  }
+  ol.steps li::before{
+    content:counter(step);
+    position:absolute; left:0; top:0;
+    width:26px; height:26px; border-radius:50%;
+    background:var(--sage); color:#fff;
+    font-family:'IBM Plex Mono',monospace; font-size:12px; font-weight:600;
+    display:flex; align-items:center; justify-content:center;
+  }
+  ol.steps li .inline-amt{ font-family:'IBM Plex Mono',monospace; font-weight:600; color:var(--mustard); }
+
+  .notes{ margin-top:8px; padding:16px 32px 28px; border-top:1px solid var(--rule); font-size:13.5px; color:var(--ink-soft); }
+
+  @media print{
+    body{ background:#fff; padding:0; }
+    .sheet{ box-shadow:none; border-radius:0; }
+    .servings-dial button{ display:none; }
+    .tab{ background:none; color:var(--ink); }
+  }
+</style>
+</head>
+<body>
+<div class="sheet">
+  <div class="tab"><a href="index.html#tag=breakfast">Breakfast</a> · <a href="index.html#tag=skillet">Skillet</a></div>
+  <header>
+    <h1>Flaxseed Greek Yogurt Johnny Cakes</h1>
+    <div class="meta">
+      <span>⏱ 10 min prep + 15 min rest</span>
+      <span>🔥 20 min cook</span>
+      <span>🍽 <span id="servings-label"></span> servings</span>
+    </div>
+    <div class="source">Adapted from my <a href="flax-greek-yogurt-pancakes.html">Flaxseed Greek Yogurt Pancakes</a> and The Kitchn's Johnny Cakes by Kia Damon</div>
+  </header>
+
+  <div class="body-grid">
+    <div class="ingredients-col">
+      <div class="servings-dial">
+        <span class="label">Servings</span>
+        <div class="controls">
+          <button id="dec">–</button>
+          <span id="servings-count"></span>
+          <button id="inc">+</button>
+        </div>
+      </div>
+      <h2 class="section-title">Ingredients</h2>
+      <ul class="ingredients" id="ingredients-list"></ul>
+    </div>
+    <div class="steps-col">
+      <h2 class="section-title">Method</h2>
+      <ol class="steps" id="steps-list"></ol>
+    </div>
+  </div>
+  <div class="notes" id="notes-block" style="display:none;"></div>
+</div>
+
+<script id="recipe-data" type="application/json">
+{
+  "baseServings": 4,
+  "ingredients": [
+    {
+      "id": "flour",
+      "name": "all-purpose flour",
+      "baseAmount": 75,
+      "unit": "g",
+      "category": "weight"
+    },
+    {
+      "id": "cornmeal",
+      "name": "medium-grind yellow cornmeal",
+      "baseAmount": 70,
+      "unit": "g",
+      "category": "weight"
+    },
+    {
+      "id": "flaxmeal",
+      "name": "ground flaxseed (flaxseed meal)",
+      "baseAmount": 21,
+      "unit": "g",
+      "category": "weight"
+    },
+    {
+      "id": "sugar",
+      "name": "sugar",
+      "baseAmount": 1,
+      "unit": "tbsp",
+      "category": "small"
+    },
+    {
+      "id": "bakingpowder",
+      "name": "baking powder, aluminum-free",
+      "baseAmount": 2,
+      "unit": "tsp",
+      "category": "small"
+    },
+    {
+      "id": "bakingsoda",
+      "name": "baking soda",
+      "baseAmount": 0.25,
+      "unit": "tsp",
+      "category": "small"
+    },
+    {
+      "id": "salt",
+      "name": "salt",
+      "baseAmount": 0.5,
+      "unit": "tsp",
+      "category": "small"
+    },
+    {
+      "id": "yogurt",
+      "name": "Greek yogurt, plain",
+      "baseAmount": 190,
+      "unit": "g",
+      "category": "weight"
+    },
+    {
+      "id": "milk",
+      "name": "whole milk or buttermilk",
+      "baseAmount": 100,
+      "unit": "ml",
+      "category": "volume"
+    },
+    {
+      "id": "eggs",
+      "name": "large eggs",
+      "baseAmount": 2,
+      "unit": "",
+      "category": "count"
+    },
+    {
+      "id": "butter",
+      "name": "butter, melted",
+      "baseAmount": 28,
+      "unit": "g",
+      "category": "weight"
+    },
+    {
+      "id": "fat",
+      "name": "bacon grease, lard, or neutral oil, for the skillet",
+      "baseAmount": 2,
+      "unit": "tbsp",
+      "category": "small"
+    },
+    {
+      "id": "panbutter",
+      "name": "butter, for the skillet",
+      "baseAmount": 14,
+      "unit": "g",
+      "category": "weight"
+    }
+  ],
+  "steps": [
+    "In a large bowl, whisk together the {{flour}}, {{cornmeal}}, {{flaxmeal}}, {{sugar}}, {{bakingpowder}}, {{bakingsoda}}, and {{salt}}.",
+    "In a separate bowl, whisk the {{yogurt}}, {{milk}}, and {{eggs}} until smooth, then stir in the {{butter}}.",
+    "Pour the wet mixture into the dry and stir just until no dry patches remain. The batter will look quite thick, closer to a drop-biscuit batter than a pancake batter. That's right.",
+    "Let the batter rest for 15 minutes. This is longer than the plain flax pancakes need, because medium-grind cornmeal hydrates slowly. The rest softens the grit and lets the batter loosen up a little. Meanwhile, preheat the oven to 350°F (175°C).",
+    "Heat a cast-iron skillet over medium heat. Add the {{fat}} and {{panbutter}} and let them melt until shimmering. Drop the batter in scant ¼-cup portions, leaving space between them, and nudge each one flat with the back of the measuring cup to about ½ inch thick.",
+    "Cook for 3-4 minutes, until the edges look set and the underside is deeply golden, then flip and cook another 3 minutes. If they brown faster than that, lower the heat a notch. Thick cornmeal cakes need gentle heat to cook through.",
+    "Move the finished cakes to a baking sheet and keep them in the oven while you fry the rest, adding a little more fat to the skillet between batches as needed. A few minutes in the oven (5-8 minutes total) finishes the centers so they're tender, not custardy.",
+    "Serve warm with butter and maple syrup or honey, or go savory with a fried egg on top."
+  ],
+  "notes": "A mashup of my <a href=\"flax-greek-yogurt-pancakes.html\">Flaxseed Greek Yogurt Pancakes</a> and The Kitchn's johnny cakes (Kia Damon): the pan-fried, golden-crusted, lightly sweet cornmeal cakes of a johnny cake, with the tang and tenderness of Greek yogurt and the fiber of flaxseed. Makes about 10 small cakes at 4 servings (roughly 2-3 per person). What changed from the flax pancakes: about half the flour is swapped for cornmeal (the johnny cake's roughly 1:1 flour-to-cornmeal ratio), the sugar is cut to 1 tbsp since johnny cakes aren't very sweet, the vanilla is gone so the corn flavor leads, and the baking powder goes up a bit because cornmeal has no gluten to give lift. The yogurt stays, with its baking soda, and does the work that buttermilk does in the original. Cornmeal soaks up more liquid than flour, so the milk goes up from 75 to 100 ml to compensate. The batter also loses the bake-in-the-skillet method of the flax pancakes in favor of small fried cakes with a short oven finish, which still guards against the too-moist, custardy center. Medium grind is ideal here: it gives some texture without being gritty, but only if you give it the full 15-minute rest. If you ever use fine cornmeal, 8-10 minutes is enough; with coarse, add another 5 and a splash more milk. If the batter seems too stiff to scoop after resting, stir in milk 1 tbsp at a time. For the most authentic flavor, fry in bacon grease, as in the original. Leftovers keep in the fridge for 3 days or in the freezer for up to 3 months; reheat in a 350°F oven for 6-8 minutes, or in the toaster, to bring back the crisp edges."
+}
+</script>
+
+<script>
+const data = JSON.parse(document.getElementById('recipe-data').textContent);
+let servings = data.baseServings;
+
+// --- unit-aware rounding & fraction display ---
+const FRACTIONS = [[0,''],[1/8,'⅛'],[1/4,'¼'],[1/3,'⅓'],[3/8,'⅜'],[1/2,'½'],[5/8,'⅝'],[2/3,'⅔'],[3/4,'¾'],[7/8,'⅞']];
+function toFraction(x){
+  let whole = Math.floor(x);
+  const rem = x - whole;
+  let best = FRACTIONS[0], bestDiff = Infinity;
+  for(const f of FRACTIONS){ const d = Math.abs(f[0]-rem); if(d<bestDiff){bestDiff=d; best=f;} }
+  // if the remainder is closer to a whole unit than to any listed fraction, carry it
+  if(Math.abs(1-rem) < bestDiff){ whole += 1; best = FRACTIONS[0]; }
+  let out = '';
+  if(whole>0) out += whole;
+  if(best[1]) out += (whole>0?' ':'') + best[1];
+  if(!out) out = x > 0 ? '⅛' : '0';
+  return out;
+}
+function roundAmount(amount, unit, category){
+  if(category === 'count'){
+    const r = Math.max(1, Math.round(amount));
+    return String(r);
+  }
+  if(category === 'small'){ // tsp/tbsp — show as friendly fractions
+    return toFraction(amount);
+  }
+  if(unit === 'g'){
+    if(amount < 20) return String(Math.round(amount));
+    if(amount < 200) return String(Math.round(amount/5)*5);
+    if(amount < 1000) return String(Math.round(amount/10)*10);
+    return String(Math.round(amount/25)*25);
+  }
+  if(unit === 'ml'){
+    if(amount < 10) return String(Math.round(amount));
+    if(amount < 100) return String(Math.round(amount/5)*5);
+    if(amount < 250) return String(Math.round(amount/10)*10);
+    if(amount < 1000) return String(Math.round(amount/25)*25);
+    return String(Math.round(amount/50)*50);
+  }
+  // fallback: 1 decimal
+  return String(Math.round(amount*10)/10);
+}
+function scaledAmount(ing){
+  const ratio = servings / data.baseServings;
+  const raw = ing.baseAmount * ratio;
+  return roundAmount(raw, ing.unit, ing.category);
+}
+function amountText(ing){
+  const val = scaledAmount(ing);
+  return ing.unit && ing.category !== 'count' ? `${val} ${ing.unit}` : val;
+}
+
+function render(){
+  document.getElementById('servings-count').textContent = servings;
+  document.getElementById('servings-label').textContent = servings;
+
+  const list = document.getElementById('ingredients-list');
+  list.innerHTML = '';
+  data.ingredients.forEach(ing=>{
+    const li = document.createElement('li');
+    li.innerHTML = `<span class="amt">${amountText(ing)}</span><span>${ing.name}</span>`;
+    list.appendChild(li);
+  });
+
+  const steps = document.getElementById('steps-list');
+  steps.innerHTML = '';
+  data.steps.forEach(stepTemplate=>{
+    let text = stepTemplate.replace(/\{\{(\w[\w-]*)\}\}/g, (_, id)=>{
+      const ing = data.ingredients.find(i=>i.id === id);
+      return ing ? `<span class="inline-amt">${amountText(ing)}</span> ${ing.name}` : '';
+    });
+    const li = document.createElement('li');
+    li.innerHTML = text;
+    steps.appendChild(li);
+  });
+
+  if(data.notes){
+    const notesBlock = document.getElementById('notes-block');
+    notesBlock.style.display = 'block';
+    notesBlock.innerHTML = `<strong>Notes:</strong> ${data.notes}`;
+  }
+}
+
+document.getElementById('inc').addEventListener('click', ()=>{ servings++; render(); });
+document.getElementById('dec').addEventListener('click', ()=>{ if(servings>1) servings--; render(); });
+
+render();
+</script>
+</body>
+</html>
